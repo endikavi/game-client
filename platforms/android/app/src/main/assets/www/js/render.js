@@ -1,48 +1,45 @@
 
-document.getElementById("up").addEventListener("click",upsi);
-function upsi(){keysDown[38] = true;}
+document.getElementById("up").addEventListener("touchstart",function(){keysDown[38] = true;});
+document.getElementById("down").addEventListener("touchstart",function(){keysDown[40] = true;});
+document.getElementById("left").addEventListener("touchstart",function(){keysDown[37] = true;});
+document.getElementById("right").addEventListener("touchstart",function(){keysDown[39] = true;});
+document.getElementById("action").addEventListener("touchstart",function(){keysDown[80] = true;});
 
-document.getElementById("down").addEventListener("click",downsi);
-function downsi(){keysDown[40] = true;}
-
-document.getElementById("left").addEventListener("click",leftsi);
-function leftsi(){keysDown[37] = true;}
-
-document.getElementById("right").addEventListener("click",rightsi);
-function rightsi(){keysDown[39] = true;}
-
-document.getElementById("action").addEventListener("click",actionsi);
-function actionsi(){keysDown[80] = true;}
+document.getElementById("up").addEventListener("touchend",function(){keysDown[38] = false;});
+document.getElementById("down").addEventListener("touchend",function(){keysDown[40] = false;});
+document.getElementById("left").addEventListener("touchend",function(){keysDown[37] = false;});
+document.getElementById("right").addEventListener("touchend",function(){keysDown[39] = false;});
+document.getElementById("action").addEventListener("touchend",function(){keysDown[80] = false;});
 
 var ctx = null;
-var r = Math.round(Math.random()*4);
+
 var gameMap = [
-	0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 2, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-	0, 2, 2, 2, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-	0, 1, 1, 2, 1, 0, 0, 0, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-	0, 1, 1, 2, 1, 0, 2, 2, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-	0, 1, 1, 2, 1, 0, 2, 2, 0, 4, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
-	0, 1, 1, 2, 2, 2, 2, 2, 0, 4, 4, 4, 1, 1, 1, 0, 2, 2, 2, 0,
-	0, 1, 1, 2, 1, 0, 2, 2, 0, 1, 1, 4, 1, 1, 1, 0, 2, 2, 2, 0,
-	0, 1, 1, 2, 1, 0, 2, 2, 0, 1, 1, 4, 1, 1, 1, 0, 2, 2, 2, 0,
-	0, 1, 1, 2, 1, 0, 0, 0, 0, 1, 1, 4, 1, 1, 0, 0, 0, 2, 0, 0,
-	0, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 0, 2, 2, 2, 2, 0,
-	0, 1, 1, 2, 2, 2, 2, 2, 2, 1, 4, 4, 1, 1, 0, 2, 2, 2, 2, 0,
-	0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
-	0, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 1, 1, 1, 0, 2, 2, 2, 2, 0,
-	0, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 0, 2, 2, 2, 2, 0,
-	0, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
-	0, 1, 1, 0, r, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-	0, 1, 1, 1, 0, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-	0, 1, 1, 0, 0, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 2, 5, 5, 5, 5, 0, 5, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 5, 0, 5, 5, 5, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 5, 0, 5, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 5, 5, 0, 5, 0, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 0, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+	0, 5, 5, 0, 5, 5, 0, 2, 0, 4, 4, 4, 1, 1, 1, 0, 2, 2, 2, 0,
+	0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 4, 1, 1, 1, 0, 2, 2, 2, 0,
+	0, 5, 5, 5, 5, 5, 5, 2, 0, 1, 1, 4, 1, 1, 1, 0, 2, 2, 2, 0,
+	0, 5, 5, 5, 5, 0, 5, 5, 0, 1, 1, 4, 1, 1, 0, 0, 0, 2, 0, 0,
+	0, 5, 5, 0, 5, 5, 5, 5, 0, 1, 1, 4, 1, 1, 0, 2, 2, 2, 2, 0,
+	0, 5, 5, 5, 5, 5, 0, 5, 0, 1, 4, 4, 1, 1, 0, 2, 2, 2, 2, 0,
+	0, 5, 5, 5, 0, 5, 5, 5, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
+	0, 5, 5, 5, 0, 5, 5, 0, 0, 4, 4, 1, 1, 1, 0, 2, 2, 2, 2, 0,
+	0, 0, 5, 5, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 0, 2, 2, 2, 2, 0,
+	0, 5, 5, 5, 5, 5, 5, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0,
+	0, 5, 5, 5, 5, 5, 5, 5, 0, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 5, 5, 5, 5, 5, 0, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0,
+	0, 0, 0, 5, 5, 0, 5, 0, 0, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0,
+    0, 5, 5, 5, 0, 0, 5, 5, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 var mapTileData = new TileMap();
 
 var roofList = [
-	{ x:5, y:2, w:5, h:8, data: [
+	/*{ x:5, y:2, w:5, h:8, data: [
 		10, 10, 11, 11, 11,
 		10, 10, 11, 11, 11,
 		10, 10, 11, 11, 11,
@@ -66,7 +63,7 @@ var roofList = [
 		10, 10, 10, 11, 11, 11,
 		10, 10, 10, 11, 11, 11,
 		10, 10, 10, 11, 11, 11
-	]}
+	]}*/
 ];
 
 var tileW = 40, tileH = 40;
@@ -518,11 +515,7 @@ Character.prototype.canMoveTo = function(x, y)
 			return false;
 		}
 	}
-			keysDown[37] = false;
-			keysDown[38] = false;
-			keysDown[39] = false;
-			keysDown[40] = false;
-	return true;
+	        return true;
 };
 Character.prototype.canMoveUp		= function() { return this.canMoveTo(this.tileFrom[0], this.tileFrom[1]-1); };
 Character.prototype.canMoveDown 	= function() { return this.canMoveTo(this.tileFrom[0], this.tileFrom[1]+1); };
@@ -542,10 +535,10 @@ Character.prototype.canMoveDirection = function(d) {
 	}
 };
 
-Character.prototype.moveLeft	= function(t) { this.tileTo[0]-=1; this.timeMoved = t; this.direction = directions.left; keysDown[37] = false;};
-Character.prototype.moveRight	= function(t) { this.tileTo[0]+=1; this.timeMoved = t; this.direction = directions.right; keysDown[39] = false;};
-Character.prototype.moveUp		= function(t) { this.tileTo[1]-=1; this.timeMoved = t; this.direction = directions.up; keysDown[38] = false;};
-Character.prototype.moveDown	= function(t) { this.tileTo[1]+=1; this.timeMoved = t; this.direction = directions.down; keysDown[40] = false;};
+Character.prototype.moveLeft	= function(t) { this.tileTo[0]-=1; this.timeMoved = t; this.direction = directions.left;};
+Character.prototype.moveRight	= function(t) { this.tileTo[0]+=1; this.timeMoved = t; this.direction = directions.right;};
+Character.prototype.moveUp		= function(t) { this.tileTo[1]-=1; this.timeMoved = t; this.direction = directions.up;};
+Character.prototype.moveDown	= function(t) { this.tileTo[1]+=1; this.timeMoved = t; this.direction = directions.down;};
 Character.prototype.moveDirection = function(d, t) {
 	
 	switch(d)
@@ -627,11 +620,11 @@ window.onload = function()
 	mapTileData.map[((2*mapW)+2)].eventEnter = function()
 		{ console.log("Entered tile 2,2"); };
 	
-	var mo1 = new MapObject(1); mo1.placeAt(2, 4);
-	var mo2 = new MapObject(2); mo2.placeAt(2, 2);
+	/*var mo1 = new MapObject(1); mo1.placeAt(1, 1);
+	var mo2 = new MapObject(1); mo2.placeAt(2, 2);
 	
 	var mo11 = new MapObject(1); mo11.placeAt(6, 4);
-	var mo12 = new MapObject(2); mo12.placeAt(7, 4);
+	var mo12 = new MapObject(1); mo12.placeAt(7, 4);
 	
 	var mo4 = new MapObject(3); mo4.placeAt(4, 5);
 	var mo5 = new MapObject(3); mo5.placeAt(4, 8);
@@ -639,8 +632,10 @@ window.onload = function()
 	
 	var mo7 = new MapObject(3); mo7.placeAt(2, 6);
 	var mo8 = new MapObject(3); mo8.placeAt(2, 9);
-	var mo9 = new MapObject(3); mo9.placeAt(2, 12);
-	
+	var mo9 = new MapObject(3); mo9.placeAt(2, 12);*/
+	var ps = new PlacedItemStack(1, 1); ps.placeAt(7, 6);
+    var ps2 = new PlacedItemStack(1, 1); ps2.placeAt(8, 19);
+    /*
 	for(var i = 3; i < 8; i++)
 	{
 		var ps = new PlacedItemStack(1, 1); ps.placeAt(i, 1);
@@ -648,7 +643,7 @@ window.onload = function()
 	for(var i = 3; i < 8; i++)
 	{
 		var ps = new PlacedItemStack(1, 1); ps.placeAt(3, i);
-	}
+	}*/
 };
 
 function drawGame()

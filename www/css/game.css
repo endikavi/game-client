@@ -3,99 +3,60 @@
 #game{
 width:100%;margin:0px; padding:0px;
 }
+
 @media screen and (device-aspect-ratio: 16/9) {	
 .container {
-  width: 10%;
+  width: 13%;
   height:0px;
   position: absolute;
   display: inline;
 }
 
 .circle {
-  border-radius: 50%;
-  width: 100%;
-  padding-bottom: 100%;
-  background: white;
+    
+    border-radius: 50%;
+    width: 100%;
+    padding-bottom: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    background-image: url("arrows.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: 100%;
+    
 }
 	
 .left {
 		
-	top:50%;
+	top:61%;
 	left:5%;
+    transform: rotate(180deg);
 		
 }
 
 .right {
 	
-	top:50%;
+	top:39%;
 	left:25%;
 	
 }
 
 .up {
-		
+	transform: rotate(270deg);	
 	top:30%;
-	left:15%;	
+	left:9%;	
 }
 
 .down {
-		
+	transform: rotate(90deg);	
 	top:70%;
-	left:15%;	
+	left:21%;	
 }
 	
 .action {
-		
+	
+    
 	top:60%;
 	right:10%;	
 }
-}
-@media screen and (min-height:500px) and (max-width:720px) {
-	
-.container {
-  width: 20%;
-  height:0px;
-  position: absolute;
-  display: inline;
-}
-
-.circle {
-  border-radius: 50%;
-  width: 100%;
-  padding-bottom: 100%;
-  background: white;
-}
-	
-.left {
-		
-	top:73%;
-	left:18%;
-		
-}
-
-.right {
-	
-	top:73%;
-	left:62%;
-	
-}
-
-.up {
-		
-	top:62%;
-	left:40%;	
-}
-
-.down {
-		
-	top:84%;
-	left:40%;	
-}
-	
-.action {
-		
-	top:73%;
-	left: 40%;	
-}
-
 }
