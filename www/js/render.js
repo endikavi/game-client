@@ -1,22 +1,22 @@
 
-document.getElementById("up").addEventListener("touchstart",function(){keysDown[38] = true;});
-document.getElementById("down").addEventListener("touchstart",function(){keysDown[40] = true;});
-document.getElementById("left").addEventListener("touchstart",function(){keysDown[37] = true;});
-document.getElementById("right").addEventListener("touchstart",function(){keysDown[39] = true;});
-document.getElementById("action").addEventListener("touchstart",function(){keysDown[80] = true;});
+document.getElementById("up").addEventListener("touchstart",function(){keysDown[38] = true; this.style.backgroundColor ="red"});
+document.getElementById("down").addEventListener("touchstart",function(){keysDown[40] = true; this.style.backgroundColor ="red"});
+document.getElementById("left").addEventListener("touchstart",function(){keysDown[37] = true; this.style.backgroundColor ="red"});
+document.getElementById("right").addEventListener("touchstart",function(){keysDown[39] = true; this.style.backgroundColor ="red"});
+document.getElementById("action").addEventListener("touchstart",function(){keysDown[80] = true; this.style.backgroundColor ="red"});
 
-document.getElementById("up").addEventListener("touchend",function(){keysDown[38] = false;});
-document.getElementById("down").addEventListener("touchend",function(){keysDown[40] = false;});
-document.getElementById("left").addEventListener("touchend",function(){keysDown[37] = false;});
-document.getElementById("right").addEventListener("touchend",function(){keysDown[39] = false;});
-document.getElementById("action").addEventListener("touchend",function(){keysDown[80] = false;});
+document.getElementById("up").addEventListener("touchend",function(){keysDown[38] = false; this.style.backgroundColor =""});
+document.getElementById("down").addEventListener("touchend",function(){keysDown[40] = false; this.style.backgroundColor =""});
+document.getElementById("left").addEventListener("touchend",function(){keysDown[37] = false; this.style.backgroundColor =""});
+document.getElementById("right").addEventListener("touchend",function(){keysDown[39] = false; this.style.backgroundColor =""});
+document.getElementById("action").addEventListener("touchend",function(){keysDown[80] = false; this.style.backgroundColor =""});
 
 var ctx = null;
 
 var gameMap = [
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 2, 5, 5, 5, 5, 0, 5, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-	0, 5, 5, 5, 0, 5, 5, 5, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 2, 5, 5, 5, 5, 0, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 5, 0, 5, 5, 5, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
 	0, 5, 0, 5, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
 	0, 5, 5, 5, 5, 0, 5, 0, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
 	0, 5, 5, 0, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
@@ -30,25 +30,25 @@ var gameMap = [
 	0, 5, 5, 5, 0, 5, 5, 0, 0, 4, 4, 1, 1, 1, 0, 2, 2, 2, 2, 0,
 	0, 0, 5, 5, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 0, 2, 2, 2, 2, 0,
 	0, 5, 5, 5, 5, 5, 5, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0,
-	0, 5, 5, 5, 5, 5, 5, 5, 0, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0,
-	0, 5, 5, 5, 5, 5, 5, 5, 0, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0,
-	0, 0, 0, 5, 5, 0, 5, 0, 0, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0,
-    0, 5, 5, 5, 0, 0, 5, 5, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 5, 5, 5, 5, 5, 0, 2, 2, 9, 2, 2, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 5, 5, 5, 5, 5, 0, 2, 2, 8, 2, 2, 1, 1, 1, 1, 1, 0,
+	0, 0, 0, 5, 5, 0, 5, 0, 0, 2, 2, 7, 2, 2, 1, 1, 1, 1, 1, 0,
+    0, 5, 5, 5, 0, 0, 5, 5, 2, 2, 2, 6, 2, 2, 1, 1, 1, 1, 1, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 var mapTileData = new TileMap();
 
 var roofList = [
-	/*{ x:5, y:2, w:5, h:8, data: [
-		10, 10, 11, 11, 11,
-		10, 10, 11, 11, 11,
-		10, 10, 11, 11, 11,
-		10, 10, 11, 11, 11,
-		10, 10, 11, 11, 11,
-		10, 10, 11, 11, 11,
-		10, 10, 11, 11, 11,
-        10, 10, 11, 11, 11
-	]},
+	{ x:1, y:8, w:7, h:8, data: [
+		10, 10, 10, 11, 11, 11, 11,
+		10, 10, 10, 11, 11, 11, 11,
+		10, 10, 10, 11, 11, 11, 11,
+		10, 10, 10, 11, 11, 11, 11,
+		10, 10, 10, 11, 11, 11, 11,
+		10, 10, 10, 11, 11, 11, 11,
+		10, 10, 10, 11, 11, 11, 11,
+        10, 10, 10, 11, 11, 11, 11
+	]}/*,
 	{ x:15, y:5, w:5, h:4, data: [
 		10, 10, 11, 11, 11,
 		10, 10, 11, 11, 11,
@@ -74,7 +74,7 @@ var tileset = null, tilesetURL = "tileset.png", tilesetLoaded = false;
 
 var gameTime = 0;
 var gameSpeeds = [
-	{name:"Normal", mult:4},
+	{name:"Normal", mult:1},
 	{name:"Slow", mult:0.3},
 	{name:"Fast", mult:3},
 	{name:"Paused", mult:0}
@@ -211,7 +211,8 @@ PlacedItemStack.prototype.placeAt = function(nx, ny)
 
 var objectCollision = {
 	none		: 0,
-	solid		: 1
+	solid		: 1,
+    push        : 2
 };
 var objectTypes = {
 	1 : {
@@ -234,6 +235,13 @@ var objectTypes = {
 		offset : [-20,-20],
 		collision : objectCollision.solid,
 		zIndex : 3
+	},
+    4 : {
+		name : "Box pushable",
+		sprite : new Sprite([{x:40,y:160,w:40,h:40}]),
+		offset : [0,0],
+		collision : objectCollision.push,
+		zIndex : 1
 	}
 };
 function MapObject(nt)
@@ -425,15 +433,15 @@ function Character()
 	this.position	= [45,45];
 
 	this.delayMove	= {};
-	this.delayMove[floorTypes.path]			= 400;
-	this.delayMove[floorTypes.grass]		= 800;
-	this.delayMove[floorTypes.ice]			= 300;
-	this.delayMove[floorTypes.conveyorU]	= 200;
-	this.delayMove[floorTypes.conveyorD]	= 200;
-	this.delayMove[floorTypes.conveyorL]	= 200;
-	this.delayMove[floorTypes.conveyorR]	= 200;
+	this.delayMove[floorTypes.path]			= 150;
+	this.delayMove[floorTypes.grass]		= 150;
+	this.delayMove[floorTypes.ice]			= 100;
+	this.delayMove[floorTypes.conveyorU]	= 100;
+	this.delayMove[floorTypes.conveyorD]	= 100;
+	this.delayMove[floorTypes.conveyorL]	= 100;
+	this.delayMove[floorTypes.conveyorR]	= 100;
 
-	this.direction	= directions.up;
+	this.direction	= directions.right;
 	this.sprites = {};
 	this.sprites[directions.up]		= new Sprite([{x:0,y:120,w:30,h:30}]);
 	this.sprites[directions.right]	= new Sprite([{x:0,y:150,w:30,h:30}]);
@@ -513,7 +521,7 @@ Character.prototype.canMoveTo = function(x, y)
 			keysDown[39] = false;
 			keysDown[40] = false;
 			return false;
-		}
+		}else if(objectTypes[o.type].collision==objectCollision.push){return false;}
 	}
 	        return true;
 };
@@ -620,8 +628,8 @@ window.onload = function()
 	mapTileData.map[((2*mapW)+2)].eventEnter = function()
 		{ console.log("Entered tile 2,2"); };
 	
-	/*var mo1 = new MapObject(1); mo1.placeAt(1, 1);
-	var mo2 = new MapObject(1); mo2.placeAt(2, 2);
+	var mo1 = new MapObject(4); mo1.placeAt(13, 18);
+	/*var mo2 = new MapObject(1); mo2.placeAt(2, 2);
 	
 	var mo11 = new MapObject(1); mo11.placeAt(6, 4);
 	var mo12 = new MapObject(1); mo12.placeAt(7, 4);
