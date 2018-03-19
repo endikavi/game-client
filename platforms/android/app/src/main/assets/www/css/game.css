@@ -1,13 +1,14 @@
 *{margin:0px; padding:0px;}
 
 #game{
-width:100%;margin:0px; padding:0px;
+width:100%;margin:0px; padding:0px; overflow:inherit;
 }
 
 body,html{
-    
+    overflow:hidden;
     background-color: rgba(0, 0, 0, 1);
-    
+	height: 99.8%;
+    margin-top:auto;
 }
 
 
@@ -32,7 +33,6 @@ body,html{
 
 .circle {
     
-    background-color: rgba(255, 255, 255, 0.3);
     border-radius: 0%;
     width: 100%;
     padding-bottom: 100%;
@@ -41,6 +41,7 @@ body,html{
     background-position: center; 
     background-size: 100%;
     transform: rotate(-45deg);
+	background-image: url("arrows.png");  
 }
 	
 .left {
