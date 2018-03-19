@@ -2,8 +2,8 @@
 var ctx = null;
 
 var gameMap = [
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 2, 5, 5, 5, 5, 0, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	1, 2, 5, 5, 5, 5, 0, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
 	0, 5, 5, 5, 0, 5, 5, 5, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
 	0, 5, 0, 5, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
 	0, 5, 5, 5, 5, 0, 5, 0, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
@@ -24,6 +24,31 @@ var gameMap = [
     0, 5, 5, 5, 0, 0, 5, 5, 2, 2, 2, 6, 2, 2, 1, 1, 1, 1, 1, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
+
+var gameMap2 = [
+	1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	1, 2, 5, 5, 5, 5, 0, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 5, 0, 5, 5, 5, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 5, 0, 5, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 5, 5, 0, 5, 0, 0, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 0, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+	0, 5, 5, 0, 5, 5, 0, 2, 0, 4, 4, 4, 1, 1, 1, 0, 2, 2, 2, 0,
+	0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 4, 1, 1, 1, 0, 2, 2, 2, 0,
+	0, 5, 5, 5, 5, 5, 5, 2, 0, 1, 1, 4, 1, 1, 1, 0, 2, 2, 2, 0,
+	0, 5, 5, 5, 5, 0, 5, 5, 0, 1, 1, 4, 1, 1, 0, 0, 0, 2, 0, 0,
+	0, 5, 5, 0, 5, 5, 5, 5, 0, 1, 1, 4, 1, 1, 0, 2, 2, 2, 2, 0,
+	0, 5, 5, 5, 5, 5, 0, 5, 0, 1, 4, 4, 1, 1, 0, 2, 2, 2, 2, 0,
+	0, 5, 5, 5, 0, 5, 5, 5, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
+	0, 5, 5, 5, 0, 5, 5, 0, 0, 4, 4, 1, 1, 1, 0, 2, 2, 2, 2, 0,
+	0, 0, 5, 5, 5, 5, 5, 5, 0, 4, 1, 1, 1, 1, 0, 2, 2, 2, 2, 0,
+	0, 5, 5, 5, 5, 5, 5, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0,
+	0, 5, 5, 5, 5, 5, 5, 5, 0, 2, 2, 9, 2, 2, 1, 1, 1, 1, 1, 0,
+	0, 5, 5, 5, 5, 5, 5, 5, 0, 2, 2, 8, 2, 2, 1, 1, 1, 1, 1, 0,
+	0, 0, 0, 5, 5, 0, 5, 0, 0, 2, 2, 7, 2, 2, 1, 1, 1, 1, 1, 0,
+    0, 5, 5, 5, 0, 0, 5, 5, 2, 2, 2, 6, 2, 2, 1, 1, 1, 1, 1, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+];
+
 var mapTileData = new TileMap();
 
 var roofList = [
@@ -462,6 +487,9 @@ Character.prototype.processMovement = function(t)
 
 		var tileFloor = tileTypes[mapTileData.map[toIndex(this.tileFrom[0], this.tileFrom[1])].type].floor;
 
+        //eventos de movimientos segun casillas
+        
+        
 		if(tileFloor==floorTypes.ice)
 		{
 			if(this.canMoveDirection(this.direction))
@@ -469,6 +497,7 @@ Character.prototype.processMovement = function(t)
 				this.moveDirection(this.direction, t);
 			}
 		}
+        
 		else if(tileFloor==floorTypes.conveyorL && this.canMoveLeft())	{ this.moveLeft(t); }
 		else if(tileFloor==floorTypes.conveyorR && this.canMoveRight()) { this.moveRight(t); }
 		else if(tileFloor==floorTypes.conveyorU && this.canMoveUp())	{ this.moveUp(t); }
@@ -509,7 +538,16 @@ Character.prototype.canMoveTo = function(x, y)
 			keysDown[39] = false;
 			keysDown[40] = false;
 			return false;
-		}else if(objectTypes[o.type].collision==objectCollision.push){return false;}
+		}else if(objectTypes[o.type].collision==objectCollision.push){
+               
+            var mpo1 = new MapPushObject(1); mpo1.placeAt(x, y);
+            
+            if(mpo1.canPushDirection(player.direction))
+			{
+				mpo1.PushDirection(mpo1.direction, mpo1.timePushd);
+			}
+            return false;
+        }
 	}
 	        return true;
 };
@@ -581,8 +619,8 @@ function toIndex(x, y)
 	return((y * mapW) + x);
 }
 
-window.onload = function()
-{
+window.onload =    function(){
+    
 	ctx = document.getElementById('game').getContext("2d");
 	requestAnimationFrame(drawGame);
 	ctx.font = "bold 10pt sans-serif";
@@ -613,24 +651,35 @@ window.onload = function()
 	
 	mapTileData.buildMapFromData(gameMap, mapW, mapH);
 	mapTileData.addRoofs(roofList);
+    
+    //eventos
 	mapTileData.map[((2*mapW)+2)].eventEnter = function()
 		{ console.log("Entered tile 2,2"); };
+    
+    mapTileData.map[((7+8*mapW))].eventEnter = function()
+		{ player.placeAt(17, 17)};
+    
+    mapTileData.map[((17+17*mapW))].eventEnter = function()
+		{ player.placeAt(7, 8)};
 	
+    mapTileData.map[((5+1*mapW))].eventEnter = function(){
+        { console.log("Entered tile 5,1"); };
+        changeMap();
+        mapTileData.buildMapFromData(gameMap, mapW, mapH);
+	    mapTileData.addRoofs(roofList);
+    };
+    
+    mapTileData.map[((17+17*mapW))].eventEnter = function()
+    { mpo1.placeAt(7, 8)};
+    
+    //objetos de mapa
 	var mo1 = new MapObject(4); mo1.placeAt(13, 18);
-	/*var mo2 = new MapObject(1); mo2.placeAt(2, 2);
-	
-	var mo11 = new MapObject(1); mo11.placeAt(6, 4);
-	var mo12 = new MapObject(1); mo12.placeAt(7, 4);
-	
-	var mo4 = new MapObject(3); mo4.placeAt(4, 5);
-	var mo5 = new MapObject(3); mo5.placeAt(4, 8);
-	var mo6 = new MapObject(3); mo6.placeAt(4, 11);
-	
-	var mo7 = new MapObject(3); mo7.placeAt(2, 6);
-	var mo8 = new MapObject(3); mo8.placeAt(2, 9);
-	var mo9 = new MapObject(3); mo9.placeAt(2, 12);*/
+    //items
 	var ps = new PlacedItemStack(1, 1); ps.placeAt(7, 6);
     var ps2 = new PlacedItemStack(1, 1); ps2.placeAt(8, 19);
+    //objetos de mapa moviles
+    var mpo1 = new MapPushObject(1); mpo1.placeAt(13, 17);
+    
     /*
 	for(var i = 3; i < 8; i++)
 	{
@@ -764,12 +813,15 @@ function drawGame()
 			}
 		}
 	}
+    
+    var tileIndex= parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0])
+    
 	ctx.textAlign = "left";
 
 	ctx.fillStyle = "#ff0000";
 	ctx.fillText("FPS: " + framesLastSecond, 10, 20);
 	ctx.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
-	ctx.fillText(player.tileFrom[0] +'  '+ player.tileFrom[1], 10, 60);
+	ctx.fillText(' X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
 
 	lastFrameTime = currentFrameTime;
 	requestAnimationFrame(drawGame);
