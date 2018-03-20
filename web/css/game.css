@@ -12,10 +12,10 @@ body,html{
 
 
 .container {
+	
   width: 15%;
   height:0px;
   position: absolute;
-  display: inline;
     
 }
 .circle-action {

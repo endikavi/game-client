@@ -5,8 +5,9 @@ var $$ = Dom7;
 document.getElementById("StartGame").addEventListener("click",addGameCanvas);
 
 function addGameCanvas(){
-$$('#screen').html('<canvas id="game" width="800" height="450"></canvas>')
-renderGame();
+	$$('#gamescreen').html('<canvas id="game" width="800" height="450"></canvas>');
+	renderGame();
+	$$('.container').attr('style','inline');
 }
 
 $$('#Menu').on('click', function () {

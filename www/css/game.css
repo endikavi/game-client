@@ -28,7 +28,8 @@ body,html{
     background-position: center; 
     background-size: 100%;
     transform: rotate(-45deg);
-    background-image: url("hand.png");  
+    background-image: url("hand.png");
+	
 }
 
 .circle {
@@ -41,7 +42,8 @@ body,html{
     background-position: center; 
     background-size: 100%;
     transform: rotate(-45deg);
-	background-image: url("arrows.png");  
+	background-image: url("arrows.png"); 
+	
 }
 	
 .left {
