@@ -18,19 +18,38 @@
         
         <link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" type="text/css" href="css/game.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
         <title>Game client</title>
     </head>
     <body>
         
-		<div>
-		<canvas id="game" width="800" height="450"></canvas>
+		<div id="screen">
+            <button class="button col button-round btn color-white" id="StartGame">Empezar Partida</button>
+            <button class="button col button-round btn color-white" id="ContinueGame">Continuar Partida</button>
+            <button class="button col button-round btn color-white" id="">Usuario</button>
+            <button class="button col button-round btn color-white" id="Menu">Menu</button>
+            <button class="button col button-round btn color-white" id="Retos">Retos</button>
+            <button class="button col button-round btn color-white" id="">Multijugador</button>
+            <div id="popup" class="popup">hola que ase</div>
 		</div>
         
         <!-- <script type="text/javascript" src="cordova.js"></script> -->
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/confg.js"></script>
+		<!--<script type="text/javascript" src="js/controlls.js"></script> -->
+		<script type="text/javascript" src="js/sprites.js"></script>
+		<script type="text/javascript" src="js/inventory.js"></script>
+		<script type="text/javascript" src="js/items.js"></script>
+		<script type="text/javascript" src="js/floortiles.js"></script>
+		<script type="text/javascript" src="js/maps.js"></script>
+		<script type="text/javascript" src="js/mapobjects.js"></script>
+		<script type="text/javascript" src="js/mobs.js"></script>
+		<script type="text/javascript" src="js/player.js"></script>
         <script type="text/javascript" src="js/render.js"></script>
+		<script type="text/javascript" src="js/eventsemulator.js"></script>
         <script type="text/javascript" src="js/push.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
         <!-- Path to Framework7 Library JS -->
         <script type="text/javascript" src="js/framework7.min.js"></script>
+        <script type="text/javascript" src="js/screen.js"></script>
     </body>
 </html>
