@@ -7,7 +7,7 @@ width:100%;margin:0px; padding:0px; overflow:inherit;
 body,html{
     overflow:hidden;
     background-color: rgba(0, 0, 0, 1);
-	height: 99.8%;
+	height: 100%;
     margin-top:auto;
 }
 
@@ -28,7 +28,8 @@ body,html{
     background-position: center; 
     background-size: 100%;
     transform: rotate(-45deg);
-    background-image: url("hand.png");  
+    background-image: url("hand.png");
+	
 }
 
 .circle {
@@ -41,7 +42,8 @@ body,html{
     background-position: center; 
     background-size: 100%;
     transform: rotate(-45deg);
-	background-image: url("arrows.png");  
+	background-image: url("arrows.png"); 
+	
 }
 	
 .left {

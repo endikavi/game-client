@@ -30,8 +30,7 @@ function toIndex(x, y)
 	return((y * mapW) + x);
 }
 
-window.onload = function()
-{
+function renderGame(){
 	ctx = document.getElementById('game').getContext("2d");
 	requestAnimationFrame(drawGame);
 	ctx.font = "bold 10pt sans-serif";

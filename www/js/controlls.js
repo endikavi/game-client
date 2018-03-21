@@ -1,5 +1,5 @@
-//android buttons
-
+function addControlls(){
+    
 document.getElementById("up").addEventListener("touchstart",function(){keysDown[38] = true; this.style.backgroundColor =""});
 document.getElementById("down").addEventListener("touchstart",function(){keysDown[40] = true; this.style.backgroundColor =""});
 document.getElementById("left").addEventListener("touchstart",function(){keysDown[37] = true; this.style.backgroundColor =""});
@@ -11,7 +11,8 @@ document.getElementById("down").addEventListener("touchend",function(){keysDown[
 document.getElementById("left").addEventListener("touchend",function(){keysDown[37] = false; this.style.backgroundColor =""});
 document.getElementById("right").addEventListener("touchend",function(){keysDown[39] = false; this.style.backgroundColor =""});
 document.getElementById("action").addEventListener("touchend",function(){keysDown[80] = false; this.style.backgroundColor =""});
-
+    
+}
 
 
 var directions = {
