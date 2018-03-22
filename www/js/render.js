@@ -30,7 +30,7 @@ function toIndex(x, y)
 	return((y * mapW) + x);
 }
 
-function renderGame(){
+function renderGame(gameMap){
 	ctx = document.getElementById('game').getContext("2d");
 	requestAnimationFrame(drawGame);
 	ctx.font = "bold 10pt sans-serif";
@@ -189,12 +189,15 @@ function drawGame()
 			}
 		}
 	}
+    
+    var tileIndex= parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0])
+    
 	ctx.textAlign = "left";
 
 	ctx.fillStyle = "#ff0000";
 	ctx.fillText("FPS: " + framesLastSecond, 10, 20);
 	ctx.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
-	ctx.fillText(player.tileFrom[0] +'  '+ player.tileFrom[1], 10, 60);
+	ctx.fillText(' X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
 
 	lastFrameTime = currentFrameTime;
 	requestAnimationFrame(drawGame);

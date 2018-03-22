@@ -1,12 +1,18 @@
 .popup-text {
     
-    padding: 7%;
+
     
 }
 
 .popup-title {
     
-    padding: 7%;
+    
+    
+}
+
+popup{
+    
+    height: 100% !important;
     
 }
 
@@ -21,7 +27,7 @@
   border: dotted #000000 2px;
   text-decoration: none;
   text-align: center;
-  padding-bottom: 6%;
+  padding-bottom: 6% !important;
 	  
 }
 
