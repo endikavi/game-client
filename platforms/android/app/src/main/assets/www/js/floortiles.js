@@ -49,8 +49,18 @@ var tileTypes = {
 	
 	10 : { colour:"#ccaa00", floor:floorTypes.solid,
 		sprite:new Sprite([{x:40,y:120,w:40,h:40}])},
-	11 : { colour:"#ccaa00", floor:floorTypes.solid,
-		sprite:new Sprite([{x:80,y:120,w:40,h:40}])}
+		11 : { colour:"#ccaa00", floor:floorTypes.solid,
+		sprite:new Sprite([{x:80,y:120,w:40,h:40}])},
+	12 : { colour:"rgba(0,0,0,0)", floor:floorTypes.solid,
+		sprite:new Sprite([{x:0,y:0,w:0,h:0}])},
+	50 : { colour:"#abcdef", floor:floorTypes.path,
+		sprite:new Sprite([{x:240,y:40,w:40,h:40}])},
+	51 : { colour:"#123456", floor:floorTypes.path,
+		sprite:new Sprite([{x:240,y:80,w:40,h:40}])},
+	112 : { colour:"#ccaa00", floor:floorTypes.path,
+		sprite:new Sprite([{x:80,y:120,w:40,h:40}])},
+	122 : { colour:"rgba(0,0,0,0)", floor:floorTypes.path,
+		sprite:new Sprite([{x:0,y:0,w:0,h:0}])}
 };
 
 function Tile(tx, ty, tt)

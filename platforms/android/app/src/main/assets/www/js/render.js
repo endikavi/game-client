@@ -30,7 +30,8 @@ function toIndex(x, y)
 	return((y * mapW) + x);
 }
 
-function renderGame(gameMap){
+function renderGame(gameMap,MapID){
+    
 	ctx = document.getElementById('game').getContext("2d");
 	requestAnimationFrame(drawGame);
 	ctx.font = "bold 10pt sans-serif";
@@ -67,8 +68,7 @@ function renderGame(gameMap){
 	
 };
 
-function drawGame()
-{
+function drawGame(){
 	if(ctx==null) { return; }
 	if(!tilesetLoaded) { requestAnimationFrame(drawGame); return; }
 
@@ -198,6 +198,7 @@ function drawGame()
 	ctx.fillText("FPS: " + framesLastSecond, 10, 20);
 	ctx.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
 	ctx.fillText(' X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
+    ctx.fillText("Steps: " + pasoscount, 10, 80);
 
 	lastFrameTime = currentFrameTime;
 	requestAnimationFrame(drawGame);

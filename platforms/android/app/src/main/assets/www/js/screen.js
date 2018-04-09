@@ -6,6 +6,8 @@ function addGameCanvas(){
 	$$('#screen').html('<canvas id="game" width="800" height="450"></canvas><div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div></div>');
 	renderGame(mainMap);
     addControlls();
+    mapSound.play();
+    menuSound.stop();
 	$$('.container').attr('style','inline');
 }
 
@@ -15,7 +17,8 @@ function mainMenu(){
 	$$('.container').attr('style','none');
     
     mainMenuControlls();
-    
+    menuSound.play();
+    mapSound.stop();
 }
 
 function addCard(title,text){
@@ -56,7 +59,7 @@ $$('#Menu').on('click', function () {addCard('menu','este es el menu de opciones
   }, 30)
 });*/
 
-$$('#Retos').on('click', function () {addCard('Retos','este es el menu de retos')})
+$$('#Retos').on('click', function () {addCard('Retos','este es el menu de retos<hr><p class="segmented segmented-raised"><button class="button button-outline">Mapa 1</button><button class="button button-outline">Mapa 2</button><button class="button button-outline">Mapa 3</button><button class="button button-outline">Mapa 4</button></p><p class="segmented segmented-raised"><button class="button button-outline">Mapa 5</button><button class="button button-outline">Mapa 6</button><button class="button button-outline">Mapa 7</button><button class="button button-outline">Mapa 8</button></p>')})
     /*
   seven.dialog.create({
     title: 'Retos',

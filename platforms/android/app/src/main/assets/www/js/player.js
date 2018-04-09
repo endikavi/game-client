@@ -33,7 +33,7 @@ Character.prototype.placeAt = function(x, y)
 };
 Character.prototype.processMovement = function(t)
 {
-	if(this.tileFrom[0]==this.tileTo[0] && this.tileFrom[1]==this.tileTo[1]) { return false; }
+	if(this.tileFrom[0]==this.tileTo[0] && this.tileFrom[1]==this.tileTo[1]) {return false; }
 
 	var moveSpeed = this.delayMove[tileTypes[mapTileData.map[toIndex(this.tileFrom[0],this.tileFrom[1])].type].floor];
 
@@ -50,9 +50,10 @@ Character.prototype.processMovement = function(t)
 
 		if(tileFloor==floorTypes.ice)
 		{
-			if(this.canMoveDirection(this.direction))
-			{
+			if(this.canMoveDirection(this.direction)){
+                
 				this.moveDirection(this.direction, t);
+                
 			}
 		}
 		else if(tileFloor==floorTypes.conveyorL && this.canMoveLeft())	{ this.moveLeft(t); }
@@ -84,19 +85,29 @@ Character.prototype.processMovement = function(t)
 Character.prototype.canMoveTo = function(x, y)
 {
 	if(x < 0 || x >= mapW || y < 0 || y >= mapH) { return false; }
-	if(typeof this.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') { return false; }
+	if(typeof this.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') { hitSound.play(); return false; }
 	if(mapTileData.map[toIndex(x,y)].object!=null)
 	{
 		var o = mapTileData.map[toIndex(x,y)].object;
-		if(objectTypes[o.type].collision==objectCollision.solid)
-		{
+		if(objectTypes[o.type].collision==objectCollision.solid){
+            
+            hitSound.play();
+            
 			keysDown[37] = false;
 			keysDown[38] = false;
 			keysDown[39] = false;
 			keysDown[40] = false;
+            
 			return false;
-		}else if(objectTypes[o.type].collision==objectCollision.push){return false;}
+            
+		}else if(objectTypes[o.type].collision==objectCollision.push){
+            
+            return false;
+            
+        }else{}
 	}
+            hitSound.stop();
+            pasoscount ++;
 	        return true;
 };
 Character.prototype.canMoveUp		= function() { return this.canMoveTo(this.tileFrom[0], this.tileFrom[1]-1); };
@@ -112,8 +123,8 @@ Character.prototype.canMoveDirection = function(d) {
 			return this.canMoveDown();
 		case directions.left:
 			return this.canMoveLeft();
-		default:
-			return this.canMoveRight();
+        case directions.right:
+            return this.canMoveRight();
 	}
 };
 
@@ -149,6 +160,8 @@ Character.prototype.pickUp = function()
 	
 	if(is!=null)
 	{
+        hurraSound.stop();
+        hurraSound.play();
 		var remains = this.inventory.addItems(is.type, is.qty);
 
 		if(remains) { is.qty = remains; }
@@ -158,7 +171,6 @@ Character.prototype.pickUp = function()
 				this.tileFrom[1])].itemStack = null;
 		}
 	}
-	
 	return true;
 };
 

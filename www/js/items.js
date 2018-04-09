@@ -1,7 +1,7 @@
 var itemTypes = {
 	1 : {
 		name : "Star",
-		maxStack : 2,
+		maxStack : 100,
 		sprite : new Sprite([{x:240,y:0,w:40,h:40}]),
 		offset : [0,0]
 	}
