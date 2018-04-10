@@ -8,6 +8,7 @@ var app = {
     onDeviceReady: function() {
 
         mainMenuControlls();
+        resetVar()
         
     }
 

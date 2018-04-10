@@ -1,5 +1,5 @@
-function Character()
-{
+function Character() {
+    
 	this.tileFrom	= [1,1];
 	this.tileTo		= [1,1];
 	this.timeMoved	= 0;
@@ -23,16 +23,19 @@ function Character()
 	this.sprites[directions.left]	= new Sprite([{x:0,y:210,w:30,h:30}]);
 	
 	this.inventory = new Inventory(4);
+    
 }
-Character.prototype.placeAt = function(x, y)
-{
+
+Character.prototype.placeAt = function(x, y) {
+    
 	this.tileFrom	= [x,y];
 	this.tileTo		= [x,y];
 	this.position	= [((tileW*x)+((tileW-this.dimensions[0])/2)),
 		((tileH*y)+((tileH-this.dimensions[1])/2))];
+    
 };
-Character.prototype.processMovement = function(t)
-{
+
+Character.prototype.processMovement = function(t) {
 	if(this.tileFrom[0]==this.tileTo[0] && this.tileFrom[1]==this.tileTo[1]) {return false; }
 
 	var moveSpeed = this.delayMove[tileTypes[mapTileData.map[toIndex(this.tileFrom[0],this.tileFrom[1])].type].floor];
@@ -82,34 +85,46 @@ Character.prototype.processMovement = function(t)
 	}
 	return true;
 }
-Character.prototype.canMoveTo = function(x, y)
-{
+
+Character.prototype.canMoveTo = function(x, y) {
+    
 	if(x < 0 || x >= mapW || y < 0 || y >= mapH) { return false; }
-	if(typeof this.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') { hitSound.play(); return false; }
-	if(mapTileData.map[toIndex(x,y)].object!=null)
-	{
+    
+	if(typeof this.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') {
+        
+        console.log('Bloque indefinido');
+        hitSound.stop();
+        hitSound.play();
+        return false; 
+        
+    }
+    
+	if(mapTileData.map[toIndex(x,y)].object!=null) {
+        
 		var o = mapTileData.map[toIndex(x,y)].object;
+        
 		if(objectTypes[o.type].collision==objectCollision.solid){
             
-            hitSound.play();
+            console.log('Bloque duro');
             
-			keysDown[37] = false;
+			/*keysDown[37] = false;
 			keysDown[38] = false;
 			keysDown[39] = false;
-			keysDown[40] = false;
+			keysDown[40] = false;*/
             
 			return false;
             
-		}else if(objectTypes[o.type].collision==objectCollision.push){
+		}else if(objectTypes[o.type].collision==objectCollision.push) {
             
             return false;
             
         }else{}
 	}
-            hitSound.stop();
+            console.log('andando')
             pasoscount ++;
 	        return true;
 };
+
 Character.prototype.canMoveUp		= function() { return this.canMoveTo(this.tileFrom[0], this.tileFrom[1]-1); };
 Character.prototype.canMoveDown 	= function() { return this.canMoveTo(this.tileFrom[0], this.tileFrom[1]+1); };
 Character.prototype.canMoveLeft 	= function() { return this.canMoveTo(this.tileFrom[0]-1, this.tileFrom[1]); };
@@ -146,8 +161,7 @@ Character.prototype.moveDirection = function(d, t) {
 			return this.moveRight(t);
 	}
 };
-Character.prototype.pickUp = function()
-{
+Character.prototype.pickUp = function() {
 	keysDown[80] = false; 
 	if(this.tileTo[0]!=this.tileFrom[0] ||
 		this.tileTo[1]!=this.tileFrom[1])

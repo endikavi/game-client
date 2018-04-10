@@ -1,10 +1,12 @@
-function Inventory(s)
-{
+function Inventory(s)  {
+    
 	this.spaces		= s;
 	this.stacks		= [];
+    
 }
-Inventory.prototype.addItems = function(id, qty)
-{
+
+Inventory.prototype.addItems = function(id, qty) {
+    
 	for(var i = 0; i < this.spaces; i++)
 	{
 		if(this.stacks.length<=i)
@@ -29,4 +31,5 @@ Inventory.prototype.addItems = function(id, qty)
 	}
 	
 	return qty;
+    
 };

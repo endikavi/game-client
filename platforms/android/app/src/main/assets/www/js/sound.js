@@ -13,9 +13,9 @@ function sound(src) {
     }
 }
 
-    menuSound = new sound("menu.mp3");
-    mapSound = new sound("map.mp3");
-    hitSound = new sound("hit.mp3");
-    hurraSound = new sound("hurra.mp3");
+    menuSound = new sound("music/menu.mp3");
+    mapSound = new sound("music/map.mp3");
+    hitSound = new sound("music/hit.mp3");
+    hurraSound = new sound("music/hurra.mp3");
 
     menuSound.play();

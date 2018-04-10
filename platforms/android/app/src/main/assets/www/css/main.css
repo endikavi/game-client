@@ -10,7 +10,10 @@
     
 }
 
-popup{
+.card{
+    
+    position: relative;
+    z-index: 2;
     
 }
 
@@ -31,6 +34,8 @@ popup{
 	position: absolute;
 	right:35%;
 	bottom: 25%;
+    
+    z-index: 1;
 }
 
 .btn {
