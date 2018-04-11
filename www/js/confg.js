@@ -5,7 +5,7 @@ var ctx = null;
 var pasoscount = 0;
 
 var tileW = 40, tileH = 40;
-var mapW = 50, mapH = 50;
+
 var currentSecond = 0, frameCount = 0, framesLastSecond = 0, lastFrameTime = 0;
 
 var tileset = null, tilesetURL = "img/tileset.png", tilesetLoaded = false;
