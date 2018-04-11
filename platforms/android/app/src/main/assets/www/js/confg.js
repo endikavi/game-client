@@ -10,6 +10,8 @@ var currentSecond = 0, frameCount = 0, framesLastSecond = 0, lastFrameTime = 0;
 
 var tileset = null, tilesetURL = "img/tileset.png", tilesetLoaded = false;
 
+var charTileset = null, charTilesetURL = "img/mainchar.png", charTilesetLoaded = false;
+
 var gameTime = 0;
 
 var gameSpeeds = [

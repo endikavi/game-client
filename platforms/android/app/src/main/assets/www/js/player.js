@@ -3,7 +3,7 @@ function Character() {
 	this.tileFrom	= [1,1];
 	this.tileTo		= [1,1];
 	this.timeMoved	= 0;
-	this.dimensions	= [30,30];
+	this.dimensions	= [64,95];
 	this.position	= [45,45];
 
 	this.delayMove	= {};
@@ -17,12 +17,78 @@ function Character() {
 
 	this.direction	= directions.right;
 	this.sprites = {};
-	this.sprites[directions.up]		= new Sprite([{x:0,y:120,w:30,h:30}]);
-	this.sprites[directions.right]	= new Sprite([{x:0,y:150,w:30,h:30}]);
-	this.sprites[directions.down]	= new Sprite([{x:0,y:180,w:30,h:30}]);
-	this.sprites[directions.left]	= new Sprite([{x:0,y:210,w:30,h:30}]);
 	
 	this.inventory = new Inventory(4);
+    
+    this.stopSprites();
+    
+}
+
+Character.prototype.stopSprites = function() {
+    
+            this.sprites[directions.up]		= new CharSprite([{x:0,y:512,w:64,h:64}]);
+            this.sprites[directions.right]	= new CharSprite([{x:0,y:704,w:64,h:64}]);
+            this.sprites[directions.down]	= new CharSprite([{x:0,y:640,w:64,h:64}]);
+            this.sprites[directions.left]	= new CharSprite([{x:0,y:576,w:64,h:64}]);
+    
+}
+
+Character.prototype.startSprites = function() {
+    
+    this.sprites[directions.up]		= new CharSprite([
+        
+        {x:0,y:512,w:64,h:64},
+        {x:64,y:512,w:64,h:64},
+        {x:128,y:512,w:64,h:64},
+        {x:192,y:512,w:64,h:64},
+        {x:256,y:512,w:64,h:64},
+        {x:320,y:512,w:64,h:64},
+        {x:384,y:512,w:64,h:64},
+        {x:448,y:512,w:64,h:64},
+        {x:512,y:512,w:64,h:64}
+        
+    ]);
+    
+	this.sprites[directions.right]	= new CharSprite([
+        
+        {x:0,y:704,w:64,h:64},
+        {x:64,y:704,w:64,h:64},
+        {x:128,y:704,w:64,h:64},
+        {x:192,y:704,w:64,h:64},
+        {x:256,y:704,w:64,h:64},
+        {x:320,y:704,w:64,h:64},
+        {x:384,y:704,w:64,h:64},
+        {x:448,y:704,w:64,h:64},
+        {x:512,y:704,w:64,h:64}
+        
+    ]);
+	this.sprites[directions.down]	= new CharSprite([
+        
+        {x:0,y:640,w:64,h:64},
+        {x:64,y:640,w:64,h:64},
+        {x:128,y:640,w:64,h:64},
+        {x:192,y:640,w:64,h:64},
+        {x:256,y:640,w:64,h:64},
+        {x:320,y:640,w:64,h:64},
+        {x:384,y:640,w:64,h:64},
+        {x:448,y:640,w:64,h:64},
+        {x:512,y:640,w:64,h:64}
+        
+    ]);
+    
+	this.sprites[directions.left]	= new CharSprite([
+        
+        {x:0,y:576,w:64,h:64},
+        {x:64,y:576,w:64,h:64},
+        {x:128,y:576,w:64,h:64},
+        {x:192,y:576,w:64,h:64},
+        {x:256,y:576,w:64,h:64},
+        {x:320,y:576,w:64,h:64},
+        {x:384,y:576,w:64,h:64},
+        {x:448,y:576,w:64,h:64},
+        {x:512,y:576,w:64,h:64}
+        
+    ]);
     
 }
 
@@ -36,7 +102,12 @@ Character.prototype.placeAt = function(x, y) {
 };
 
 Character.prototype.processMovement = function(t) {
-	if(this.tileFrom[0]==this.tileTo[0] && this.tileFrom[1]==this.tileTo[1]) {return false; }
+	if(this.tileFrom[0]==this.tileTo[0] && this.tileFrom[1]==this.tileTo[1]) {
+        
+        this.stopSprites();
+        return false; 
+    
+    }
 
 	var moveSpeed = this.delayMove[tileTypes[mapTileData.map[toIndex(this.tileFrom[0],this.tileFrom[1])].type].floor];
 
@@ -115,6 +186,8 @@ Character.prototype.canMoveTo = function(x, y) {
             
         }else{}
 	}
+    
+            this.startSprites();
             console.log('andando')
             pasoscount ++;
 	        return true;

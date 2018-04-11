@@ -2,8 +2,8 @@ function CharSprite(data) {
 	
 	this.animated	= data.length > 1;
 	this.frameCount	= data.length;
-	this.duration	= 0;
-	this.loop		= false;
+	this.duration	= 1;
+	this.loop		= true;
 	
 	if(data.length > 1) {
 		
@@ -37,8 +37,7 @@ CharSprite.prototype.draw = function(t, x, y) {
 		
 		frameIdx = (this.frames.length - 1);
 		
-	}
-	else if(this.animated) {
+	}else if(this.animated) {
 		
 		t = t % this.duration;
 		var totalD = 0;
@@ -52,7 +51,7 @@ CharSprite.prototype.draw = function(t, x, y) {
 				
 				break;
 				
-			}
+			}else{}
 		}
 	}
 	
