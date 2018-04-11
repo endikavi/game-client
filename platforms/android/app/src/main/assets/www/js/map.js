@@ -9,39 +9,29 @@ var mapTileData = new TileMap();
 
 function populateMap() {
 	
-	switch(mapId) {
-			
-		case 0001:
-			populateMap0003();	
-		case 0002:
-			populateMap0003();
-		case 0003:
-			populateMap0003();
-        case 0004:
-			populateMap0003();
-		default:
-			populateMap0003();
-			
-	}
+	if(mapId == 0001) {populateMap0001()}
+    
+    if(mapId == 0002) {populateMap0002()}
+
+	if(mapId == 0003) {populateMap0003()}
+    
+    if(mapId == 0004) {populateMap0004()}
+    
+    if(mapId == 000) {populateMap000()}
     
 }
 
-function setMap(Id) {
+function setMap() {
 	
-	switch(mapId) {
-			
-		case 0001:
-			setMap0003();	
-		case 0002:
-			setMap0003();
-		case 0003:
-			setMap0003();
-        case 0004:
-			setMap0003();
-		default:
-			setMap0003();
-			
-	}
+	if(mapId == 0001) {setMap0001()}
+
+    if(mapId == 0002) {setMap0002()}
+    
+    if(mapId == 0003) {setMap0003()}
+    
+    if(mapId == 0004) {setMap0004()}
+    
+    if(mapId == 000) {setMap000()}
     
 }
 
