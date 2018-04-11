@@ -2,33 +2,38 @@ var seven = new Framework7();
 
 var $$ = Dom7;
 
-function addGameCanvas(){
+function addGameCanvas() {
 	$$('#screen').html('<canvas id="game" width="800" height="450"></canvas><div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>');
-	renderGame(mainMap);
+	
+	mapId = 0003;
+	
+	renderGame();
+	
     addControlls();
     mapSound.play();
     menuSound.stop();
 	$$('.container').attr('style','inline');
+	
 }
 
-function mainMenu(){
+function mainMenu() {
     
 	$$('#screen').html('<button class="button col button-round btn color-white btn-left" id="StartGame">&#9773  Empezar</button><button class="button col button-round btn color-white btn-left" id="ContinueGame">&#9773 Continuar</button><button class="button col button-round btn color-white" id="User">Usuario</button><img class="spin" src="img/whell.png" /><button class="button col button-round btn color-white" id="Menu">Menu</button><button class="button col button-round btn color-white btn-right" id="Retos">modo Reto &#9773</button><button class="button col button-round btn color-white btn-right" id="Multi">Multijugador &#9773</button><div class="card"></div>');
 	$$('.container').attr('style','none');
     
-    resetVar();
+    resetCanvas();
     mainMenuControlls();
     menuSound.play();
     mapSound.stop();
 }
 
-function addCard(title,text){
+function addCard(title,text) {
     
 	$$('.card').html('<div class="card-header"><p class="popup-title">' + title + '</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">' + text + '</p></div><div id="gamescreen"></div>');
     
 }
 
-function mainMenuControlls(){
+function mainMenuControlls() {
     
 document.removeEventListener("backbutton", mainMenu, false);   
 document.addEventListener("backbutton", exitFromApp, false);

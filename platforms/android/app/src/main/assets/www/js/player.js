@@ -107,11 +107,6 @@ Character.prototype.canMoveTo = function(x, y) {
             
             console.log('Bloque duro');
             
-			/*keysDown[37] = false;
-			keysDown[38] = false;
-			keysDown[39] = false;
-			keysDown[40] = false;*/
-            
 			return false;
             
 		}else if(objectTypes[o.type].collision==objectCollision.push) {
@@ -161,31 +156,37 @@ Character.prototype.moveDirection = function(d, t) {
 			return this.moveRight(t);
 	}
 };
+
 Character.prototype.pickUp = function() {
-	keysDown[80] = false; 
+	
+	keysDown[80] = false;
+	
 	if(this.tileTo[0]!=this.tileFrom[0] ||
-		this.tileTo[1]!=this.tileFrom[1])
-	{
+		this.tileTo[1]!=this.tileFrom[1]) {
+		
 		return false;
+		
 	}
 	
 	var is = mapTileData.map[toIndex(this.tileFrom[0],
 				this.tileFrom[1])].itemStack;
 	
-	if(is!=null)
-	{
+	if(is!=null) {
+		
         hurraSound.stop();
         hurraSound.play();
 		var remains = this.inventory.addItems(is.type, is.qty);
 
 		if(remains) { is.qty = remains; }
-		else
-		{
-			mapTileData.map[toIndex(this.tileFrom[0],
-				this.tileFrom[1])].itemStack = null;
+		else {
+			
+			mapTileData.map[toIndex(this.tileFrom[0],this.tileFrom[1])].itemStack = null;
+			
 		}
 	}
+	
 	return true;
+	
 };
 
 var player = new Character();

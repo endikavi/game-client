@@ -1,4 +1,5 @@
 var floorTypes = {
+	
 	solid	: 0,
 	path	: 1,
 	water	: 2,
@@ -8,8 +9,11 @@ var floorTypes = {
 	conveyorL	: 6,
 	conveyorR	: 7,
 	grass		: 8
+	
 };
+
 var tileTypes = {
+	
 	0 : { colour:"#685b48", floor:floorTypes.solid,
 		sprite:new Sprite([{x:0,y:0,w:40,h:40}])	},
 	1 : { colour:"#5aa457", floor:floorTypes.grass,
@@ -61,10 +65,11 @@ var tileTypes = {
 		sprite:new Sprite([{x:80,y:120,w:40,h:40}])},
 	122 : { colour:"rgba(0,0,0,0)", floor:floorTypes.path,
 		sprite:new Sprite([{x:0,y:0,w:0,h:0}])}
+	
 };
 
-function Tile(tx, ty, tt)
-{
+function Tile(tx, ty, tt) {
+	
 	this.x			= tx;
 	this.y			= ty;
 	this.type		= tt;
@@ -73,4 +78,5 @@ function Tile(tx, ty, tt)
 	this.eventEnter	= null;
 	this.object		= null;
 	this.itemStack	= null;
+	
 }

@@ -8,7 +8,6 @@ var app = {
     onDeviceReady: function() {
 
         mainMenuControlls();
-        resetVar()
         
     }
 
@@ -16,7 +15,7 @@ var app = {
 
 app.initialize();
 
-function exitFromApp(){
+function exitFromApp() {
     
     navigator.app.exitApp();
     

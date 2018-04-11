@@ -1,4 +1,5 @@
 var objectTypes = {
+	
 	1 : {
 		name : "Box",
 		sprite : new Sprite([{x:40,y:160,w:40,h:40}]),
@@ -28,21 +29,26 @@ var objectTypes = {
 		zIndex : 1
 	}
 };
-function MapObject(nt)
-{
+
+function MapObject(nt) {
+	
 	this.x		= 0;
 	this.y		= 0;
 	this.type	= nt;
+	
 }
-MapObject.prototype.placeAt = function(nx, ny)
-{
-	if(mapTileData.map[toIndex(this.x, this.y)].object==this)
-	{
+
+MapObject.prototype.placeAt = function(nx, ny) {
+	
+	if(mapTileData.map[toIndex(this.x, this.y)].object==this) {
+		
 		mapTileData.map[toIndex(this.x, this.y)].object = null;
+		
 	}
 	
 	this.x = nx;
 	this.y = ny;
 	
 	mapTileData.map[toIndex(nx, ny)].object = this;
+	
 };
