@@ -1,9 +1,11 @@
 
-var mainMap = [];
+var gameMap = [];
 
 var roofList = [];
 
 var mapId = 0001;
+
+var mapW = 50, mapH = 50;
 
 var mapTileData = new TileMap();
 

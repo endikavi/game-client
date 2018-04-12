@@ -10,6 +10,9 @@ function sound(src) {
 	
     this.play = function() {
 		
+		this.sound = document.createElement("audio");
+		this.sound.src = src;
+		this.sound.load();
         this.sound.play();
 		
     }
@@ -19,6 +22,13 @@ function sound(src) {
         this.sound.pause();
 		
     }
+	
+	this.loop = function() {
+		
+        this.sound.loop = true;
+		
+    }
+	
 }
 
     menuSound = new sound("music/menu.mp3");
@@ -27,3 +37,4 @@ function sound(src) {
     hurraSound = new sound("music/hurra.mp3");
 
     menuSound.play();
+	menuSound.loop();
