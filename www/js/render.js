@@ -56,31 +56,9 @@ function renderGame() {
 	});
 
 	viewport.screen = [800,450];
-    ////////////////////////////////////////////////////////////////////
-	tileset = new Image();
-	tileset.onerror = function() {
-		
-		ctx = null;
-		alert("Failed loading map tileset.");
-		
-	};
-	
-	tileset.onload = function() { tilesetLoaded = true; };
-	
-	tileset.src = tilesetURL;
-    ////////////////////////////////////////////////////////////////////
-    charTileset = new Image();
-	charTileset.onerror = function() {
-		
-		ctx = null;
-		alert("Failed loading characters tileset.");
-		
-	};
-	
-	charTileset.onload = function() { charTilesetLoaded = true; };
-	
-	charTileset.src = charTilesetURL;
-	///////////////////////////////////////////////////////////////////
+    
+    LoadSprites();
+
 	mapTileData.buildMapFromData(gameMap, mapW, mapH);
 	mapTileData.addRoofs(roofList);
 	

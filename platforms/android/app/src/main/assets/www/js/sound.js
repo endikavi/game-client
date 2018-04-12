@@ -1,7 +1,9 @@
-function sound(src) {
+function sound(loop,src) {
 	
     this.sound = document.createElement("audio");
     this.sound.src = src;
+    this.sound.loop = loop;
+    
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
@@ -9,12 +11,11 @@ function sound(src) {
     document.body.appendChild(this.sound);
 	
     this.play = function() {
-		
-		this.sound = document.createElement("audio");
-		this.sound.src = src;
-		this.sound.load();
-        this.sound.play();
-		
+        
+            this.sound.src = src;
+            this.sound.load();
+            this.sound.play().catch(function(error) {});
+        
     }
 	
     this.stop = function() {
@@ -23,18 +24,11 @@ function sound(src) {
 		
     }
 	
-	this.loop = function() {
-		
-        this.sound.loop = true;
-		
-    }
-	
 }
 
-    menuSound = new sound("music/menu.mp3");
-    mapSound = new sound("music/map.mp3");
-    hitSound = new sound("music/hit.mp3");
-    hurraSound = new sound("music/hurra.mp3");
+    menuSound = new sound(true,"music/menu.mp3");
+    mapSound = new sound(true,"music/map.mp3");
+    hitSound = new sound(false,"music/hit.mp3");
+    hurraSound = new sound(false,"music/hurra.mp3");
 
     menuSound.play();
-	menuSound.loop();

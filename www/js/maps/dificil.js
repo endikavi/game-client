@@ -312,15 +312,25 @@ function populateMap0003() {
 	};
 
 	//objetos de mapa
-	var mo1 = new MapObject(3);
+    
+    var mo6 = new MapObject("mo6",4);
+	mo6.placeAt(20, 18);
+    
+    var mo7 = new MapObject("mo7",1);
+	mo7.placeAt(22, 18);
+    
+    var mo7 = new MapObject("mo5",2);
+	mo7.placeAt(24, 18);
+    
+	var mo1 = new MapObject("mo1",3);
 	mo1.placeAt(18, 18);
-	var mo2 = new MapObject(3);
+	var mo2 = new MapObject("mo2",3);
 	mo2.placeAt(30, 18);
-	var mo3 = new MapObject(3);
+	var mo3 = new MapObject("mo3",3);
 	mo3.placeAt(24, 24);
-	var mo4 = new MapObject(3);
+	var mo4 = new MapObject("mo4",3);
 	mo4.placeAt(18, 30);
-	var mo5 = new MapObject(3);
+	var mo5 = new MapObject("mo5",3);
 	mo5.placeAt(30, 30);
 	//items
 	var ps1 = new PlacedItemStack(1, 1);

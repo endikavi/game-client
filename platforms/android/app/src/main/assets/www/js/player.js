@@ -26,16 +26,16 @@ function Character() {
 
 Character.prototype.stopSprites = function() {
     
-            this.sprites[directions.up]		= new CharSprite([{x:0,y:512,w:64,h:64}]);
-            this.sprites[directions.right]	= new CharSprite([{x:0,y:704,w:64,h:64}]);
-            this.sprites[directions.down]	= new CharSprite([{x:0,y:640,w:64,h:64}]);
-            this.sprites[directions.left]	= new CharSprite([{x:0,y:576,w:64,h:64}]);
+            this.sprites[directions.up]		= new CharSprite(charTileset,[{x:0,y:512,w:64,h:64}]);
+            this.sprites[directions.right]	= new CharSprite(charTileset,[{x:0,y:704,w:64,h:64}]);
+            this.sprites[directions.down]	= new CharSprite(charTileset,[{x:0,y:640,w:64,h:64}]);
+            this.sprites[directions.left]	= new CharSprite(charTileset,[{x:0,y:576,w:64,h:64}]);
     
 }
 
 Character.prototype.startSprites = function() {
     
-    this.sprites[directions.up]		= new CharSprite([
+    this.sprites[directions.up]		= new CharSprite(charTileset,[
         
         {x:0,y:512,w:64,h:64},
         {x:64,y:512,w:64,h:64},
@@ -49,7 +49,7 @@ Character.prototype.startSprites = function() {
         
     ]);
     
-	this.sprites[directions.right]	= new CharSprite([
+	this.sprites[directions.right]	= new CharSprite(charTileset,[
         
         {x:0,y:704,w:64,h:64},
         {x:64,y:704,w:64,h:64},
@@ -62,7 +62,7 @@ Character.prototype.startSprites = function() {
         {x:512,y:704,w:64,h:64}
         
     ]);
-	this.sprites[directions.down]	= new CharSprite([
+	this.sprites[directions.down]	= new CharSprite(charTileset,[
         
         {x:0,y:640,w:64,h:64},
         {x:64,y:640,w:64,h:64},
@@ -76,7 +76,7 @@ Character.prototype.startSprites = function() {
         
     ]);
     
-	this.sprites[directions.left]	= new CharSprite([
+	this.sprites[directions.left]	= new CharSprite(charTileset,[
         
         {x:0,y:576,w:64,h:64},
         {x:64,y:576,w:64,h:64},
@@ -157,15 +157,14 @@ Character.prototype.processMovement = function(t) {
 	return true;
 }
 
-Character.prototype.canMoveTo = function(x, y) {
+Character.prototype.canMoveTo = function(d, x, y) {
     
 	if(x < 0 || x >= mapW || y < 0 || y >= mapH) { return false; }
     
 	if(typeof this.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') {
         
-        console.log('Bloque indefinido');
-        hitSound.stop();
         hitSound.play();
+        console.log('Pared');
         return false; 
         
     }
@@ -176,11 +175,18 @@ Character.prototype.canMoveTo = function(x, y) {
         
 		if(objectTypes[o.type].collision==objectCollision.solid){
             
-            console.log('Bloque duro');
-            
+            hitSound.play();
+            console.log('Bloque inamovible');
 			return false;
             
 		}else if(objectTypes[o.type].collision==objectCollision.push) {
+            
+            console.log('Bloque movible'+ JSON.stringify(o));
+            
+            if(d == "u"){o.placeAt(x,y-1);}
+            if(d == "d"){o.placeAt(x,y+1);}
+            if(d == "l"){o.placeAt(x-1,y);}
+            if(d == "r"){o.placeAt(x+1,y);}
             
             return false;
             
@@ -188,15 +194,14 @@ Character.prototype.canMoveTo = function(x, y) {
 	}
     
             this.startSprites();
-            console.log('andando')
             pasoscount ++;
 	        return true;
 };
 
-Character.prototype.canMoveUp		= function() { return this.canMoveTo(this.tileFrom[0], this.tileFrom[1]-1); };
-Character.prototype.canMoveDown 	= function() { return this.canMoveTo(this.tileFrom[0], this.tileFrom[1]+1); };
-Character.prototype.canMoveLeft 	= function() { return this.canMoveTo(this.tileFrom[0]-1, this.tileFrom[1]); };
-Character.prototype.canMoveRight 	= function() { return this.canMoveTo(this.tileFrom[0]+1, this.tileFrom[1]); };
+Character.prototype.canMoveUp		= function() { return this.canMoveTo("u", this.tileFrom[0], this.tileFrom[1]-1); };
+Character.prototype.canMoveDown 	= function() { return this.canMoveTo("d", this.tileFrom[0], this.tileFrom[1]+1); };
+Character.prototype.canMoveLeft 	= function() { return this.canMoveTo("l", this.tileFrom[0]-1, this.tileFrom[1]); };
+Character.prototype.canMoveRight 	= function() { return this.canMoveTo("r", this.tileFrom[0]+1, this.tileFrom[1]); };
 Character.prototype.canMoveDirection = function(d) {
 	switch(d)
 	{

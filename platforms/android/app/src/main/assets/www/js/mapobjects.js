@@ -30,8 +30,9 @@ var objectTypes = {
 	}
 };
 
-function MapObject(nt) {
-	
+function MapObject(nam,nt) {
+    
+	this.name	= nam;
 	this.x		= 0;
 	this.y		= 0;
 	this.type	= nt;

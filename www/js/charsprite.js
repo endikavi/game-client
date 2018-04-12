@@ -1,5 +1,57 @@
-function CharSprite(data) {
+
+var tileset = null, tilesetURL = "img/tileset.png", tilesetLoaded = false;
+
+var charTileset = null, charTilesetURL = "img/mainchar.png", charTilesetLoaded = false;
+
+var mobTileset = null, mobTilesetURL = "img/mobchar.png", mobTilesetLoaded = false;
+
+var ImageSrc = "";
+
+function LoadSprites(){
+    
+    ////////////////////////////////////////////////////////////////////
+	tileset = new Image();
+	tileset.onerror = function() {
+		
+		ctx = null;
+		alert("Failed loading map and item tileset.");
+		
+	};
 	
+	tileset.onload = function() { tilesetLoaded = true; };
+	
+	tileset.src = tilesetURL;
+    ////////////////////////////////////////////////////////////////////
+    charTileset = new Image();
+	charTileset.onerror = function() {
+		
+		ctx = null;
+		alert("Failed loading main character tileset.");
+		
+	};
+	
+	charTileset.onload = function() { charTilesetLoaded = true; };
+	
+	charTileset.src = charTilesetURL;
+    ////////////////////////////////////////////////////////////////////
+    mobTileset = new Image();
+	mobTileset.onerror = function() {
+		
+		ctx = null;
+		alert("Failed loading enemy character tileset.");
+		
+	};
+	
+	mobTileset.onload = function() { charTilesetLoaded = true; };
+	
+	mobTileset.src = charTilesetURL;
+    
+}
+
+function CharSprite(src,data) {
+	
+    ImageSrc = src;
+    
 	this.animated	= data.length > 1;
 	this.frameCount	= data.length;
 	this.duration	= 1;
@@ -51,13 +103,13 @@ CharSprite.prototype.draw = function(t, x, y) {
 				
 				break;
 				
-			}else{}
+			}
 		}
 	}
 	
 	var offset = (typeof this.frames[frameIdx].offset=='undefined' ? [0,0] : this.frames[frameIdx].offset);
 	
-	ctx.drawImage(charTileset,
+	ctx.drawImage(ImageSrc,
 		this.frames[frameIdx].x, this.frames[frameIdx].y,
 		this.frames[frameIdx].w, this.frames[frameIdx].h,
 		x + offset[0], y + offset[1],
