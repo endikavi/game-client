@@ -37,6 +37,16 @@ function setMap() {
     
 }
 
+function changeMap(id){
+
+		mapId=id
+        setMap();
+        mapTileData.buildMapFromData(gameMap, mapW, mapH);
+        mapTileData.addRoofs(roofList);
+        populateMap();
+
+}
+
 function TileMap() {
 	
 	this.map	= [];

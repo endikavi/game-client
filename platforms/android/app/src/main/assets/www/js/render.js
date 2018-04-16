@@ -78,7 +78,7 @@ function drawGame() {
 	
 	if(ctx==null) { return; }
 	
-	if(!tilesetLoaded) { requestAnimationFrame(drawGame); return; }
+	if(!tilesetLoaded) {alert("Failed loading some assets. "); ctx=null; mainMenu(); return; }
 
 	var currentFrameTime = Date.now();
 	var timeElapsed = currentFrameTime - lastFrameTime;

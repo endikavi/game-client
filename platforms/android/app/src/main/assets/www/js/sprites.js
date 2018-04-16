@@ -1,4 +1,4 @@
-function Sprite(data) {
+/*function Sprite(data) {
 	
 	this.animated	= data.length > 1;
 	this.frameCount	= data.length;
@@ -58,10 +58,10 @@ Sprite.prototype.draw = function(t, x, y) {
 	
 	var offset = (typeof this.frames[frameIdx].offset=='undefined' ? [0,0] : this.frames[frameIdx].offset);
 	
-	ctx.drawImage(tileset,
+	ctx.drawImage(tileset.T,
 		this.frames[frameIdx].x, this.frames[frameIdx].y,
 		this.frames[frameIdx].w, this.frames[frameIdx].h,
 		x + offset[0], y + offset[1],
 		this.frames[frameIdx].w, this.frames[frameIdx].h);
 	
-};
+};*/

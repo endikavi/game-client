@@ -25,7 +25,11 @@ var objectCollision = {
 	
         none		: 0,
         solid		: 1,
-        push        : 2
+        push        : 2,
+        loot        : 3,
+        info        : 4,
+        npc         : 5,
+        enemy       : 6
 	
 };
 

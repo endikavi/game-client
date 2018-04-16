@@ -1,3 +1,5 @@
+var musicLoaded = true;
+
 function sound(loop,src) {
 	
     this.sound = document.createElement("audio");
@@ -23,6 +25,14 @@ function sound(loop,src) {
         this.sound.pause();
 		
     }
+    
+    this.sound.onerror = function() {
+		
+		ctx = null;
+		alert("Failed loading: " + src);
+		musicLoaded = false;
+		
+	};
 	
 }
 

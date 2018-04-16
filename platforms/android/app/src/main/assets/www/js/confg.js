@@ -25,7 +25,11 @@ var objectCollision = {
 	
         none		: 0,
         solid		: 1,
-        push        : 2
+        push        : 2,
+        loot        : 3,
+        info        : 4,
+        npc         : 5,
+        enemy       : 6
 	
 };
 
@@ -37,7 +41,7 @@ function resetCanvas() {
 
     currentSecond = 0, frameCount = 0, framesLastSecond = 0, lastFrameTime = 0;
 
-    tileset = null, tilesetURL = "img/tileset.png", tilesetLoaded = false;
+    tilesetLoaded = false;
 
     gameTime = 0;
 	

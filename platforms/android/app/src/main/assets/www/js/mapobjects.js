@@ -2,28 +2,28 @@ var objectTypes = {
 	
 	1 : {
 		name : "Box",
-		sprite : new Sprite([{x:40,y:160,w:40,h:40}]),
+		sprite : new Sprite(tileset,[{x:40,y:160,w:40,h:40}]),
 		offset : [0,0],
 		collision : objectCollision.solid,
 		zIndex : 1
 	},
 	2 : {
 		name : "Broken Box",
-		sprite : new Sprite([{x:40,y:200,w:40,h:40}]),
+		sprite : new Sprite(tileset,[{x:40,y:200,w:40,h:40}]),
 		offset : [0,0],
 		collision : objectCollision.none,
 		zIndex : 1
 	},
 	3 : {
 		name : "Tree top",
-		sprite : new Sprite([{x:80,y:160,w:80,h:80}]),
+		sprite : new Sprite(tileset,[{x:80,y:160,w:80,h:80}]),
 		offset : [-20,-20],
 		collision : objectCollision.solid,
 		zIndex : 3
 	},
     4 : {
 		name : "Box pushable",
-		sprite : new Sprite([{x:40,y:160,w:40,h:40}]),
+		sprite : new Sprite(tileset,[{x:40,y:160,w:40,h:40}]),
 		offset : [0,0],
 		collision : objectCollision.push,
 		zIndex : 1

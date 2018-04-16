@@ -26,16 +26,16 @@ function Character() {
 
 Character.prototype.stopSprites = function() {
     
-            this.sprites[directions.up]		= new CharSprite(charTileset,[{x:0,y:512,w:64,h:64}]);
-            this.sprites[directions.right]	= new CharSprite(charTileset,[{x:0,y:704,w:64,h:64}]);
-            this.sprites[directions.down]	= new CharSprite(charTileset,[{x:0,y:640,w:64,h:64}]);
-            this.sprites[directions.left]	= new CharSprite(charTileset,[{x:0,y:576,w:64,h:64}]);
+            this.sprites[directions.up]		= new Sprite(playerTileset,[{x:0,y:512,w:64,h:64}]);
+            this.sprites[directions.right]	= new Sprite(playerTileset,[{x:0,y:704,w:64,h:64}]);
+            this.sprites[directions.down]	= new Sprite(playerTileset,[{x:0,y:640,w:64,h:64}]);
+            this.sprites[directions.left]	= new Sprite(playerTileset,[{x:0,y:576,w:64,h:64}]);
     
 }
 
 Character.prototype.startSprites = function() {
     
-    this.sprites[directions.up]		= new CharSprite(charTileset,[
+    this.sprites[directions.up]		= new Sprite(playerTileset,[
         
         {x:0,y:512,w:64,h:64},
         {x:64,y:512,w:64,h:64},
@@ -49,7 +49,7 @@ Character.prototype.startSprites = function() {
         
     ]);
     
-	this.sprites[directions.right]	= new CharSprite(charTileset,[
+	this.sprites[directions.right]	= new Sprite(playerTileset,[
         
         {x:0,y:704,w:64,h:64},
         {x:64,y:704,w:64,h:64},
@@ -62,7 +62,7 @@ Character.prototype.startSprites = function() {
         {x:512,y:704,w:64,h:64}
         
     ]);
-	this.sprites[directions.down]	= new CharSprite(charTileset,[
+	this.sprites[directions.down]	= new Sprite(playerTileset,[
         
         {x:0,y:640,w:64,h:64},
         {x:64,y:640,w:64,h:64},
@@ -76,7 +76,7 @@ Character.prototype.startSprites = function() {
         
     ]);
     
-	this.sprites[directions.left]	= new CharSprite(charTileset,[
+	this.sprites[directions.left]	= new Sprite(playerTileset,[
         
         {x:0,y:576,w:64,h:64},
         {x:64,y:576,w:64,h:64},

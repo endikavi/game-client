@@ -5,7 +5,7 @@ var $$ = Dom7;
 function addGameCanvas() {
 	$$('#screen').html('<canvas id="game" width="800" height="450"></canvas><div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>');
 	
-	mapId = 0003;
+	mapId = 0002;
 	
 	renderGame();
 	
