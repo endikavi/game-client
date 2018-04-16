@@ -198,21 +198,25 @@ var tileTypes = {
 	
 	500 : { colour:"#eeeeff", floor:floorTypes.ice,
 		sprite:new Sprite(tileset,[{x:120,y:120,w:40,h:40}])	},
+    
 	600 : { colour:"#cccccc", floor:floorTypes.conveyorL,
 		sprite:new Sprite(tileset,[
 			{x:0,y:40,w:40,h:40,d:200}, {x:40,y:40,w:40,h:40,d:200},
 			{x:80,y:40,w:40,h:40,d:200}, {x:120,y:40,w:40,h:40,d:200}
 		])},
+    
 	700 : { colour:"#cccccc", floor:floorTypes.conveyorR,
 		sprite:new Sprite(tileset,[
 			{x:120,y:80,w:40,h:40,d:200}, {x:80,y:80,w:40,h:40,d:200},
 			{x:40,y:80,w:40,h:40,d:200}, {x:0,y:80,w:40,h:40,d:200}
 		])},
+    
 	800 : { colour:"#cccccc", floor:floorTypes.conveyorD,
 		sprite:new Sprite(tileset,[
 			{x:160,y:200,w:40,h:40,d:200}, {x:160,y:160,w:40,h:40,d:200},
 			{x:160,y:120,w:40,h:40,d:200}, {x:160,y:80,w:40,h:40,d:200}
 		])},
+    
 	900 : { colour:"#cccccc", floor:floorTypes.conveyorU,
 		sprite:new Sprite(tileset,[
 			{x:200,y:80,w:40,h:40,d:200}, {x:200,y:120,w:40,h:40,d:200},
@@ -221,16 +225,22 @@ var tileTypes = {
 	
 	100 : { colour:"#ccaa00", floor:floorTypes.solid,
 		sprite:new Sprite(tileset,[{x:40,y:120,w:40,h:40}])},
+    
     110 : { colour:"#ccaa00", floor:floorTypes.solid,
 		sprite:new Sprite(tileset,[{x:80,y:120,w:40,h:40}])},
+    
 	120 : { colour:"rgba(0,0,0,0)", floor:floorTypes.solid,
 		sprite:new Sprite(tileset,[{x:0,y:0,w:0,h:0}])},
+    
 	5000 : { colour:"#abcdef", floor:floorTypes.path,
 		sprite:new Sprite(tileset,[{x:240,y:40,w:40,h:40}])},
+    
 	5100 : { colour:"#123456", floor:floorTypes.path,
 		sprite:new Sprite(tileset,[{x:240,y:80,w:40,h:40}])},
+    
 	11200 : { colour:"#ccaa00", floor:floorTypes.path,
 		sprite:new Sprite(tileset,[{x:80,y:120,w:40,h:40}])},
+    
 	12200 : { colour:"rgba(0,0,0,0)", floor:floorTypes.path,
 		sprite:new Sprite(tileset,[{x:0,y:0,w:0,h:0}])}
 	

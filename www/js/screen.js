@@ -31,6 +31,8 @@ function addCard(title,text) {
     
 	$$('.card').html('<div class="card-header"><p class="popup-title">' + title + '</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">' + text + '</p></div><div id="gamescreen"></div>');
     
+    $$('.card-header').on('click', function () {$$('.card').html('')})
+    
 }
 
 function mainMenuControlls() {
@@ -44,9 +46,11 @@ $$('#Multi').on('click', function () {addCard('multijugador','este es el menu de
 
 $$('#ContinueGame').on('click', function () {addCard('Continuar','este es el menu para elegir partida guardada')})
     
-$$('#User').on('click', function () {addCard('Login','este es el menu de login,ver usuario')})
-
-$$('.card').on('click', function () {$$('.card').html('')})
+$$('#User').on('click', function () {
+    
+        addCard('Login','<button Style="display:none;" class="button button-outline" id="Reset" type="buttom">Volver</button> <button Style="display:block;" id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button Style="display:block;" id="Google" class="button button-outline button-register-google" type="buttom">Usar cuenta Google</button> <button Style="display:block;" id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
+        
+} )
 
 $$('#Menu').on('click', function () {addCard('menu','este es el menu de opciones')})
     /*
