@@ -1,56 +1,35 @@
 
-var tileset = null, tilesetURL = "img/tileset.png", tilesetLoaded = false;
+var tilesetLoaded = true;
 
-var charTileset = null, charTilesetURL = "img/mainchar.png", charTilesetLoaded = false;
+var tileset = new Tileset("img/tileset.png");
 
-var mobTileset = null, mobTilesetURL = "img/mobchar.png", mobTilesetLoaded = false;
+var playerTileset = new Tileset("img/player.png");
 
-var ImageSrc = "";
+var water = new Tileset("img/water.png");
 
-function LoadSprites(){
-    
-    ////////////////////////////////////////////////////////////////////
-	tileset = new Image();
-	tileset.onerror = function() {
+function Tileset(src){
+	
+	this.T = new Image();
+	this.T.loaded = false;
+	this.T.src = src;
+	
+	this.T.onerror = function() {
 		
 		ctx = null;
-		alert("Failed loading map and item tileset.");
+		alert("Failed loading: " + src);
+		tilesetLoaded = false;
 		
 	};
 	
-	tileset.onload = function() { tilesetLoaded = true; };
+	this.T.onload = function() { this.loaded = true; };
 	
-	tileset.src = tilesetURL;
-    ////////////////////////////////////////////////////////////////////
-    charTileset = new Image();
-	charTileset.onerror = function() {
-		
-		ctx = null;
-		alert("Failed loading main character tileset.");
-		
-	};
-	
-	charTileset.onload = function() { charTilesetLoaded = true; };
-	
-	charTileset.src = charTilesetURL;
-    ////////////////////////////////////////////////////////////////////
-    mobTileset = new Image();
-	mobTileset.onerror = function() {
-		
-		ctx = null;
-		alert("Failed loading enemy character tileset.");
-		
-	};
-	
-	mobTileset.onload = function() { charTilesetLoaded = true; };
-	
-	mobTileset.src = charTilesetURL;
-    
 }
 
-function CharSprite(src,data) {
+function LoadSprites(){}
+
+function Sprite(img,data) {
 	
-    ImageSrc = src;
+	this.img = img
     
 	this.animated	= data.length > 1;
 	this.frameCount	= data.length;
@@ -81,7 +60,7 @@ function CharSprite(src,data) {
 	
 }
 
-CharSprite.prototype.draw = function(t, x, y) {
+Sprite.prototype.draw = function(t, x, y) {
 	
 	var frameIdx = 0;
 	
@@ -108,8 +87,7 @@ CharSprite.prototype.draw = function(t, x, y) {
 	}
 	
 	var offset = (typeof this.frames[frameIdx].offset=='undefined' ? [0,0] : this.frames[frameIdx].offset);
-	
-	ctx.drawImage(ImageSrc,
+	ctx.drawImage(this.img.T,
 		this.frames[frameIdx].x, this.frames[frameIdx].y,
 		this.frames[frameIdx].w, this.frames[frameIdx].h,
 		x + offset[0], y + offset[1],

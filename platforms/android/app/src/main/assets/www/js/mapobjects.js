@@ -36,20 +36,62 @@ function MapObject(nam,nt) {
 	this.x		= 0;
 	this.y		= 0;
 	this.type	= nt;
-	
+/////////////////////////////////////////////
+	this.offset	= [0,0];
 }
 
 MapObject.prototype.placeAt = function(nx, ny) {
 	
-	if(mapTileData.map[toIndex(this.x, this.y)].object==this) {
-		
+	if(mapTileData.map[toIndex(this.x, this.y)].object==this){
+			 
 		mapTileData.map[toIndex(this.x, this.y)].object = null;
 		
 	}
 	
 	this.x = nx;
 	this.y = ny;
-	
+		
 	mapTileData.map[toIndex(nx, ny)].object = this;
 	
+};
+
+MapObject.prototype.processMovement = function() {	
+	
+	if(this.offset[0] > 0 ) {this.offset[0]=(this.offset[0]-2.25)}
+	if(this.offset[0] < 0 ) {this.offset[0]=(this.offset[0]+2.25)}
+	if(this.offset[1] > 0 ) {this.offset[1]=(this.offset[1]-2.25)}
+	if(this.offset[1] < 0 ) {this.offset[1]=(this.offset[1]+2.25)}
+	
+};
+
+MapObject.prototype.objectCanMoveTo = function(x, y) {
+    
+	if(x < 0 || x >= mapW || y < 0 || y >= mapH) { return false; }
+    
+	if(typeof player.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') {
+        
+        hitSound.play();
+        console.log('objeto contra Pared');
+        return false; 
+        
+    }
+    
+	if(mapTileData.map[toIndex(x,y)].object!=null) {
+        
+		var o = mapTileData.map[toIndex(x,y)].object;
+        
+		if(objectTypes[o.type].collision==objectCollision.solid || objectTypes[o.type].collision==objectCollision.push || objectTypes[o.type].collision==objectCollision.none){
+            
+            hitSound.play();
+            console.log('objeto contra Bloque inamovible');
+			return false;
+            
+		}
+		
+		return false;
+		
+	}
+	
+	this.placeAt(x,y);
+	return false;
 };

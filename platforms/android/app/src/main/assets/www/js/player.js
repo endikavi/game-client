@@ -3,7 +3,7 @@ function Character() {
 	this.tileFrom	= [1,1];
 	this.tileTo		= [1,1];
 	this.timeMoved	= 0;
-	this.dimensions	= [64,95];
+	this.dimensions	= [64,94];
 	this.position	= [45,45];
 
 	this.delayMove	= {};
@@ -164,7 +164,7 @@ Character.prototype.canMoveTo = function(d, x, y) {
 	if(typeof this.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') {
         
         hitSound.play();
-        console.log('Pared');
+        //console.log('Pared');
         return false; 
         
     }
@@ -176,23 +176,27 @@ Character.prototype.canMoveTo = function(d, x, y) {
 		if(objectTypes[o.type].collision==objectCollision.solid){
             
             hitSound.play();
-            console.log('Bloque inamovible');
+            //console.log('Bloque inamovible');
 			return false;
             
 		}else if(objectTypes[o.type].collision==objectCollision.push) {
             
-            console.log('Bloque movible'+ JSON.stringify(o));
-            
-            if(d == "u"){o.placeAt(x,y-1);}
-            if(d == "d"){o.placeAt(x,y+1);}
-            if(d == "l"){o.placeAt(x-1,y);}
-            if(d == "r"){o.placeAt(x+1,y);}
-            
+			if(keysDown[80]){
+				
+            	if(d == "u")		{o.objectCanMoveTo(x,y-1);o.offset[1]=+22.5}
+            	if(d == "d")		{o.objectCanMoveTo(x,y+1);o.offset[1]=-22.5}
+            	if(d == "l")		{o.objectCanMoveTo(x-1,y);o.offset[0]=+22.5}
+            	if(d == "r")		{o.objectCanMoveTo(x+1,y);o.offset[0]=-22.5}
+				
+			}
+			
+			hitSound.play();
+			//console.log('Bloque movible');
             return false;
             
-        }else{}
+        }
 	}
-    
+    		//console.log('Moviendose');
             this.startSprites();
             pasoscount ++;
 	        return true;
@@ -246,13 +250,76 @@ Character.prototype.pickUp = function() {
 		
 	}
 	
-	var is = mapTileData.map[toIndex(this.tileFrom[0],
-				this.tileFrom[1])].itemStack;
-	
-	if(is!=null) {
+	if((mapTileData.map[toIndex(this.tileFrom[0],this.tileFrom[1])].itemStack) == null){
 		
-        hurraSound.stop();
-        hurraSound.play();
+		if((mapTileData.map[lookingTo()].itemStack) == null){
+			
+			if((mapTileData.map[lookingTo()].object) == null){
+				
+				return false;
+				
+			}else{
+				
+				var o = mapTileData.map[lookingTo()].object;
+				
+				if(player.direction == directions.down && player.canMoveUp()) {
+					
+					o.offset[1]=+45
+					player.moveUp(gameTime);
+					player.direction = directions.down
+					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
+					
+				}
+				
+            	if(this.direction == directions.up && player.canMoveDown()) {
+					
+					o.offset[1]=-45
+					player.moveDown(gameTime);
+					player.direction = directions.up
+					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
+					
+				}
+				
+            	if(this.direction == directions.right && player.canMoveLeft())	{
+					
+					o.offset[0]=+45
+					player.moveLeft(gameTime);
+					player.direction = directions.right
+					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
+					
+				}
+				
+            	if(this.direction == directions.left && player.canMoveRight()) {
+					
+					o.offset[0]=-45
+					player.moveRight(gameTime);
+					player.direction = directions.left
+					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
+					
+				}
+			}
+			
+		}else {
+			
+			var is = mapTileData.map[lookingTo()].itemStack;
+			
+			hurraSound.play();
+			var remains = this.inventory.addItems(is.type, is.qty);
+
+			if(remains) { is.qty = remains; }
+			else {
+			
+				mapTileData.map[lookingTo()].itemStack = null;
+			
+			}
+			
+		}
+		
+	}else{
+		
+		var is = mapTileData.map[toIndex(this.tileFrom[0],this.tileFrom[1])].itemStack;
+		
+		hurraSound.play();
 		var remains = this.inventory.addItems(is.type, is.qty);
 
 		if(remains) { is.qty = remains; }
@@ -261,9 +328,10 @@ Character.prototype.pickUp = function() {
 			mapTileData.map[toIndex(this.tileFrom[0],this.tileFrom[1])].itemStack = null;
 			
 		}
+		
 	}
 	
-	return true;
+	return false;
 	
 };
 

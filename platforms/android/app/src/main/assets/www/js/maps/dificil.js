@@ -306,8 +306,8 @@ function populateMap0003() {
 		player.placeAt(20, 24)
 	};
 	mapTileData.map[((16 + 26 * mapW))].eventEnter = function () {
+		
 		mapId=0015
-		cambiarmapa();
 		player.placeAt(16, 22);
 	};
 
@@ -479,5 +479,11 @@ function populateMap0003() {
 	ps72.placeAt(31, 31);
 	var ps73 = new PlacedItemStack(1, 1);
 	ps73.placeAt(17, 31);
-
+	
+	//enemigo
+	
+	var enemy = new Character();
+	
+	enemy.placeAt(26, 18);
+	
 }

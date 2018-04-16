@@ -1,4 +1,12 @@
 
+function lookingTo(){
+	
+	if(player.direction == directions.up)		{return ((parseInt(player.tileFrom[1])-1) * mapW + parseInt(player.tileFrom[0]))}
+	else if(player.direction == directions.down)	{return ((parseInt(player.tileFrom[1])+1) * mapW + parseInt(player.tileFrom[0]))} 
+	else if(player.direction == directions.left)	{return (parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0])-1)}
+	else if(player.direction == directions.right){return (parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0])+1)}
+	
+}
 
 var viewport = {
 	
@@ -70,7 +78,7 @@ function drawGame() {
 	
 	if(ctx==null) { return; }
 	
-	if(!tilesetLoaded) { requestAnimationFrame(drawGame); return; }
+	if(!tilesetLoaded) {alert("Failed loading some assets. "); ctx=null; mainMenu(); return; }
 
 	var currentFrameTime = Date.now();
 	var timeElapsed = currentFrameTime - lastFrameTime;
@@ -88,11 +96,17 @@ function drawGame() {
 
 	if(!player.processMovement(gameTime) && gameSpeeds[currentSpeed].mult!=0){
 		
-		if(keysDown[38] && player.canMoveUp())			{ player.moveUp(gameTime); }
+		this.direction	= directions.right;
+		
+		if     (keysDown[38] && player.canMoveUp())		{ player.moveUp(gameTime); }
 		else if(keysDown[40] && player.canMoveDown())	{ player.moveDown(gameTime); }
 		else if(keysDown[37] && player.canMoveLeft())	{ player.moveLeft(gameTime); }
 		else if(keysDown[39] && player.canMoveRight())	{ player.moveRight(gameTime); }
-		else if(keysDown[80]) { player.pickUp(); }
+		else if(keysDown[38] && !player.canMoveUp())	{ player.direction = directions.up; }
+		else if(keysDown[40] && !player.canMoveDown())	{ player.direction = directions.down; }
+		else if(keysDown[37] && !player.canMoveLeft())	{ player.direction = directions.left; }
+		else if(keysDown[39] && !player.canMoveRight())	{ player.direction = directions.right; }
+		else if(keysDown[80]) 							{ player.pickUp(); }
 		
 	}
 
@@ -133,13 +147,16 @@ function drawGame() {
 			}
 			
 			var o = mapTileData.map[toIndex(x,y)].object;
+			
 			if(o!=null && objectTypes[o.type].zIndex==z) {
+				
+				o.processMovement();
 				
 				var ot = objectTypes[o.type];
 				
 				ot.sprite.draw(gameTime,
-					viewport.offset[0] + (x*tileW) + ot.offset[0],
-					viewport.offset[1] + (y*tileH) + ot.offset[1]);
+					viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
+					viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
 			}
 			
 			if(z==2 &&
@@ -189,15 +206,15 @@ function drawGame() {
 		}
 	}
     
-    var tileIndex= parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0])
-    
+    var tileIndex= parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0]);
+	
 	ctx.textAlign = "left";
 
 	ctx.fillStyle = "#ff0000";
 	ctx.fillText("FPS: " + framesLastSecond, 10, 20);
 	ctx.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
 	ctx.fillText(' X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
-    ctx.fillText("Steps: " + pasoscount, 10, 80);
+    ctx.fillText("Steps: " + pasoscount + " p posi 0: " + player.position[0] + " p posi 1: " + player.position[1] , 10, 80);
 
 	lastFrameTime = currentFrameTime;
 	requestAnimationFrame(drawGame);
