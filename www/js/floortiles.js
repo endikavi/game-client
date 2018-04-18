@@ -21,35 +21,41 @@ var tileTypes = [
 function autogenTiles(){
     
     imgy = (terrainTileset.T.height / 40);//casillas de alto
-    imgx = (terrainTileset.T.width / 40 );//casillas de largo
+    imgx = (terrainTileset.T.width / 41 );//casillas de largo
+    
+    console.log((terrainTileset.T.width / 41 ))
     
     for(var y = 0; y < imgy; ++y) {
 		
         for(var x = 0; x < imgx; ++x) {
             
-            tileTypes.push( {floor:floorTypes.grass , sprite:new Sprite(terrainTileset,[{x:(x*40),y:(y*40),w:40,h:40}])});
+            tileTypes.push( {floor:floorTypes.water , sprite:new Sprite(terrainTileset,[{x:(x*41),y:(y*40),w:40,h:40}])});
             
-            if ( (x+(y*imgy)) > 25 && (x+(y*imgy)) < 50 ) {
+            if ( (x+(y*imgy)) > 0 && (x+(y*imgy)) < 76 ) {
+                
+                tileTypes[x+(y*imgy)].floor = floorTypes.grass;
+                
+            }
+            
+            if ((x+(y*imgy)) > 75 && (x+(y*imgy)) < 230) {
+                
+                tileTypes[x+(y*imgy)].floor = floorTypes.path;
+                
+            }
+            
+            if ((x+(y*imgy)) > 229 && (x+(y*imgy)) < 431) {
                 
                 tileTypes[x+(y*imgy)].floor = floorTypes.block;
                 
             }
             
-            if ((x+(y*imgy)) > 50) {
-                
-                tileTypes[x+(y*imgy)].floor = floorTypes.water;
-                
-            }
-            
-            if ( (x+(y*imgy)) == 26 || (x+(y*imgy)) == 38){tileTypes[x+(y*imgy)].floor = floorTypes.ice;}
+            //if ( (x+(y*imgy)) == 26 || (x+(y*imgy)) == 38){tileTypes[x+(y*imgy)].floor = floorTypes.ice;}
             
         }
         
     }
     
 }
-
-autogenTiles();
 
 function Tile(tx, ty, tt) {
 	

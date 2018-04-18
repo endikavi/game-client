@@ -19,6 +19,14 @@ function populateMap() {
     
     if(mapId == 0004) {populateMap0004()}
     
+    if(mapId == 0005) {populateMap0005()}
+    
+    if(mapId == 0006) {populateMap0006()}
+    
+    if(mapId == 0007) {populateMap0007()}
+    
+    if(mapId == 0008) {populateMap0008()}
+    
     if(mapId == 000) {populateMap000()}
     
 }
@@ -32,6 +40,16 @@ function setMap() {
     if(mapId == 0003) {setMap0003()}
     
     if(mapId == 0004) {setMap0004()}
+    
+    if(mapId == 0005) {setMap0005()}
+    
+    if(mapId == 0006) {setMap0006()}
+    
+    if(mapId == 0007) {setMap0007()}
+    
+    if(mapId == 0008) {setMap0008()}
+    
+    if(mapId == 0009) {setMap0009()}
     
     if(mapId == 000) {setMap000()}
     

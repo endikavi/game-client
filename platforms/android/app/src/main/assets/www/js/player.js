@@ -8,7 +8,7 @@ function Character() {
 
 	this.delayMove	= {};
 	this.delayMove[floorTypes.path]			= 150;
-	this.delayMove[floorTypes.grass]		= 150;
+	this.delayMove[floorTypes.grass]		= 200;
 	this.delayMove[floorTypes.ice]			= 100;
 	this.delayMove[floorTypes.conveyorU]	= 100;
 	this.delayMove[floorTypes.conveyorD]	= 100;

@@ -43,6 +43,8 @@ function toIndex(x, y) {
 }
 
 function renderGame() {
+    
+    autogenTiles();
 	
 	setMap();
     
@@ -66,7 +68,7 @@ function renderGame() {
 	viewport.screen = [800,450];
     
     LoadSprites();
-
+    
 	mapTileData.buildMapFromData(gameMap, mapW, mapH);
 	mapTileData.addRoofs(roofList);
 	
@@ -79,7 +81,6 @@ function drawGame() {
 	if(ctx==null) { return; }
 	
 	if(!tilesetLoaded || !musicLoaded) {alert("Failed loading some assets. "); ctx=null; mainMenu(); return; }
-
 	var currentFrameTime = Date.now();
 	var timeElapsed = currentFrameTime - lastFrameTime;
 	gameTime+= Math.floor(timeElapsed * gameSpeeds[currentSpeed].mult);
