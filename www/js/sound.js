@@ -5,7 +5,7 @@ function sound(loop,src) {
     this.sound = document.createElement("audio");
     this.sound.src = src;
     this.sound.loop = loop;
-    
+    this.sound.loaded = false;
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
@@ -25,13 +25,19 @@ function sound(loop,src) {
         this.sound.pause();
 		
     }
+	
+	this.sound.onload = function() {
+		
+		this.sound.loaded = true;
+		
+	};
     
     this.sound.onerror = function() {
-		
-		ctx = null;
-		alert("Failed loading: " + src);
-		musicLoaded = false;
-		
+		if (this.sound.loaded == false){
+			ctx = null;
+			alert("Failed loading: " + src);
+			musicLoaded = false;
+		}
 	};
 	
 }

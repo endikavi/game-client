@@ -45,12 +45,35 @@ body,html{
 	background-image: url("arrows.png"); 
 	
 }
+
+.circley {
+    
+    border-radius: 0%;
+    width: 100%;
+    padding-bottom: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: 100%;
+    transform: rotate(-45deg);
 	
+}
+
 .left {
 		
 	top:65.5%;
 	left:3.5%;
     transform: rotate(180deg);
+		
+}
+
+.styck {
+		
+	top:0%;
+	left:0%;
+	width: 50%;
+	height: 100%;
+	transform: rotate(45deg);
 		
 }
 

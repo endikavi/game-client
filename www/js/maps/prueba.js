@@ -28,6 +28,30 @@ function populateMap0002() {
     var tree2 = new MapObject("mo1",3);
 	tree2.placeAt(5, 9);
     
+	var tree3 = new MapObject("mo1",3);
+	tree3.placeAt(5, 10);
+	
+	var tree3 = new MapObject("mo1",3);
+	tree3.placeAt(5, 11);
+	
+	var tree3 = new MapObject("mo1",3);
+	tree3.placeAt(5, 12);
+	
+	var tree3 = new MapObject("mo1",3);
+	tree3.placeAt(5, 13);
+	
+	var tree3 = new MapObject("mo1",3);
+	tree3.placeAt(5, 14);
+	
+	var tree3 = new MapObject("mo1",3);
+	tree3.placeAt(5, 15);
+	
+	var tree3 = new MapObject("mo1",3);
+	tree3.placeAt(5, 16);
+	
+	var tree3 = new MapObject("mo1",3);
+	tree3.placeAt(5, 17);
+	
     var tree3 = new MapObject("mo1",3);
 	tree3.placeAt(5, 18);
     

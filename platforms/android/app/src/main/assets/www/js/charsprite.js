@@ -89,10 +89,5 @@ Sprite.prototype.draw = function(t, x, y) {
 	}
 	
 	var offset = (typeof this.frames[frameIdx].offset=='undefined' ? [0,0] : this.frames[frameIdx].offset);
-	ctx.drawImage(this.img.T,
-		this.frames[frameIdx].x, this.frames[frameIdx].y,
-		this.frames[frameIdx].w, this.frames[frameIdx].h,
-		x + offset[0], y + offset[1],
-		this.frames[frameIdx].w, this.frames[frameIdx].h);
-	
+	ctx.drawImage(this.img.T,this.frames[frameIdx].x, this.frames[frameIdx].y,this.frames[frameIdx].w, this.frames[frameIdx].h, Math.floor(x + offset[0]), Math.floor(y + offset[1]),this.frames[frameIdx].w, this.frames[frameIdx].h);
 };

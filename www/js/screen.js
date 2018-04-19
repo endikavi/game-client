@@ -3,8 +3,8 @@ var seven = new Framework7();
 var $$ = Dom7;
 
 function addGameCanvas() {
-	$$('#screen').html('<canvas id="game" width="800" height="450"></canvas><div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>');
-	
+	$$('#screen').html('<canvas id="game" width="600" height="338"></canvas><div class="container styck"><div class="circley" id="styck"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>');
+	//<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div>
 	mapId = 0002;
 	
 	renderGame();
