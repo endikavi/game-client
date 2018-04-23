@@ -28,6 +28,9 @@ function populateMap0002() {
     var box2 = new MapObject("box2",false,4);
 	box2.placeAt(21, 13);
     
+    var cartel = new MapObject("cartel",["Soy un cartel","un cartel magnifico sin sprite","dejame ya"],5);
+	cartel.placeAt(17, 13);
+    
     var tree1 = new MapObject("mo1",false,3);
 	tree1.placeAt(21, 19);
     

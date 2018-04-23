@@ -1,15 +1,24 @@
+
 function addControlls() {
-   /* 
-    document.getElementById("up").addEventListener("touchstart",function() {keysDown[38] = true; this.style.backgroundColor =""});
-    document.getElementById("down").addEventListener("touchstart",function() {keysDown[40] = true; this.style.backgroundColor =""});
-    document.getElementById("left").addEventListener("touchstart",function() {keysDown[37] = true; this.style.backgroundColor =""});
-    document.getElementById("right").addEventListener("touchstart",function() {keysDown[39] = true; this.style.backgroundColor =""});*/
+    
+    if (UserConf.controlls==0){
+        
+        addControlls0();
+       
+    }else if(UserConf.controlls==1){
+             
+        addControlls1();     
+             
+    }
+	
+}
+
+function addControlls0() {
+    
+    $$('#controlls-box').html('<div class="container styck"><div class="circley" id="styck"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>')
+
     document.getElementById("action").addEventListener("touchstart",function() {keysDown[80] = true; this.style.backgroundColor =""});
-/*
-    document.getElementById("up").addEventListener("touchend",function() {keysDown[38] = false; this.style.backgroundColor =""});
-    document.getElementById("down").addEventListener("touchend",function() {keysDown[40] = false; this.style.backgroundColor =""});
-    document.getElementById("left").addEventListener("touchend",function() {keysDown[37] = false; this.style.backgroundColor =""});
-    document.getElementById("right").addEventListener("touchend",function() {keysDown[39] = false; this.style.backgroundColor =""});*/
+
     document.getElementById("action").addEventListener("touchend",function() {keysDown[80] = false; this.style.backgroundColor =""});
     
     document.removeEventListener("backbutton", exitFromApp, false);
@@ -17,6 +26,36 @@ function addControlls() {
 	
 	joystick = new VirtualJoystick({mouseSupport: true})
 	
+}
+
+function addControlls1() {
+    
+    $$('#controlls-box').html('<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>')
+
+    document.getElementById("up").addEventListener("touchstart",function() {keysDown[38] = true; this.style.backgroundColor =""});
+    document.getElementById("down").addEventListener("touchstart",function() {keysDown[40] = true; this.style.backgroundColor =""});
+    document.getElementById("left").addEventListener("touchstart",function() {keysDown[37] = true; this.style.backgroundColor =""});
+    document.getElementById("right").addEventListener("touchstart",function() {keysDown[39] = true; this.style.backgroundColor =""});
+    document.getElementById("action").addEventListener("touchstart",function() {keysDown[80] = true; this.style.backgroundColor =""});
+
+    document.getElementById("up").addEventListener("touchend",function() {keysDown[38] = false; this.style.backgroundColor =""});
+    document.getElementById("down").addEventListener("touchend",function() {keysDown[40] = false; this.style.backgroundColor =""});
+    document.getElementById("left").addEventListener("touchend",function() {keysDown[37] = false; this.style.backgroundColor =""});
+    document.getElementById("right").addEventListener("touchend",function() {keysDown[39] = false; this.style.backgroundColor =""});
+    document.getElementById("action").addEventListener("touchend",function() {keysDown[80] = false; this.style.backgroundColor =""});
+    
+    document.removeEventListener("backbutton", exitFromApp, false);
+    document.addEventListener("backbutton", mainMenu, false);
+	
+}
+
+function addControllsForInfo(inf) {
+    
+    $$('#controlls-box').html('<div class="msg-box">' + inf + '</div>')
+
+    document.getElementById('controlls-box').addEventListener("touchstart",function() {keysDown[69] = true;});
+    document.getElementById('controlls-box').addEventListener("touchend",function() {keysDown[69] = false;});
+    
 }
 
 var joystick;
@@ -36,6 +75,7 @@ var keysDown = {
 	38 : false,
 	39 : false,
 	40 : false,
+    69 : false,
 	80 : false
 	
 };
@@ -43,9 +83,9 @@ var keysDown = {
 
 var VirtualJoystick	= function(opts)
 {
-	opts			= opts			|| {};
+	opts			    = opts			    || {};
 	this._container		= opts.container	|| document.getElementById("styck");
-	this._strokeStyle	= opts.strokeStyle	|| 'white';
+	this._strokeStyle	= opts.strokeStyle	|| 'rgba(255,0,0,0.3)';
 	this._stickEl		= opts.stickElement	|| this._buildJoystickStick();
 	this._baseEl		= opts.baseElement	|| this._buildJoystickBase();
 	this._mouseSupport	= opts.mouseSupport !== undefined ? opts.mouseSupport : false;
@@ -365,16 +405,12 @@ VirtualJoystick.prototype._buildJoystickBase	= function()
 	canvas.height	= 126;
 	
 	var ctx		= canvas.getContext('2d');
-	ctx.beginPath(); 
+    ctx.moveTo(32, 64);
+    ctx.lineTo(96, 64);
+    ctx.moveTo(64, 96);
+    ctx.lineTo(64, 32);
 	ctx.strokeStyle = this._strokeStyle; 
-	ctx.lineWidth	= 6; 
-	ctx.arc( canvas.width/2, canvas.width/2, 40, 0, Math.PI*2, true); 
-	ctx.stroke();	
-
-	ctx.beginPath(); 
-	ctx.strokeStyle	= this._strokeStyle; 
 	ctx.lineWidth	= 2; 
-	ctx.arc( canvas.width/2, canvas.width/2, 60, 0, Math.PI*2, true); 
 	ctx.stroke();
 	
 	return canvas;
@@ -386,14 +422,8 @@ VirtualJoystick.prototype._buildJoystickBase	= function()
 VirtualJoystick.prototype._buildJoystickStick	= function()
 {
 	var canvas	= document.createElement( 'canvas' );
-	canvas.width	= 86;
-	canvas.height	= 86;
-	var ctx		= canvas.getContext('2d');
-	ctx.beginPath(); 
-	ctx.strokeStyle	= this._strokeStyle; 
-	ctx.lineWidth	= 6; 
-	ctx.arc( canvas.width/2, canvas.width/2, 40, 0, Math.PI*2, true); 
-	ctx.stroke();
+	canvas.width	= 1;
+	canvas.height	= 1;
 	return canvas;
 }
 

@@ -258,7 +258,7 @@ Character.prototype.pickUp = function() {
 				
 				return false;
 				
-			}else{
+			}else if(objectTypes[mapTileData.map[lookingTo()].object.type].collision==objectCollision.push){
 				
 				var o = mapTileData.map[lookingTo()].object;
 				
@@ -297,7 +297,13 @@ Character.prototype.pickUp = function() {
 					o.objectCanMoveTo(this.tileFrom[0], this.tileFrom[1])
 					
 				}
-			}
+			}else if(objectTypes[mapTileData.map[lookingTo()].object.type].info!=false){
+                     
+                    var o = mapTileData.map[lookingTo()].object;
+                    console.log(o.info);
+                    o.talk();
+                     
+            }
 			
 		}else {
 			

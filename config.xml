@@ -26,4 +26,7 @@
     <preference name="Fullscreen" value="true" />
     <preference name="Orientation" value="sensorLandscape" />
     <engine name="android" spec="^7.0.0" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <plugin name="cordova-plugin-device" spec="^2.0.2" />
+    <plugin name="cordova-plugin-vibration" spec="^3.1.0" />
 </widget>

@@ -27,6 +27,13 @@ var objectTypes = {
 		offset : [0,0],
 		collision : objectCollision.push,
 		zIndex : 1
+	},
+    5 : {
+		name : "cartel",
+		sprite : new Sprite(tileset,[{x:40,y:160,w:40,h:40}]),
+		offset : [0,0],
+		collision : objectCollision.solid,
+		zIndex : 1
 	}
 };
 
@@ -34,10 +41,10 @@ function MapObject(nam,inf,nt) {
     
 	this.name	= nam;
 	this.info	= inf;
+    this.talking= 0;
 	this.x		= 0;
 	this.y		= 0;
 	this.type	= nt;
-/////////////////////////////////////////////
 	this.offset	= [0,0];
 	
 }
@@ -54,6 +61,36 @@ MapObject.prototype.placeAt = function(nx, ny) {
 	this.y = ny;
 		
 	mapTileData.map[toIndex(nx, ny)].object = this;
+	
+};
+
+MapObject.prototype.talk = function() {
+	
+	if(this.info!=false && this.talking == 0){
+        
+        
+        //ctx3.fillRect(0, (viewport.screen[1]/3)*2,viewport.screen[0], viewport.screen[1]/3);
+        addControllsForInfo(this.info[this.talking]);
+        this.talking++
+		
+	}else if(this.info!=false && this.talking > 0){
+        
+        if(this.info.length > this.talking){
+            
+        addControllsForInfo(this.info[this.talking]);   
+        this.talking++ 
+            
+        }else{
+            
+        console.log("reset");
+        addControlls();
+        document.getElementById('controlls-box').removeEventListener("touchstart",function() {keysDown[69] = true;});
+        document.getElementById('controlls-box').removeEventListener("touchend",function() {keysDown[69] = false;});
+        this.talking=0;
+            
+        }
+        
+    }
 	
 };
 

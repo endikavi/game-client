@@ -2,13 +2,23 @@ var seven = new Framework7();
 
 var $$ = Dom7;
 
+var UserConf = {
+	
+        controlls	: 0,
+        music		: 1,
+        vibrate     : 2,
+        loot        : 3,
+        info        : 4,
+        npc         : 5,
+        enemy       : 6
+	
+};
+
 function addGameCanvas() {
-	$$('#screen').html('<canvas id="layer0" width="800" height="450"></canvas><canvas id="layer1" width="800" height="450"></canvas><canvas id="layer2" width="800" height="450"></canvas><canvas id="layer3" width="800" height="450"></canvas><div class="container styck"><div class="circley" id="styck"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>');
-	//<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div>
+	$$('#screen').html('<canvas id="layer0" width="800" height="450"></canvas><canvas id="layer1" width="800" height="450"></canvas><canvas id="layer2" width="800" height="450"></canvas><canvas id="layer3" width="800" height="450"></canvas><div id=controlls-box></div>');
 	mapId = 0002;
 	
-	addControlls();
-	
+    addControlls();
 	renderGame();
 	
     mapSound.play();
