@@ -27,8 +27,6 @@ function Tileset(src){
 	
 }
 
-function LoadSprites(){}
-
 function Sprite(img,data) {
 	
 	this.img = img
@@ -37,6 +35,8 @@ function Sprite(img,data) {
 	this.frameCount	= data.length;
 	this.duration	= 1;
 	this.loop		= true;
+	this.preCtx		= null;
+	this.pre		= null;
 	
 	if(data.length > 1) {
 		
@@ -63,7 +63,7 @@ function Sprite(img,data) {
 }
 
 Sprite.prototype.draw = function(t, x, y) {
-	
+	if(this.preCtx==null){
 	var frameIdx = 0;
 	
 	if(!this.loop && this.animated && t>=this.duration) {
@@ -89,5 +89,20 @@ Sprite.prototype.draw = function(t, x, y) {
 	}
 	
 	var offset = (typeof this.frames[frameIdx].offset=='undefined' ? [0,0] : this.frames[frameIdx].offset);
-	ctx.drawImage(this.img.T,this.frames[frameIdx].x, this.frames[frameIdx].y,this.frames[frameIdx].w, this.frames[frameIdx].h, Math.floor(x + offset[0]), Math.floor(y + offset[1]),this.frames[frameIdx].w, this.frames[frameIdx].h);
+	ctx1.drawImage(this.img.T,this.frames[frameIdx].x, this.frames[frameIdx].y,this.frames[frameIdx].w, this.frames[frameIdx].h,  (0.5+(x + offset[0])|0),  (0.5+(y + offset[1])|0),this.frames[frameIdx].w, this.frames[frameIdx].h);
+	}else{
+		
+		ctx.drawImage(this.pre,x,y);
+		
+	}
+};
+
+Sprite.prototype.preload = function() {
+	if(this.preCtx==null){
+		this.pre = document.createElement('canvas');
+		this.pre.width = 40 ;
+		this.pre.height = 40 ;
+		this.preCtx = this.pre.getContext('2d');
+		this.preCtx.drawImage(this.img.T,this.frames[0].x,this.frames[0].y,40,40,0,0,40,40);
+	}
 };

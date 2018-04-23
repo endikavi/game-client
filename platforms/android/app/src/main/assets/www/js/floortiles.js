@@ -50,7 +50,7 @@ function autogenTiles(){
             }
             
             //if ( (x+(y*imgy)) == 26 || (x+(y*imgy)) == 38){tileTypes[x+(y*imgy)].floor = floorTypes.ice;}
-            
+            	
         }
         
     }

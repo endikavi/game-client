@@ -55,12 +55,15 @@ function setMap() {
     
 }
 
-function changeMap(id){
-
+async function changeMap(id){
+		
+		mapTileData.preLoaded = false;
 		mapId=id
         setMap();
+		setTimeout(function (){preLoadSprites()},0);
         mapTileData.buildMapFromData(gameMap, mapW, mapH);
         mapTileData.addRoofs(roofList);
+		setTimeout(function (){mapTileData.preLoad()},0);
         populateMap();
 
 }
@@ -71,7 +74,33 @@ function TileMap() {
 	this.w		= 0;
 	this.h		= 0;
 	this.levels	= 4;
+	this.prem = null;
+	this.premCtx = null;
+	this.preLoaded = false;
 	
+}
+
+TileMap.prototype.preLoad = function() {
+	
+	if(this.preloaded == false){
+		this.prem = document.createElement('canvas');
+		this.prem.width = this.w*40 ;
+		this.prem.height = this.h*40 ;
+		this.premCtx = this.prem.getContext('2d');
+		this.premCtx.fillStyle = "#000000";
+		this.premCtx.fillRect(0, 0, this.prem.width, this.prem.height);
+
+		for(var ym = 0;ym < this.h; ++ym) {
+
+			for(var xm = 0;xm < this.w; ++xm) {
+
+				this.premCtx.drawImage(tileTypes[this.map[toIndex(xm,ym)].type].sprite.pre,xm*40,ym*40)
+
+			}
+
+		}
+		this.preloaded == true;
+	}	
 }
 
 TileMap.prototype.buildMapFromData = function(d, w, h) {

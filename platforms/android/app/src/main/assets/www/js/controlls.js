@@ -15,7 +15,7 @@ function addControlls() {
     document.removeEventListener("backbutton", exitFromApp, false);
     document.addEventListener("backbutton", mainMenu, false);
 	
-	joystick = new VirtualJoystick({mouseSupport: false})
+	joystick = new VirtualJoystick({mouseSupport: true})
 	
 }
 

@@ -30,14 +30,16 @@ var objectTypes = {
 	}
 };
 
-function MapObject(nam,nt) {
+function MapObject(nam,inf,nt) {
     
 	this.name	= nam;
+	this.info	= inf;
 	this.x		= 0;
 	this.y		= 0;
 	this.type	= nt;
 /////////////////////////////////////////////
 	this.offset	= [0,0];
+	
 }
 
 MapObject.prototype.placeAt = function(nx, ny) {
