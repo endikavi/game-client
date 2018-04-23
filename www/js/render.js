@@ -126,12 +126,10 @@ function drawGame() {
 				else if(keysDown[39] || joystick.right())		{ player.direction = directions.right; }
 				else if(keysDown[80]) 							{ player.pickUp(); }
 
-			}else if(keysDown[69]) { 
+			}else if(keysDown[80]) { 
                 
-                console.log("pulsando"); 
-                keysDown[69]=false;
-                
-                
+                player.pickUp();
+                keysDown[80]=false; 
                 
             }
 		}

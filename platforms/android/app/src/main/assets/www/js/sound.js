@@ -13,11 +13,11 @@ function sound(loop,src) {
     document.body.appendChild(this.sound);
 	
     this.play = function() {
-        
+        if(UserConf.controlls==1){
             this.sound.src = src;
             this.sound.load();
             this.sound.play().catch(function(error) {});
-        
+		}
     }
 	
     this.stop = function() {

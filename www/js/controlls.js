@@ -49,12 +49,14 @@ function addControlls1() {
 	
 }
 
-function addControllsForInfo(inf) {
+function addControllsForInfo(nam,inf) {
+	
+	currentSpeed = 3;
     
-    $$('#controlls-box').html('<div class="msg-box">' + inf + '</div>')
+    $$('#controlls-box').html('<div id="msg-box"><img id="msg-img" src="img/' + nam + '.png" ></img><div id="msg-text-box"><h3 id="msg-title">' + nam + '</h3><p id="msg-text">' + inf + '</p></div></div>')
 
-    document.getElementById('controlls-box').addEventListener("touchstart",function() {keysDown[69] = true;});
-    document.getElementById('controlls-box').addEventListener("touchend",function() {keysDown[69] = false;});
+    document.getElementById('msg-box').addEventListener("touchstart",function() {keysDown[80] = true;});
+   	document.getElementById('msg-box').addEventListener("touchend",function() {keysDown[80] = false;});
     
 }
 

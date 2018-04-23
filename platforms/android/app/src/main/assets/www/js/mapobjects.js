@@ -27,17 +27,26 @@ var objectTypes = {
 		offset : [0,0],
 		collision : objectCollision.push,
 		zIndex : 1
+	},
+    5 : {
+		name : "cartel",
+		sprite : new Sprite(tileset,[{x:40,y:160,w:40,h:40}]),
+		offset : [0,0],
+		collision : objectCollision.solid,
+		zIndex : 1
 	}
 };
 
-function MapObject(nam,nt) {
+function MapObject(nam,inf,nt) {
     
 	this.name	= nam;
+	this.info	= inf;
+    this.talking= 0;
 	this.x		= 0;
 	this.y		= 0;
 	this.type	= nt;
-/////////////////////////////////////////////
 	this.offset	= [0,0];
+	
 }
 
 MapObject.prototype.placeAt = function(nx, ny) {
@@ -52,6 +61,30 @@ MapObject.prototype.placeAt = function(nx, ny) {
 	this.y = ny;
 		
 	mapTileData.map[toIndex(nx, ny)].object = this;
+	
+};
+
+MapObject.prototype.talk = function() {
+	
+if(this.info!=false && this.talking >= 0){
+        
+	if(this.info.length > this.talking){
+
+		addControllsForInfo(this.name,this.info[this.talking]);   
+		this.talking++ 
+
+	}else{
+
+		console.log("reset");
+		document.getElementById('msg-box').removeEventListener("touchstart",function() {keysDown[80] = true;});
+		document.getElementById('msg-box').removeEventListener("touchend",function() {keysDown[80] = false;});
+		addControlls();
+		this.talking=0;
+		currentSpeed=0;
+
+		}
+        
+    }
 	
 };
 

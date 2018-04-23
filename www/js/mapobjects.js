@@ -66,29 +66,23 @@ MapObject.prototype.placeAt = function(nx, ny) {
 
 MapObject.prototype.talk = function() {
 	
-	if(this.info!=false && this.talking == 0){
+if(this.info!=false && this.talking >= 0){
         
-        
-        //ctx3.fillRect(0, (viewport.screen[1]/3)*2,viewport.screen[0], viewport.screen[1]/3);
-        addControllsForInfo(this.info[this.talking]);
-        this.talking++
-		
-	}else if(this.info!=false && this.talking > 0){
-        
-        if(this.info.length > this.talking){
-            
-        addControllsForInfo(this.info[this.talking]);   
-        this.talking++ 
-            
-        }else{
-            
-        console.log("reset");
-        addControlls();
-        document.getElementById('controlls-box').removeEventListener("touchstart",function() {keysDown[69] = true;});
-        document.getElementById('controlls-box').removeEventListener("touchend",function() {keysDown[69] = false;});
-        this.talking=0;
-            
-        }
+	if(this.info.length > this.talking){
+
+		addControllsForInfo(this.name,this.info[this.talking]);   
+		this.talking++ 
+
+	}else{
+
+		console.log("reset");
+		document.getElementById('msg-box').removeEventListener("touchstart",function() {keysDown[80] = true;});
+		document.getElementById('msg-box').removeEventListener("touchend",function() {keysDown[80] = false;});
+		addControlls();
+		this.talking=0;
+		currentSpeed=0;
+
+		}
         
     }
 	

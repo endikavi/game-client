@@ -5,12 +5,14 @@ var $$ = Dom7;
 var UserConf = {
 	
         controlls	: 0,
-        music		: 1,
-        vibrate     : 2,
-        loot        : 3,
-        info        : 4,
-        npc         : 5,
-        enemy       : 6
+        music		: 0,
+        vibrate     : 0,
+        name        : "anonimo",
+        lvl         : 4,
+        powers      : 5,
+        actualmap   : 6,
+		actualpositionx: 0,
+		actualpositiony: 0
 	
 };
 

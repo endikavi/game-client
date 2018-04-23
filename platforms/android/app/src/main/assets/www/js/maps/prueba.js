@@ -25,40 +25,43 @@ function populateMap0002() {
 
 	player.placeAt(11, 1);
     
-    var box2 = new MapObject("box2",4);
+    var box2 = new MapObject("box2",false,4);
 	box2.placeAt(21, 13);
     
-    var tree1 = new MapObject("mo1",3);
+    var cartel = new MapObject("cartel",["Soy un cartel,en ocasiones veo muertos por que no puedo dormir y me entra la paranoia oye tio eso que tienes es azucar?damela damela damela","un cartel magnifico sin sprite","dejame ya"],5);
+	cartel.placeAt(17, 13);
+    
+    var tree1 = new MapObject("mo1",false,3);
 	tree1.placeAt(21, 19);
     
-    var tree2 = new MapObject("mo1",3);
+    var tree2 = new MapObject("mo1",false,3);
 	tree2.placeAt(5, 9);
     
-	var tree3 = new MapObject("mo1",3);
+	var tree3 = new MapObject("mo1",false,3);
 	tree3.placeAt(5, 10);
 	
-	var tree3 = new MapObject("mo1",3);
+	var tree3 = new MapObject("mo1",false,3);
 	tree3.placeAt(5, 11);
 	
-	var tree3 = new MapObject("mo1",3);
+	var tree3 = new MapObject("mo1",false,3);
 	tree3.placeAt(5, 12);
 	
-	var tree3 = new MapObject("mo1",3);
+	var tree3 = new MapObject("mo1",false,3);
 	tree3.placeAt(5, 13);
 	
-	var tree3 = new MapObject("mo1",3);
+	var tree3 = new MapObject("mo1",false,3);
 	tree3.placeAt(5, 14);
 	
-	var tree3 = new MapObject("mo1",3);
+	var tree3 = new MapObject("mo1",false,3);
 	tree3.placeAt(5, 15);
 	
-	var tree3 = new MapObject("mo1",3);
+	var tree3 = new MapObject("mo1",false,3);
 	tree3.placeAt(5, 16);
 	
-	var tree3 = new MapObject("mo1",3);
+	var tree3 = new MapObject("mo1",false,3);
 	tree3.placeAt(5, 17);
 	
-    var tree3 = new MapObject("mo1",3);
+    var tree3 = new MapObject("mo1",false,3);
 	tree3.placeAt(5, 18);
     
     mapTileData.map[((21 + 10 * mapW))].eventEnter = function () {

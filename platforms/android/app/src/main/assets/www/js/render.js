@@ -50,6 +50,8 @@ var stop = false;
 var frameCount;
 var fps, fpsInterval, startTime, now, then, elapsed;
 
+var tileIndex;
+
 function renderGame() {
 	
 	fpsInterval = 1000 / 60;
@@ -70,7 +72,7 @@ function renderGame() {
 	ctx3.font = "bold 10pt sans-serif";
 	
 	window.addEventListener("keydown", function(e) {
-		if(e.keyCode>=37 && e.keyCode<=40) { keysDown[e.keyCode] = true; }
+		if((e.keyCode>=37 && e.keyCode<=40) || (e.keyCode=69) ) { keysDown[e.keyCode] = true; }
 		if(e.keyCode==80) { keysDown[e.keyCode] = true; }
 	});
 	window.addEventListener("keyup", function(e) {
@@ -79,7 +81,7 @@ function renderGame() {
 		{
 			currentSpeed = (currentSpeed>=(gameSpeeds.length-1) ? 0 : currentSpeed+1);
 		}
-		if(e.keyCode==80) { keysDown[e.keyCode] = false; }
+		if(e.keyCode==80 || e.keyCode==69) { keysDown[e.keyCode] = false; }
 	});
 
 	viewport.screen = [800,450];
@@ -124,7 +126,12 @@ function drawGame() {
 				else if(keysDown[39] || joystick.right())		{ player.direction = directions.right; }
 				else if(keysDown[80]) 							{ player.pickUp(); }
 
-			}
+			}else if(keysDown[80]) { 
+                
+                player.pickUp();
+                keysDown[80]=false; 
+                
+            }
 		}
 
         then = now - (elapsed % fpsInterval);
@@ -222,11 +229,14 @@ function drawGame() {
 		frameCount = 1;
 		if(ctx3==null) { return; }
 	
-		ctx3.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
-	
+		ctx3.clearRect(0, 0, viewport.screen[0]/2, viewport.screen[1]/2);
+	    ctx3.fillStyle = "#ff0000";
 		ctx3.textAlign = "left";
-
+        tileIndex = parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0]);
     	ctx3.fillText("FPS: " + framesLastSecond, 10, 15);
+        ctx3.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
+        ctx3.fillText('X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
+        ctx3.fillText("Steps: " + pasoscount, 10, 80);
 		
 	}
 	else { frameCount++; }
@@ -234,26 +244,6 @@ function drawGame() {
 	lastFrameTime = currentFrameTime;
 		
 	}
-	
-}
-
-function drawHUD() {
-	
-
-	
-	requestAnimationFrame(drawHUD);
-	
-}
-
-function drawGameTwo() {
-	
-	if(ctx2==null) { return; }
-	
-	ctx2.fillStyle = "#000000";
-	ctx2.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
-	
-	requestAnimationFrame(drawGameTwo);
-	
 	
 }
 
