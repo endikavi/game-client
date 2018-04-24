@@ -9,6 +9,8 @@ var playerTileset = new Tileset("img/player.png");
 
 var water = new Tileset("img/water.png");
 
+var cartelTile = new Tileset("img/carteltile.png");
+
 var msgbox= new Image();
 msgbox.src="css/msgbox.png";
 

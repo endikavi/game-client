@@ -30,6 +30,13 @@ var objectTypes = {
 	},
     5 : {
 		name : "cartel",
+		sprite : new Sprite(cartelTile,[{x:0,y:0,w:40,h:40}]),
+		offset : [0,-10],
+		collision : objectCollision.solid,
+		zIndex : 1
+	},
+    6 : {
+		name : "npc",
 		sprite : new Sprite(tileset,[{x:40,y:160,w:40,h:40}]),
 		offset : [0,0],
 		collision : objectCollision.solid,

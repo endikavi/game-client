@@ -1,38 +1,49 @@
+
+var UserConf = [
+	{controlls	        : 0,music		        : 0,vibrate             : 0,performance         : 0,username            : "anonimo",id                  : 0,lvl                 : 4,powers              : 5,actualmap           : 6,actualpositionx     : 0,actualpositiony     : 0,actualpositiony     : 0,actualpositiony     : 0}
+];
+
 function startSave() {
 	
 		window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
         	dir.getFile("Save.txt", {create:true}, function(file) {
             	SaveOb = file;
 				console.log('Save working');
-				writeSave("App Save started");
+                //UserConf = readSave();
         	});
     	});
 	
 }
 
-function writeSave(str) {
+function writeSave() {
     
-    if(!SaveOb) return;
-    var Save = str + " [" + (new Date()) + "]\n";
+    
+    if(!SaveOb) return false;
+    
+    var Save = UserConf;
     console.log(Save);
+    
     SaveOb.createWriter(function(fileWriter) {
         
-        fileWriter.seek(fileWriter.length);
+        fileWriter.truncate(0);
         
-        var blob = new Blob([Save], {type:'text/plain'});
+        var blob = new Blob(Save, {type:'text/plain'});
         fileWriter.write(blob);
         
     });
+    
 }
 
 function readSave() {
 	
+    if(!SaveOb) return false;
     SaveOb.file(function(file) {
         var reader = new FileReader();
 
         reader.onloadend = function(e) {
-            console.log(this.result);
-			alert(this.result);
+            
+            return this.result;
+            
         };
 
         reader.readAsText(file);

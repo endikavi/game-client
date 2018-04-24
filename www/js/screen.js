@@ -2,20 +2,6 @@ var seven = new Framework7();
 
 var $$ = Dom7;
 
-var UserConf = {
-	
-        controlls	: 0,
-        music		: 0,
-        vibrate     : 0,
-        name        : "anonimo",
-        lvl         : 4,
-        powers      : 5,
-        actualmap   : 6,
-		actualpositionx: 0,
-		actualpositiony: 0
-	
-};
-
 function addGameCanvas() {
 	$$('#screen').html('<canvas id="layer0" width="800" height="450"></canvas><canvas id="layer1" width="800" height="450"></canvas><canvas id="layer2" width="800" height="450"></canvas><canvas id="layer3" width="800" height="450"></canvas><div id=controlls-box></div>');
 	mapId = 0002;

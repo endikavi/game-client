@@ -12,6 +12,7 @@ var app = {
         console.log(navigator.vibrate);
         console.log(device.cordova);
         console.log(cordova.file);
+        startSave();
         
     }
 

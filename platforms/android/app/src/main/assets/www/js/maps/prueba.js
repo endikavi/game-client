@@ -28,8 +28,10 @@ function populateMap0002() {
     var box2 = new MapObject("box2",false,4);
 	box2.placeAt(21, 13);
     
-    var cartel = new MapObject("cartel",["Soy un cartel,en ocasiones veo muertos por que no puedo dormir y me entra la paranoia oye tio eso que tienes es azucar?damela damela damela","un cartel magnifico sin sprite","dejame ya"],5);
-	cartel.placeAt(17, 13);
+    var cartel = new MapObject("cartel",["Soy un cartel,en ocasiones veo muertos por que no puedo dormir y me entra la paranoia oye tio eso que tienes es azucar?damela damela damela","un cartel magnifico con sprite","dejame ya"],5);
+    cartel.placeAt(17, 13);
+    var charlie = new MapObject("charlie",["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],6);
+	charlie.placeAt(17, 15);
     
     var tree1 = new MapObject("mo1",false,3);
 	tree1.placeAt(21, 19);

@@ -1,11 +1,11 @@
 
 function addControlls() {
     
-    if (UserConf.controlls==0){
+    if (UserConf[0].controlls==0){
         
         addControlls0();
        
-    }else if(UserConf.controlls==1){
+    }else if(UserConf[0].controlls==1){
              
         addControlls1();     
              
