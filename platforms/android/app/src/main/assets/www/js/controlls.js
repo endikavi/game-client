@@ -49,11 +49,40 @@ function addControlls1() {
 	
 }
 
+var ind = 0;
+var interval;
+
 function addControllsForInfo(nam,inf) {
 	
 	currentSpeed = 3;
-    
-    $$('#controlls-box').html('<div id="msg-box"><img id="msg-img" src="img/' + nam + '.png" ></img><div id="msg-text-box"><h3 id="msg-title">' + nam + '</h3><p id="msg-text">' + inf + '</p></div></div>')
+	
+    clearInterval(interval);
+	
+    $$('#controlls-box').html('<div id="msg-box"><img id="msg-img" src="img/' + nam + '.png" ></img><div id="msg-text-box"><h3 id="msg-title">' + nam + '</h3><p id="msg-text"></p></div></div>');
+	
+	ind = 0;
+    interval = setInterval(function(){
+		
+        $$('#msg-text').append('<span id="msg-letter">'+inf[ind]+'<span>');
+        ind++;
+		
+        if (ind >= inf.length){
+			
+            clearInterval(interval);
+			return;
+        }
+		$$('#msg-text').append('<span id="msg-letter">'+inf[ind]+'<span>');
+        ind++;
+		
+        if (ind >= inf.length){
+			
+            clearInterval(interval);
+			
+        }
+    }, 0);
+	
+	
+	
 
     document.getElementById('msg-box').addEventListener("touchstart",function() {keysDown[80] = true;});
    	document.getElementById('msg-box').addEventListener("touchend",function() {keysDown[80] = false;});

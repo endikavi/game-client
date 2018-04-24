@@ -54,7 +54,7 @@
 }
 
 #ContinueGame {
-	
+	background-image: url("msgbox.png");
 	position: absolute;
     height: 10%;
 	width: 44%;

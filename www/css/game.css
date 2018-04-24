@@ -19,6 +19,12 @@ body,html{
 	height: 100%;
     margin-top:auto;
 }
+
+@-webkit-keyframes image_blur {
+	0% {opacity:0;}
+	100% {opacity:1;}
+}
+
 #msg-box{
     
     
@@ -41,6 +47,11 @@ body,html{
    margin:0px; margin-left:5px; padding:0px; overflow:inherit; z-index: 5;text-transform:none;
 	font-family: Myfont;
     
+}
+#msg-letter{
+	
+	-webkit-animation: image_blur 0.5s;
+	
 }
 #msg-text-box{
 	
