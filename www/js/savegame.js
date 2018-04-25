@@ -1,71 +1,55 @@
 
-var UserConf = [
-	{controlls	        : 0,music		        : 0,vibrate             : 0,performance         : 0,username            : "anonimo",id                  : 0,lvl                 : 4,powers              : 5,actualmap           : 6,actualpositionx     : 0,actualpositiony     : 0,actualpositiony     : 0,actualpositiony     : 0}
-];
+var UserConf;
 
-function startSave() {
-	
-		window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
-        	dir.getFile("Save.txt", {create:true}, function(file) {
-            	SaveOb = file;
-				console.log('Save working');
-                //UserConf = readSave();
-        	});
-    	});
-	
-}
-
-function writeSave() {
-    
-    
-    if(!SaveOb) return false;
-    
-    var Save = UserConf;
-    console.log(Save);
-    
-    SaveOb.createWriter(function(fileWriter) {
-        
-        fileWriter.truncate(0);
-        
-        var blob = new Blob(Save, {type:'text/plain'});
-        fileWriter.write(blob);
-        
-    });
-    
-}
+readSave()
 
 function readSave() {
-	
-    if(!SaveOb) return false;
-    SaveOb.file(function(file) {
-        var reader = new FileReader();
-
-        reader.onloadend = function(e) {
-            
-            return this.result;
-            
-        };
-
-        reader.readAsText(file);
-    });
+    
+    userdata=localStorage.getItem('savedata');
+    userdata=JSON.parse(userdata);
+    
+    if( userdata != null){
+        
+        UserConf = userdata;
+        
+    }else{
+        
+        resetSave();
+        
+    }
+    
+    console.log("Usuario: "+UserConf[0].username);
 
 }
 
 function resetSave() {
-	
-	SaveOb.remove(function(){
-                  startSave();
-              },function(error){
-                  startSave();
-              },function(){
-                  startSave();
-              });
+    
+    localStorage.clear();
+    
+    UserConf = [{
+        controlls: 0,
+        music: 0,
+        vibrate: 0,
+        performance: 0,
+        username: "anonimo",
+        id: 0,
+        lvl: 4,
+        powers: 5,
+        actualmap: 6,
+        actualpositionx: 0,
+        actualpositiony: 0,
+        actualpositiony: 0,
+        actualpositiony: 0
+        }];
+        
+    localStorage.setItem("savedata", JSON.stringify(UserConf));
+    console.log('Nuevo usuario');
 	
 }
 
 function mostrarInfo() {
     
-    alert(
+    console.log(
         
         'Fabricante: ' + device.manufacturer + '\n' +
         'Cordova: ' + device.cordova + '\n' +

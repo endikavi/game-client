@@ -6,8 +6,27 @@
 }
 
 #screen{
-width:100%;margin:0px; padding:0px; height: 100%; overflow:inherit;position: relative;
+width:100%;margin:0px; padding:0px; height: 100%; overflow:inherit;position: relative;background-color: aliceblue;
 }
+
+
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%;
+        transform: rotate(-120deg);
+	}
+	50% {
+		background-position: 100% 50%;
+        transform: rotate(120deg);
+	}
+	100% {
+		background-position: 0% 50%;
+        transform: rotate(-120deg);
+	}
+};animation: Gradient 5s ease infinite; 
+
+
 	#layer3 { position: absolute; width:100%; margin:0px; padding:0px; overflow:inherit; z-index: 4 }
   	#layer2 { position: absolute; width:100%; margin:0px; padding:0px; overflow:inherit; z-index: 3 }
   	#layer1 { position: absolute; width:100%; margin:0px; padding:0px; overflow:inherit; z-index: 2 }
@@ -20,7 +39,7 @@ body,html{
     margin-top:auto;
 }
 
-@-webkit-keyframes image_blur {
+@keyframes image_blur {
 	0% {opacity:0;}
 	100% {opacity:1;}
 }
