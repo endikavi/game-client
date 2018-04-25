@@ -1,8 +1,6 @@
 
 var UserConf;
 
-readSave()
-
 function readSave() {
     
     userdata=localStorage.getItem('savedata');
@@ -18,7 +16,7 @@ function readSave() {
         
     }
     
-    console.log("Usuario: "+UserConf[0].username);
+    console.log("Usuario: "+UserConf[1].username);
 
 }
 
@@ -26,41 +24,74 @@ function resetSave() {
     
     localStorage.clear();
     
-    UserConf = [{
-        controlls: 0,
-        music: 0,
-        vibrate: 0,
-        performance: 0,
-        username: "anonimo",
-        id: 0,
-        lvl: 4,
-        powers: 5,
-        actualmap: 6,
-        actualpositionx: 0,
-        actualpositiony: 0,
-        actualpositiony: 0,
-        actualpositiony: 0
-        }];
+    UserConf = [
+        {
+        
+            controlls: 0,
+            music: 0,
+            vibrate: 0,
+            performance: 0,
+            
+        },
+                
+        {
+            
+            username: "anonimo",
+            email: undefined,
+            premiun: 0,
+            mobileid: undefined,
+            mobileinfo: undefined,
+        
+        },
+        
+        {
+            lvl: 1,
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+        },
+        
+        {
+            lvl: 1,
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+        },
+        
+        {
+
+            lvl: 1,
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+        }
+    ];
+    
+    TakeMobileInfo();
         
     localStorage.setItem("savedata", JSON.stringify(UserConf));
     console.log('Nuevo usuario');
 	
 }
 
-function mostrarInfo() {
+function TakeMobileInfo() {
     
-    console.log(
+    UserConf[1].mobileid = device.uuid
+    
+    UserConf[1].mobileinfo = {
         
-        'Fabricante: ' + device.manufacturer + '\n' +
-        'Cordova: ' + device.cordova + '\n' +
-        'Modelo: ' + device.model + '\n' +
-        'Plataforma: ' + device.platform + '\n' +
-        'Numero unico: ' + device.uuid + '\n' +
-        'Version: ' + device.version + '\n' +
-        'Es emulacion: ' + device.isVirtual + '\n' +
-        'Serial: ' + device.serial 
+        Fabricante:     device.manufacturer,
+        Cordova:        device.cordova,
+        Modelo:         device.model,
+        Plataforma:     device.platform,
+        Version:        device.version,
+        Emulacion:      device.isVirtual,
+        Serial:         device.serial,
         
-         );
+    }
     
 }
 
