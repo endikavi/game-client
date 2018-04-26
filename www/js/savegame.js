@@ -1,5 +1,49 @@
 
-var UserConf;
+var UserConf; /*= [
+        {
+        
+            controlls: 0,
+            music: 0,
+            vibrate: 0,
+            performance: 0,
+            
+        },
+                
+        {
+            
+            username: "anonimo",
+            email: undefined,
+            premiun: 0,
+            mobileid: undefined,
+            mobileinfo: undefined,
+        
+        },
+        
+        {
+            lvl: 1,
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+        },
+        
+        {
+            lvl: 1,
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+        },
+        
+        {
+
+            lvl: 1,
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+        }
+    ];*/
 
 function readSave() {
     
