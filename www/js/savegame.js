@@ -1,5 +1,5 @@
 
-var UserConf; /*= [
+var UserConf = [
         {
         
             controlls: 0,
@@ -43,7 +43,7 @@ var UserConf; /*= [
             actualpositiony: 3
         
         }
-    ];*/
+    ];
 
 function readSave() {
     

@@ -300,7 +300,6 @@ Character.prototype.pickUp = function() {
 			}else if(objectTypes[mapTileData.map[lookingTo()].object.type].info!=false){
                      
                     var o = mapTileData.map[lookingTo()].object;
-                    console.log(o.info);
                     o.talk();
                      
             }

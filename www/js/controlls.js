@@ -50,7 +50,9 @@ function addControlls1() {
 }
 
 var ind = 0;
+var maxind;
 var interval;
+var text;
 
 function addControllsForInfo(nam,inf) {
 	
@@ -61,29 +63,28 @@ function addControllsForInfo(nam,inf) {
     $$('#controlls-box').html('<div id="msg-box"><img id="msg-img" src="img/' + nam + '.png" ></img><div id="msg-text-box"><h3 id="msg-title">' + nam + '</h3><p id="msg-text"></p></div></div>');
 	
 	ind = 0;
+    maxind = inf.length;
+    text=$$('#msg-text');
+    
     interval = setInterval(function(){
-		
-        $$('#msg-text').append('<span id="msg-letter">'+inf[ind]+'<span>');
-        ind++;
-		
-        if (ind >= inf.length){
-			
-            clearInterval(interval);
-			return;
-        }
-		$$('#msg-text').append('<span id="msg-letter">'+inf[ind]+'<span>');
-        ind++;
-		
-        if (ind >= inf.length){
-			
-            clearInterval(interval);
-			
-        }
-    }, 0);
-	
-	
-	
+        
+            for (s = 0; s < 2; s++){
 
+                if (ind >= maxind){
+
+                    clearInterval(interval);
+                    return;
+
+                }else{
+
+                    text.append('<span id="msg-letter">'+inf[ind++]+'<span>');
+
+                }
+
+            }
+    
+    }, 15);
+	
     document.getElementById('msg-box').addEventListener("touchstart",function() {keysDown[80] = true;});
    	document.getElementById('msg-box').addEventListener("touchend",function() {keysDown[80] = false;});
     

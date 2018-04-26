@@ -24,7 +24,8 @@ width:100%;margin:0px; padding:0px; height: 100%; overflow:inherit;position: rel
 		background-position: 0% 50%;
         transform: rotate(-120deg);
 	}
-};animation: Gradient 5s ease infinite; 
+}
+.pruebagradiente {animation: Gradient 5s ease infinite;} 
 
 
 	#layer3 { position: absolute; width:100%; margin:0px; padding:0px; overflow:inherit; z-index: 4 }
@@ -69,7 +70,7 @@ body,html{
 }
 #msg-letter{
 	
-	-webkit-animation: image_blur 0.5s;
+	-webkit-animation: image_blur 0.4s;
 	
 }
 #msg-text-box{

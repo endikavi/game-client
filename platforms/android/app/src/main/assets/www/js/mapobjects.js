@@ -44,14 +44,14 @@ var objectTypes = {
 	}
 };
 
-function MapObject(nam,inf,nt) {
+function MapObject(dat) {
     
-	this.name	= nam;
-	this.info	= inf;
+	this.name	= dat.name || "object";
+	this.info	= dat.info || false;
     this.talking= 0;
 	this.x		= 0;
 	this.y		= 0;
-	this.type	= nt;
+	this.type	= dat.nt || 0;
 	this.offset	= [0,0];
 	
 }
@@ -82,7 +82,6 @@ if(this.info!=false && this.talking >= 0){
 
 	}else{
 
-		console.log("reset");
 		document.getElementById('msg-box').removeEventListener("touchstart",function() {keysDown[80] = true;});
 		document.getElementById('msg-box').removeEventListener("touchend",function() {keysDown[80] = false;});
 		addControlls();

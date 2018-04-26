@@ -112,26 +112,32 @@ function drawGame() {
 	if (elapsed > fpsInterval) {
 		
 		if (elapsed > fpsInterval/4){
-			if(!player.processMovement(gameTime) && gameSpeeds[currentSpeed].mult!=0){
-
-				this.direction	= directions.right;
-
-				if     ((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp()))		{ player.moveUp(gameTime); }
-				else if((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > 35 && player.canMoveDown()) 		{ player.moveDown(gameTime); }
-				else if((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -30 && player.canMoveLeft())		{ player.moveLeft(gameTime); }
-				else if((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > 30 && player.canMoveRight())		{ player.moveRight(gameTime); }
-				else if(keysDown[38] || joystick.up())			{ player.direction = directions.up; }
-				else if(keysDown[40] || joystick.down())		{ player.direction = directions.down; }
-				else if(keysDown[37] || joystick.left())		{ player.direction = directions.left; }
-				else if(keysDown[39] || joystick.right())		{ player.direction = directions.right; }
-				else if(keysDown[80]) 							{ player.pickUp(); }
-
-			}else if(keysDown[80]) { 
+            
+            //setTimeout(function(){
                 
-                player.pickUp();
-                keysDown[80]=false; 
+                if(!player.processMovement(gameTime) && gameSpeeds[currentSpeed].mult!=0){
+
+                    this.direction	= directions.right;
+
+                    if     ((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp()))		{ player.moveUp(gameTime); }
+                    else if((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > 35 && player.canMoveDown()) 		{ player.moveDown(gameTime); }
+                    else if((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -30 && player.canMoveLeft())		{ player.moveLeft(gameTime); }
+                    else if((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > 30 && player.canMoveRight())		{ player.moveRight(gameTime); }
+                    else if(keysDown[38] || joystick.up())			{ player.direction = directions.up; }
+                    else if(keysDown[40] || joystick.down())		{ player.direction = directions.down; }
+                    else if(keysDown[37] || joystick.left())		{ player.direction = directions.left; }
+                    else if(keysDown[39] || joystick.right())		{ player.direction = directions.right; }
+                    else if(keysDown[80]) 							{ player.pickUp(); }
+
+                }else if(keysDown[80]) { 
+
+                    player.pickUp();
+                    keysDown[80]=false; 
+
+                }
                 
-            }
+           // }, 0);
+            
 		}
 
         then = now - (elapsed % fpsInterval);
@@ -151,11 +157,13 @@ function drawGame() {
 		
 		ctx1.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
 		
-		if(z==0 && mapTileData.preLoaded == true){
-		
-			ctx.drawImage(mapTileData.prem, viewport.offset[0], viewport.offset[1]);
-			
-		}
+		//if(z==0 && mapTileData.preLoaded == true){
+           // setTimeout(function(){
+
+                //ctx.drawImage(mapTileData.prem, viewport.offset[0], viewport.offset[1]);
+
+           // }, 0);	
+		//}
 		for(z = 0;z < l; z++) {
 
 			for(y = viewport.startTile[1];y <= ye; ++y) {
@@ -164,7 +172,7 @@ function drawGame() {
 
 				mapTileNow = mapTileData.map[toIndex(x,y)];
 					
-				if(z==0 && mapTileData.preLoaded == false){
+				if(z==0 /*&& mapTileData.preLoaded == false*/){
 					
 					tileTypes[mapTileNow.type].sprite.draw(
 						gameTime,

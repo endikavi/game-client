@@ -23,8 +23,6 @@ function autogenTiles(){
     imgy = (terrainTileset.T.height / 40);//casillas de alto
     imgx = (terrainTileset.T.width / 41 );//casillas de largo
     
-    console.log((terrainTileset.T.width / 41 ))
-    
     for(var y = 0; y < imgy; ++y) {
 		
         for(var x = 0; x < imgx; ++x) {
