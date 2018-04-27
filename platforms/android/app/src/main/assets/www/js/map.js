@@ -60,11 +60,13 @@ async function changeMap(id){
 		mapTileData.preLoaded = false;
 		mapId=id
         setMap();
-		setTimeout(function (){preLoadSprites()},0);
         mapTileData.buildMapFromData(gameMap, mapW, mapH);
         mapTileData.addRoofs(roofList);
-		setTimeout(function (){mapTileData.preLoad()},0);
         populateMap();
+        setTimeout(function (){
+            preLoadSprites();
+            mapTileData.preLoad();               
+        },0);
 
 }
 
@@ -89,23 +91,21 @@ TileMap.prototype.preLoad = function() {
 		this.prem.height = this.h*40 ;
 		this.premCtx = this.prem.getContext('2d');
         
-		//this.premCtx.fillStyle = "#000000";
-		//this.premCtx.fillRect(0, 0, this.prem.width, this.prem.height);
-
+		this.premCtx.fillStyle = "#000000";
+		this.premCtx.fillRect(0, 0, this.prem.width, this.prem.height);
+        
 		for(var ym = 0;ym < this.h; ++ym) {
 
 			for(var xm = 0;xm < this.w; ++xm) {
-                
-                console.log('entra')
-                this.premCtx.drawImage(tileTypes[this.map[toIndex(xm,ym)].type].sprite.pre,(xm*tileW),(ym*tileH))
-                
-                //tileTypes[this.map[toIndex(xm,ym)].type].sprite.draw(0,(xm*tileW),(ym*tileH));
 
+                this.premCtx.drawImage(tileTypes[mapTileData.map[toIndex(ym,xm)].type].sprite.pre, 40*ym, 40*xm);
+			
+				this.preLoaded = true;
 			}
 
 		}
         
-		this.preLoaded = true;
+		
 	}	
 }
 

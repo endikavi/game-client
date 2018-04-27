@@ -153,17 +153,17 @@ function drawGame() {
 		xe = viewport.endTile[0];
 
 		
-		ctx.fillRect(0, 0, viewport.screen[0], viewport.screen[1]);
+		
 		
 		ctx1.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
 		
-		if(z==0 && mapTileData.preLoaded == true){
-           // setTimeout(function(){
+		if(mapTileData.preLoaded == true){
+				
+				ctx.fillRect(0, 0, viewport.screen[0], viewport.screen[1]);
+				ctx.drawImage(mapTileData.prem,-viewport.offset[0],-viewport.offset[1], viewport.screen[0], viewport.screen[1], 0, 0, viewport.screen[0], viewport.screen[1]);
 
-                ctx.drawImage(mapTileData.prem, viewport.offset[0], viewport.offset[1]);
-
-           // }, 0);	
 		}
+		
 		for(z = 0;z < l; z++) {
 
 			for(y = viewport.startTile[1];y <= ye; ++y) {
@@ -196,7 +196,7 @@ function drawGame() {
 
 					o = mapTileNow.object;
 
-					if(o!=null && objectTypes[o.type].zIndex==z) {
+					if(o!=null && objectTypes[o.type].zIndex==1 && z==1 && (y*tileH) <= player.position[1]) {
 
 						o.processMovement();
 
@@ -207,13 +207,33 @@ function drawGame() {
 							viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
 					}
 
-					if(z==1) {
+					if(z==1 && (y*tileH) <= (player.position[1]-5)) {
 
 						player.sprites[player.direction].draw(
 						gameTime,
 						viewport.offset[0] + player.position[0],
 						viewport.offset[1] + player.position[1]);
 
+					}
+					
+					if(o!=null && objectTypes[o.type].zIndex==1 && z==1 && (y*tileH) >= player.position[1]) {
+
+						o.processMovement();
+
+						ot = objectTypes[o.type];
+
+						ot.sprite.draw(gameTime,
+							viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
+							viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
+					}
+					
+					if(o!=null && objectTypes[o.type].zIndex==3 && z==3) {
+
+						ot = objectTypes[o.type];
+
+						ot.sprite.draw(gameTime,
+							viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
+							viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
 					}
 
 					if(z==2 && mapTileNow.roofType!=0 && mapTileNow.roof!=playerRoof1 && mapTileNow.roof!=playerRoof2){

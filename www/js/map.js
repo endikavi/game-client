@@ -97,14 +97,15 @@ TileMap.prototype.preLoad = function() {
 		for(var ym = 0;ym < this.h; ++ym) {
 
 			for(var xm = 0;xm < this.w; ++xm) {
-                
-                this.premCtx.drawImage(tileTypes[this.map[toIndex(xm,ym)].type].sprite.pre,xm*40,ym*40)
 
+                this.premCtx.drawImage(tileTypes[mapTileData.map[toIndex(ym,xm)].type].sprite.pre, 40*ym, 40*xm);
+			
+				this.preLoaded = true;
 			}
 
 		}
         
-		this.preLoaded = true;
+		
 	}	
 }
 
