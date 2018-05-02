@@ -39,17 +39,18 @@ function mainMenuControlls() {
 document.removeEventListener("backbutton", mainMenu, false);   
 document.addEventListener("backbutton", exitFromApp, false);
     
-document.getElementById("StartGame").addEventListener("click",addGameCanvas);
+$$("#StartGame").on("click",function () {
+    
+    addCard('Empezar nueva partida','')
+    
+                                                      
+});
     
 $$('#Multi').on('click', function () {addCard('multijugador','este es el menu del multi')})
 
 $$('#ContinueGame').on('click', function () {addCard('Continuar','este es el menu para elegir partida guardada')})
     
-$$('#User').on('click', function () {
-    
-        addCard('Login','<button Style="display:none;" class="button button-outline" id="Reset" type="buttom">Volver</button> <button Style="display:block;" id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button Style="display:block;" id="Google" class="button button-outline button-register-google" type="buttom">Usar cuenta Google</button> <button Style="display:block;" id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
-        
-} )
+$$('#User').on('click', resetUserMenu)
 
 $$('#Menu').on('click', function () {addCard('menu','este es el menu de opciones')})
 
@@ -57,3 +58,38 @@ $$('#Menu').on('click', function () {addCard('menu','este es el menu de opciones
 $$('#Retos').on('click', function () {addCard('Retos','este es el menu de retos<hr><p class="segmented segmented-raised"><button class="button button-outline">Mapa 1</button><button class="button button-outline">Mapa 2</button><button class="button button-outline">Mapa 3</button><button class="button button-outline">Mapa 4</button></p><p class="segmented segmented-raised"><button class="button button-outline">Mapa 5</button><button class="button button-outline">Mapa 6</button><button class="button button-outline">Mapa 7</button><button class="button button-outline">Mapa 8</button></p>')})
     
 }
+
+function resetUserMenu (){
+    
+    addCard('Login','<button Style="display:none;" class="button button-outline" id="Reset" type="buttom">Volver</button> <button  id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button id="Google" class="button button-outline button-register-google" type="buttom">Usar cuenta Google</button> <button id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
+    
+    $$('#Register').on('click', registerMenu)
+    $$('#Google').on('click', logInGoogle)
+    $$('#Login').on('click', loginMenu)
+    
+}
+
+function registerMenu (){
+    
+    addCard('Login','<button Style="display:none;" class="button button-outline" id="Reset" type="buttom">Volver</button> <button  id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button id="Google" class="button button-outline button-register-google" type="buttom">Usar cuenta Google</button> <button id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
+    
+    $$('#Register').on('click', registerMenu)
+    $$('#Google').on('click', logInGoogle)
+    $$('#Login').on('click', loginMenu)
+    
+}
+
+function loginMenu (){
+    
+    addCard('Login','<button Style="display:none;" class="button button-outline" id="Reset" type="buttom">Volver</button> <button  id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button id="Google" class="button button-outline button-register-google" type="buttom">Usar cuenta Google</button> <button id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
+    
+    $$('#Register').on('click', registerMenu)
+    $$('#Google').on('click', logInGoogle)
+    $$('#Login').on('click', loginMenu)
+    
+}
+
+
+
+
+
