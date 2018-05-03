@@ -196,7 +196,7 @@ function drawGame() {
 
 					o = mapTileNow.object;
 
-					if(o!=null && objectTypes[o.type].zIndex==1 && z==1 && (y*tileH) <= player.position[1]) {
+					if(o!=null && objectTypes[o.type].zIndex==1 && z==1 && (y*tileH) <= player.position[1]+5) {
 
 						o.processMovement();
 
@@ -207,7 +207,7 @@ function drawGame() {
 							viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
 					}
 
-					if(z==1 && (y*tileH) <= (player.position[1]-5)) {
+					if(z==1 && (y*tileH) <= (player.position[1])+27) {
 
 						player.sprites[player.direction].draw(
 						gameTime,
@@ -263,7 +263,7 @@ function drawGame() {
         tileIndex = parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0]);
     	ctx3.fillText("FPS: " + framesLastSecond, 10, 15);
         ctx3.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
-        ctx3.fillText('X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
+        ctx3.fillText(player.position[1] + 'X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
         ctx3.fillText("Steps: " + pasoscount, 10, 80);
 		
 	}

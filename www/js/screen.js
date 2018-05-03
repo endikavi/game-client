@@ -3,7 +3,9 @@ var seven = new Framework7();
 var $$ = Dom7;
 
 function addGameCanvas() {
+    
 	$$('#screen').html('<canvas id="layer0" width="800" height="450"></canvas><canvas id="layer1" width="800" height="450"></canvas><canvas id="layer2" width="800" height="450"></canvas><canvas id="layer3" width="800" height="450"></canvas><div id=controlls-box></div>');
+    
 	mapId = 0002;
 	
     addControlls();
@@ -41,7 +43,8 @@ document.addEventListener("backbutton", exitFromApp, false);
     
 $$("#StartGame").on("click",function () {
     
-    addCard('Empezar nueva partida','')
+    //addCard('Empezar nueva partida','')
+    addGameCanvas();
     
                                                       
 });
@@ -61,31 +64,28 @@ $$('#Retos').on('click', function () {addCard('Retos','este es el menu de retos<
 
 function resetUserMenu (){
     
-    addCard('Login','<button Style="display:none;" class="button button-outline" id="Reset" type="buttom">Volver</button> <button  id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button id="Google" class="button button-outline button-register-google" type="buttom">Usar cuenta Google</button> <button id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
+    addCard('Login','<button  id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
     
     $$('#Register').on('click', registerMenu)
-    $$('#Google').on('click', logInGoogle)
     $$('#Login').on('click', loginMenu)
     
 }
 
 function registerMenu (){
     
-    addCard('Login','<button Style="display:none;" class="button button-outline" id="Reset" type="buttom">Volver</button> <button  id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button id="Google" class="button button-outline button-register-google" type="buttom">Usar cuenta Google</button> <button id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
+    addCard('Login','<button class="button button-outline" id="Reset" type="buttom">Volver</button><div class="item-input-wrap"><input type="text" name="e" class="dropdown-item " id="Email" placeholder="Email address" required pattern="^[^@]+@[^@]+\.[^@]{2,3}$" minlength="8" maxlength="40" required  required><span class="input-clear-button"></span></div><div class="item-input-wrap"><input type="text" name="u" class="dropdown-item " id="Username"  placeholder="Username" pattern="[A-z0-9À-ž]{3,15}$" minlength="3" maxlength="15" ><span class="input-clear-button"></span></div><div class="item-input-wrap"><input type="password" name="p" class="dropdown-item " id="Password"  placeholder="Password" required pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,40}" minlength="8" maxlength="40" required> <button id="Login" class="button button-outline button-register-google" type="buttom">Entrar</button>')
     
-    $$('#Register').on('click', registerMenu)
-    $$('#Google').on('click', logInGoogle)
-    $$('#Login').on('click', loginMenu)
+    $$('#Reset').on('click', resetUserMenu)
+    $$('#Login').on('click', logIn)
     
 }
 
 function loginMenu (){
     
-    addCard('Login','<button Style="display:none;" class="button button-outline" id="Reset" type="buttom">Volver</button> <button  id="Register" class="button button-outline button-register" type="buttom" >Registrarte</button> <button id="Google" class="button button-outline button-register-google" type="buttom">Usar cuenta Google</button> <button id="Login" class="button button-outline button-register-google" type="buttom">Ya tengo cuenta</button>')
+    addCard('Login','<button class="button button-outline" id="Reset" type="buttom">Volver</button><div class="item-input-wrap"><input type="text" name="e" class="dropdown-item " id="Email" placeholder="Email address" required pattern="^[^@]+@[^@]+\.[^@]{2,3}$" minlength="8" maxlength="40" required  required></div><div class="item-input-wrap"><input type="text" name="u" class="dropdown-item " id="Username"  placeholder="Username" pattern="[A-z0-9À-ž]{3,15}$" minlength="3" maxlength="15" ></div><div class="item-input-wrap"><input type="password" name="p" class="dropdown-item " id="Password"  placeholder="Password" required pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,40}" minlength="8" maxlength="40" required> <button id="Login" class="button button-outline button-register-google" type="buttom">Entrar</button>')
     
-    $$('#Register').on('click', registerMenu)
-    $$('#Google').on('click', logInGoogle)
-    $$('#Login').on('click', loginMenu)
+    $$('#Reset').on('click', resetUserMenu)
+    $$('#Login').on('click', signIn)
     
 }
 
