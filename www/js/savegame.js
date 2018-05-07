@@ -6,95 +6,15 @@ function appInit(){
     if( userdata != null){
         
         UserConf = userdata;
-		mainMenuControlls();
-		menuSound.play();
+		mainMenu();
         
     }else{
         
-        
-        
-    }
-	
-}
-
-
-
-
-
-
-function readSave() {
-    
-    userdata=localStorage.getItem('savedata');
-    userdata=JSON.parse(userdata);
-    
-    if( userdata != null){
-        
-        UserConf = userdata;
-        
-    }else{
-        
-        resetSave();
+        TakeMobileInfo();
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+        newUserMenu();
         
     }
-    
-    console.log("Usuario: "+UserConf[1].username);
-
-}
-
-function resetSave() {
-    
-    localStorage.clear();
-    
-    UserConf = [
-        {
-        
-            controlls: 0,
-            music: 0,
-            vibrate: 0,
-            performance: 0,
-            
-        },
-                
-        {
-            
-            username: "anonimo",
-            email: undefined,
-            premiun: 0,
-            mobileid: undefined,
-            mobileinfo: undefined,
-        
-        },
-        
-        {
-            lvl: 1,
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
-        
-        },
-        
-        {
-            lvl: 1,
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
-        
-        },
-        
-        {
-
-            lvl: 1,
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
-        
-        }
-    ];
-    
-    TakeMobileInfo();
-        
-    localStorage.setItem("savedata", JSON.stringify(UserConf));
-    console.log('Nuevo usuario');
 	
 }
 
@@ -123,47 +43,36 @@ function vibrate() {
 }
 
 var UserConf = [
+    
         {
         
-            controlls: 0,
+            controllsR: 0,
+            controllsL: 0,
             music: 0,
             vibrate: 0,
             performance: 0,
+            online: 0,
+            
             
         },
                 
         {
             
-            username: "anonimo",
-            email: undefined,
-            premiun: 0,
+            username: undefined,
+            multiplayerid: undefined,
             mobileid: undefined,
-            mobileinfo: undefined,
+            mobileinfo: undefined
         
         },
         
         {
             lvl: 1,
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
-        
-        },
-        
-        {
-            lvl: 1,
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
-        
-        },
-        
-        {
-
-            lvl: 1,
+            name:undefined,
+            inventory:"",
             actualmap: 0001,
             actualpositionx: 3,
             actualpositiony: 3
         
         }
+    
     ];

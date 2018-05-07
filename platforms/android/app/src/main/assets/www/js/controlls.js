@@ -1,19 +1,29 @@
 
 function addControlls() {
     
-    if (UserConf[0].controlls==0){
+    if (UserConf[0].controllsL==0){
         
-        addControlls0();
+        addControllsL0();
        
-    }else if(UserConf[0].controlls==1){
+    }else if(UserConf[0].controllsL==1){
              
-        addControlls1();     
+        addControllsL1(); 
+             
+    }
+    
+    if (UserConf[0].controllsR==0){
+        
+        addControllsR0();
+       
+    }else if(UserConf[0].controllsR==1){
+             
+        addControllsR1(); 
              
     }
 	
 }
 
-function addControlls0() {
+function addControllsL0() {
     
     $$('#controlls-box').html('<div class="container styck"><div class="circley" id="styck"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>')
 
@@ -25,10 +35,13 @@ function addControlls0() {
     document.addEventListener("backbutton", mainMenu, false);
 	
 	joystick = new VirtualJoystick({mouseSupport: true})
+    
+    document.removeEventListener("backbutton", exitFromApp, false);
+    document.addEventListener("backbutton", mainMenu, false);
 	
 }
 
-function addControlls1() {
+function addControllsL1() {
     
     $$('#controlls-box').html('<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>')
 
@@ -47,6 +60,18 @@ function addControlls1() {
     document.removeEventListener("backbutton", exitFromApp, false);
     document.addEventListener("backbutton", mainMenu, false);
 	
+}
+
+function addControllsR0() {
+    
+    
+    
+}
+    
+function addControllsR1() {
+    
+    
+    
 }
 
 var ind = 0;

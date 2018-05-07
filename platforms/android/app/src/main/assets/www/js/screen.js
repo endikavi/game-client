@@ -28,6 +28,33 @@ function mainMenu() {
     mapSound.stop();
 }
 
+function newUserMenu() {
+    
+    $$('.card').html('<div class="card-header"><p class="popup-title">Bienvenido al juego</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">Para empezar a usar el multijugador y la funcion de datos en la nube da un nombre de usuario para identificarte,puedes activarlo o desactivarlo en ajustes mas adelante.</p> <hr><div class="item-inner"><div class="item-input-wrap"><div class="inputbox"><input type="text" class="inputname" placeholder="Nombre de usuario" value="'+ (UserConf[1].username || "") +'"><span class="input-clear-button resetinput"></span></div><hr></div></div></div><div id="gamescreen"><div class="block"><div class="row"><button class="button col" id="newUser">Listo</button><button class="button col" id="notUser">No me interesa</button></div></div></div>');
+    
+    $$('#notUser').on('click', function () {mainMenu();});
+    $$('#newUser').on('click', function () {setNewUser();});
+    
+}
+
+function setNewUser(){
+    
+    username = $$('.inputname').val();
+    
+    if (username == undefined || username == "" || username == null){
+        
+        alert("Por favor rellene el nombre de usuario.")
+        
+    }else{
+        
+        UserConf[1].username=username;
+        UserConf[1].multiplayerid=username+device.uuid+(device.isVirtual ? 1 : 0);
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+        mainMenu();
+    }
+    
+}
+
 function addCard(title,text) {
     
 	$$('.card').html('<div class="card-header"><p class="popup-title">' + title + '</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">' + text + '</p></div><div id="gamescreen"></div>');
@@ -53,7 +80,7 @@ $$('#Multi').on('click', function () {addCard('multijugador','este es el menu de
 
 $$('#ContinueGame').on('click', function () {addCard('Continuar','este es el menu para elegir partida guardada')})
     
-$$('#User').on('click', resetUserMenu)
+$$('#User').on('click',  newUserMenu)
 
 $$('#Menu').on('click', function () {addCard('menu','este es el menu de opciones')})
 

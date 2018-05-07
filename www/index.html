@@ -23,23 +23,18 @@
     <body>
 		
 		<div id="screen">
-            <img class="spin" src="img/whell.png" />
-            <button class="button col button-round btn color-white btn-left" id="StartGame">&#9773  Empezar</button>
-            <button class="button col button-round btn color-white btn-left" id="ContinueGame">&#9773 Continuar</button>
-            <button class="button col button-round btn color-white" id="User">Usuario</button>
-			
-            <button class="button col button-round btn color-white" id="Menu">Menu</button>
-            <button class="button col button-round btn color-white btn-right" id="Retos">modo Reto &#9773</button>
-            <button class="button col button-round btn color-white btn-right" id="Multi">Multijugador &#9773</button>
             <div class="card">
             </div>
 		</div>
-        <!-- jugo y pantalla -->
+        
+        <!-- Path to Framework7 -->
+        <script type="text/javascript" src="js/framework7.min.js"></script>
+        <!-- juego y pantalla -->
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/confg.js"></script>
         <script type="text/javascript" src="js/savegame.js"></script>
 		<script type="text/javascript" src="js/controlls.js"></script>
-		<script type="text/javascript" src="js/sprites.js"></script>
+		<script type="text/javascript" src="js/ajax.js"></script>
         <script type="text/javascript" src="js/charsprite.js"></script>
 		<script type="text/javascript" src="js/inventory.js"></script>
 		<script type="text/javascript" src="js/items.js"></script>
@@ -51,17 +46,13 @@
         <script type="text/javascript" src="js/render.js"></script>
 		<script type="text/javascript" src="js/prerender.js"></script>
 		<script type="text/javascript" src="js/eventsemulator.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/screen.js"></script>
+        <script type="text/javascript" src="js/sound.js"></script>
 		<!-- maps -->
 		<script type="text/javascript" src="js/maps/dificil.js"></script>
         <script type="text/javascript" src="js/maps/prueba.js"></script>
-        <!-- Path to Framework7 Library JS -->
-        <script type="text/javascript" src="js/framework7.min.js"></script>
-        <script type="text/javascript" src="js/screen.js"></script>
-        <script type="text/javascript" src="js/sound.js"></script>
-        <!-- firebase y login -->
-        <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
-        <script type="text/javascript" src="js/setfirebase.js"></script>
-        <script type="text/javascript" src="js/fireauth.js"></script>
+        <!-- cordova -->
+        <script type="text/javascript" src="js/index.js"></script>
+
     </body>
 </html>
