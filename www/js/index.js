@@ -7,12 +7,9 @@ var app = {
 
     onDeviceReady: function() {
 
-        mainMenuControlls();
-        
-        console.log(navigator.vibrate);
-        console.log(device.cordova);
-        console.log(cordova.file);
-        readSave();
+        console.log("Device ready");
+		
+        appInit();
         
     }
 

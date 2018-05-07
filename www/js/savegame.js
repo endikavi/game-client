@@ -1,49 +1,26 @@
+function appInit(){
+	
+	userdata=localStorage.getItem('savedata');
+    userdata=JSON.parse(userdata);
+    
+    if( userdata != null){
+        
+        UserConf = userdata;
+		mainMenuControlls();
+		menuSound.play();
+        
+    }else{
+        
+        
+        
+    }
+	
+}
 
-var UserConf = [
-        {
-        
-            controlls: 0,
-            music: 0,
-            vibrate: 0,
-            performance: 0,
-            
-        },
-                
-        {
-            
-            username: "anonimo",
-            email: undefined,
-            premiun: 0,
-            mobileid: undefined,
-            mobileinfo: undefined,
-        
-        },
-        
-        {
-            lvl: 1,
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
-        
-        },
-        
-        {
-            lvl: 1,
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
-        
-        },
-        
-        {
 
-            lvl: 1,
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
-        
-        }
-    ];
+
+
+
 
 function readSave() {
     
@@ -144,3 +121,49 @@ function vibrate() {
 	console.log(navigator.vibrate(2000));
     
 }
+
+var UserConf = [
+        {
+        
+            controlls: 0,
+            music: 0,
+            vibrate: 0,
+            performance: 0,
+            
+        },
+                
+        {
+            
+            username: "anonimo",
+            email: undefined,
+            premiun: 0,
+            mobileid: undefined,
+            mobileinfo: undefined,
+        
+        },
+        
+        {
+            lvl: 1,
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+        },
+        
+        {
+            lvl: 1,
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+        },
+        
+        {
+
+            lvl: 1,
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+        }
+    ];
