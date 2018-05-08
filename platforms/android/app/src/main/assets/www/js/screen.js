@@ -70,9 +70,7 @@ document.addEventListener("backbutton", exitFromApp, false);
     
 $$("#StartGame").on("click",function () {
     
-    //addCard('Empezar nueva partida','')
     addGameCanvas();
-    
                                                       
 });
     
@@ -82,8 +80,7 @@ $$('#ContinueGame').on('click', function () {addCard('Continuar','este es el men
     
 $$('#User').on('click',  newUserMenu)
 
-$$('#Menu').on('click', function () {addCard('menu','este es el menu de opciones')})
-
+$$('#Menu').on('click', function () {configMenu})
 
 $$('#Retos').on('click', function () {addCard('Retos','este es el menu de retos<hr><p class="segmented segmented-raised"><button class="button button-outline">Mapa 1</button><button class="button button-outline">Mapa 2</button><button class="button button-outline">Mapa 3</button><button class="button button-outline">Mapa 4</button></p><p class="segmented segmented-raised"><button class="button button-outline">Mapa 5</button><button class="button button-outline">Mapa 6</button><button class="button button-outline">Mapa 7</button><button class="button button-outline">Mapa 8</button></p>')})
     

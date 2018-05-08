@@ -178,7 +178,7 @@ var VirtualJoystick	= function(opts)
 	this._$onTouchStart	= __bind(this._onTouchStart	, this);
 	this._$onTouchEnd	= __bind(this._onTouchEnd	, this);
 	this._$onTouchMove	= __bind(this._onTouchMove	, this);
-	this._container.addEventListener( 'touchstart'	, this._$onTouchStart	, false );
+	this._container.addEventListener( 'touchstart'	, this._$onTouchStart	, true );
 	this._container.addEventListener( 'touchend'	, this._$onTouchEnd	, false );
 	this._container.addEventListener( 'touchmove'	, this._$onTouchMove	, false );
 	if( this._mouseSupport ){
@@ -196,7 +196,7 @@ VirtualJoystick.prototype.destroy	= function()
 	this._container.removeChild(this._baseEl);
 	this._container.removeChild(this._stickEl);
 
-	this._container.removeEventListener( 'touchstart'	, this._$onTouchStart	, false );
+	this._container.removeEventListener( 'touchstart'	, this._$onTouchStart	, true );
 	this._container.removeEventListener( 'touchend'		, this._$onTouchEnd	, false );
 	this._container.removeEventListener( 'touchmove'	, this._$onTouchMove	, false );
 	if( this._mouseSupport ){
