@@ -11,15 +11,20 @@ function ajaxcall(method){
         
     }else if(method == "post"){
         
-        data = { "UserConf" : JSON.stringify(UserConf),"Check":"true","uid":UserConf[1].multiplayerid}
+        data = { "UserConf" : JSON.stringify(UserConf),"Check":false,"uid":UserConf[1].multiplayerid}
         
     }else if(method == "put"){
         
-        data = { "UserConf" : JSON.stringify(UserConf),"Check":"true","uid":UserConf[1].multiplayerid}
+        data = {"UserConf" : JSON.stringify(UserConf),"uid":oldUid}
+        
+    }else if(method == "patch"){
+        
+        data = {"UserConf" : JSON.stringify(UserConf),"uid":oldUid}
         
     }else if(method == "delete"){
         
-        data = { "UserConf" : JSON.stringify(UserConf),"Check":"true","uid":UserConf[1].multiplayerid}
+        url = url + "/" + UserConf[1].multiplayerid;
+        data = "";
         
     }
     
@@ -30,7 +35,9 @@ function ajaxcall(method){
         data: data,
         
         processData: true,
-        
+		
+        dataType: "json",
+		
         method: method,
         
         success: function(res){
@@ -38,23 +45,37 @@ function ajaxcall(method){
             if(method == "get"){
                 
                 console.log('partida recogida de la nube');
-                Use = JSON.parse(res);
-                UserConf = JSON.parse(Use.users[0].UserConf[0]);
+				console.log(res);
+                /*Use = JSON.parse(res);
+                UserConf = JSON.parse(Use.users[0].UserConf[0]);*/
         
             }else if(method == "post"){
         
-                console.log('partida guardada en la nube');
+                console.log(res);
+				console.log('partida guardada en la nube');
         
             }else if(method == "put"){
+				
+        		console.log(res);
+                console.log('Actualizado movil');
         
-                console.log('partida recogida y actualizado movil');
+            }else if(method == "patch"){
+				
+        		console.log(res);
+        		console.log('Actualizada partida');
         
-            }  
+    		}else if(method == "delete"){
+				
+        		console.log(res);
+				console.log('partida eliminada');
+        
+    		}
             
         },
         error: function(res){
         
             console.log(res);
+			console.log('Error en la llamada');
             
         },
         complete: function(res){
