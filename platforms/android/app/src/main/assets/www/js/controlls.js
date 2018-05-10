@@ -178,7 +178,7 @@ var VirtualJoystick	= function(opts)
 	this._$onTouchStart	= __bind(this._onTouchStart	, this);
 	this._$onTouchEnd	= __bind(this._onTouchEnd	, this);
 	this._$onTouchMove	= __bind(this._onTouchMove	, this);
-	this._container.addEventListener( 'touchstart'	, this._$onTouchStart	, true );
+	this._container.addEventListener( 'touchstart'	, this._$onTouchStart	, false );
 	this._container.addEventListener( 'touchend'	, this._$onTouchEnd	, false );
 	this._container.addEventListener( 'touchmove'	, this._$onTouchMove	, false );
 	if( this._mouseSupport ){
@@ -196,7 +196,7 @@ VirtualJoystick.prototype.destroy	= function()
 	this._container.removeChild(this._baseEl);
 	this._container.removeChild(this._stickEl);
 
-	this._container.removeEventListener( 'touchstart'	, this._$onTouchStart	, true );
+	this._container.removeEventListener( 'touchstart'	, this._$onTouchStart	, false );
 	this._container.removeEventListener( 'touchend'		, this._$onTouchEnd	, false );
 	this._container.removeEventListener( 'touchmove'	, this._$onTouchMove	, false );
 	if( this._mouseSupport ){
@@ -363,7 +363,7 @@ VirtualJoystick.prototype._onMouseUp	= function(event)
 
 VirtualJoystick.prototype._onMouseDown	= function(event)
 {
-	event.preventDefault();
+	//event.preventDefault();
 	var x	= event.clientX;
 	var y	= event.clientY;
 	return this._onDown(x, y);
@@ -392,7 +392,7 @@ VirtualJoystick.prototype._onTouchStart	= function(event)
 	// dispatch touchStart
 	this.dispatchEvent('touchStart', event);
 
-	event.preventDefault();
+	//event.preventDefault();
 	// get the first who changed
 	var touch	= event.changedTouches[0];
 	// set the touchIdx of this joystick
@@ -423,9 +423,10 @@ VirtualJoystick.prototype._onTouchEnd	= function(event)
 
 //??????
 // no preventDefault to get click event on ios
-event.preventDefault();
+//event.preventDefault();
 
 	return this._onUp()
+    
 }
 
 VirtualJoystick.prototype._onTouchMove	= function(event)
@@ -440,7 +441,7 @@ VirtualJoystick.prototype._onTouchMove	= function(event)
 	if( i === touchList.length)	return;
 	var touch	= touchList[i];
 
-	event.preventDefault();
+	//event.preventDefault();
 
 	var x		= touch.pageX;
 	var y		= touch.pageY;

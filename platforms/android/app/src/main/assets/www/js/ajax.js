@@ -15,11 +15,11 @@ function ajaxcall(method){
         
     }else if(method == "put"){
         
-        data = {"UserConf" : JSON.stringify(UserConf),"uid":oldUid}
+        data = {"uid" : UserConf[1].multiplayerid,"oldUid":oldUid}
         
     }else if(method == "patch"){
         
-        data = {"UserConf" : JSON.stringify(UserConf),"uid":oldUid}
+        data = {"UserConf" : JSON.stringify(UserConf),"uid":UserConf[1].multiplayerid}
         
     }else if(method == "delete"){
         
@@ -46,8 +46,7 @@ function ajaxcall(method){
                 
                 console.log('partida recogida de la nube');
 				console.log(res);
-                /*Use = JSON.parse(res);
-                UserConf = JSON.parse(Use.users[0].UserConf[0]);*/
+                UserConf = res;
         
             }else if(method == "post"){
         
