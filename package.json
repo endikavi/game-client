@@ -18,10 +18,10 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {},
       "cordova-plugin-file": {},
       "cordova-plugin-device": {},
-      "cordova-plugin-vibration": {}
+      "cordova-plugin-vibration": {},
+      "cordova-plugin-whitelist": {}
     },
     "platforms": [
       "android"

@@ -7,9 +7,6 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "aa.g.client"
-    },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "aa.g.client"
     },
@@ -17,6 +14,9 @@
       "PACKAGE_NAME": "aa.g.client"
     },
     "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "aa.g.client"
+    },
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "aa.g.client"
     }
   },
