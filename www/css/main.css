@@ -165,3 +165,25 @@
   	border-style: solid
 	
 }
+
+.key{
+	
+	height: 100%;
+	z-index: 5;
+	background: white;	
+}
+
+.pressed{
+	
+	background: black;
+	
+}
+
+#Board{
+	
+	position: absolute;
+	height: 40%;
+	width: 100%;
+	bottom: 0px;
+	
+}
