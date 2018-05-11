@@ -2,7 +2,17 @@ var socket;
 
 function multiplayer(){
     
-    socket = io();
+    socket = io("https://gserver.herokuapp.com/:8080",{
+        
+        transportOptions: {
+            
+            polling: {
+                extraHeaders: {'Access-Control-Allow-Origin': '*:*'}
+            }
+            
+        }
+        
+    });
     
     socket.emit('id', "1");
     
