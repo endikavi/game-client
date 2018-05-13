@@ -42,6 +42,27 @@ function vibrate() {
     
 }
 
+function startGame(){
+	
+	UserConf.push({
+		
+            lvl: 1,
+            name:savename,
+            inventory:"",
+            actualmap: 0001,
+            actualpositionx: 3,
+            actualpositiony: 3
+        
+	})
+	
+}
+
+function loadGame(){
+	
+	
+	
+}
+
 var UserConf = [
     
         {
@@ -62,16 +83,6 @@ var UserConf = [
             multiplayerid: undefined,
             mobileid: undefined,
             mobileinfo: undefined
-        
-        },
-        
-        {
-            lvl: 1,
-            name:undefined,
-            inventory:"",
-            actualmap: 0001,
-            actualpositionx: 3,
-            actualpositiony: 3
         
         }
     
