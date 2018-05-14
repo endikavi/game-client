@@ -5,6 +5,7 @@ var chats = {};
 var players = {};
 var rooms = {};
 chats.room = {};
+chats.global = {};
 function multiplayer(){
 	
 	multiplayerOn = true
