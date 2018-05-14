@@ -1,6 +1,7 @@
 var socket;
 var multiplayerOn;
 var moving = false;
+var chats = {};
 function multiplayer(){
 	
 	multiplayerOn = true
@@ -30,22 +31,32 @@ function multiplayer(){
     })
 	
 	socket.on('allGlobalChats', function(msg){
-        
+        chats.global = msg
         console.log(msg);
         
     })
 	
 	socket.on('globalChat', function(msg){
-	
-		$$('#GCmessages').append('<li>'+msg+'</li>');
+		
+		printGlobalChat(msg);
 		
 	})
     
 }
 
+function printGlobalChat(msg){
+	
+		$$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">'+msg[2]+':<div class="item-header"><p class="popup-text">'+msg[0]+' </p></div><div class="item-footer">'+msg[1]+'</div></div><div class="item-after">'+msg[3]+'</div></div></div></li>');
+	
+}
+
 function sendGlobalChat(){
 	
-	socket.emit('globalChat', $$('#m').val());
+	var timenow = new Date();
+	
+	time = timenow.getFullYear()+'-'+timenow.getMonth()+'-'+timenow.getDate()+' '+timenow.getHours()+':'+timenow.getMinutes();
+	
+	socket.emit('globalChat', [$$('#m').val(), UserConf[1].multiplayerid, UserConf[1].username, time]);
 	
 	$$('#m').val('');
     
