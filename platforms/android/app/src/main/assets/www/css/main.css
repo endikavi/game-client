@@ -207,7 +207,38 @@
 .relleno{
 	display: block;
   	width: 95%;
-  	height: 45vh;
+  	height: 55vh;
 	padding-bottom: 10vh;
   	overflow-y: scroll;
+}
+
+.segmento{
+    
+    width: 100%;
+    
+}
+
+#seeGC{
+    
+    width: 30%;
+    font-size: 15px;
+    
+}
+#seeR{
+    
+    width: 25%;
+    font-size: 15px;
+    
+}
+#seeRC{
+    
+    width: 30%;
+    font-size: 15px;
+    
+}
+#exitCard{
+    
+    width: 6%;
+    font-size: 20px;
+    
 }

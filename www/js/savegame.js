@@ -81,6 +81,7 @@ var UserConf = [
             
             username: undefined,
             multiplayerid: undefined,
+            roomid: undefined,
             mobileid: undefined,
             mobileinfo: undefined
         

@@ -2,6 +2,9 @@ var socket;
 var multiplayerOn;
 var moving = false;
 var chats = {};
+var players = {};
+var rooms = {};
+chats.room = {};
 function multiplayer(){
 	
 	multiplayerOn = true
@@ -20,18 +23,21 @@ function multiplayer(){
 	
 	socket.on('playersList', function(msg){
         
+        players.list = msg;
         console.log(msg);
         
     })
 	
 	socket.on('roomsList', function(msg){
         
+        rooms.list = msg;
         console.log(msg);
         
     })
 	
 	socket.on('allGlobalChats', function(msg){
-        chats.global = msg
+        
+        chats.global = msg;
         console.log(msg);
         
     })
@@ -41,12 +47,47 @@ function multiplayer(){
 		printGlobalChat(msg);
 		
 	})
+
+	socket.on('allRoomChats', function(msg){
+        
+        chats.room = msg;
+        console.log(msg);
+        
+    })
+	
+	socket.on('roomChat', function(msg){
+        
+		printRoomChat(msg);
+		
+	})
+    
+    socket.on('newRoom', function(msg){
+        
+		printRoom(msg[UserConf[1].roomid]);
+		
+	})
+    
+    socket.on('newRoom', function(msg){
+        
+		UserConf[1].roomid = $$('#m').val();
+		
+	})
+    
+    
     
 }
 
 function printGlobalChat(msg){
 	
-		$$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">'+msg[2]+':<div class="item-header"><p class="popup-text">'+msg[0]+' </p></div><div class="item-footer">'+msg[1]+'</div></div><div class="item-after">'+msg[3]+'</div></div></div></li>');
+    $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">'+msg[2]+':<div class="item-header"><p class="popup-text">'+msg[0]+' </p></div><div class="item-footer">'+msg[1]+'</div></div><div class="item-after">'+msg[3]+'</div></div></div></li>');
+	
+}
+
+function printRoom(msg){
+	        
+    console.log(msg)
+    
+    $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+msg[0]+':<div class="item-header"><p class="popup-text">'+msg[0]+' </p></div><div class="item-footer">'+msg[1]+'</div></div><div class="item-after">'+msg[1]+'</div></div></div></li>');
 	
 }
 
@@ -64,25 +105,37 @@ function sendGlobalChat(){
 
 function sendRoomChat(){
 	
+    var timenow = new Date();
 	
+	time = timenow.getFullYear()+'-'+timenow.getMonth()+'-'+timenow.getDate()+' '+timenow.getHours()+':'+timenow.getMinutes();
+	
+	socket.emit('roomChat', [$$('#m').val(), UserConf[1].multiplayerid, UserConf[1].username, time]);
+	
+	$$('#m').val('');
     
 }
 
 function enterRoom(){
-	
-	
     
+    socket.emit('enterRoom', [UserConf[1].roomid, UserConf[1].multiplayerid]);
+    
+	$$('#GCmessages').html('');
+    $$('#multiInput').html('');
 }
 
 function createRoom(){
+    
+    UserConf[1].roomid = $$('#m').val();
 	
+    socket.emit('newRoom', [$$('#m').val(), UserConf[1].multiplayerid]);
 	
+	$$('.relleno').html('');
     
 }
 
 function exitRoom(){
 	
-	
+	socket.emit('exitRoom', [UserConf[1].roomid, UserConf[1].multiplayerid, UserConf[1].username]);
     
 }
 

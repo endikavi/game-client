@@ -60,7 +60,7 @@ function addCard(title,text) {
     
 	$$('.card').html('<div class="card-header"><p class="popup-title">' + title + '</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">' + text + '</p></div><div id="gamescreen"></div>');
     
-    $$('.card-header').on('click', function () {$$('.card').html('')})
+    //$$('.card-header').on('click', function () {$$('.card').html('')})
     
 }
 
@@ -121,13 +121,15 @@ function loadGameMenu(){
 
 function multiplayerMenu(){
 	
-	addCard('Multijugador','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
+	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap" id="multiInput"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
 	
 	for(var c = 0;c < chats.global.length;c++){
 		
 		printGlobalChat(chats.global[c])
 		
 	}
+    
+    $$('#exitCard').on('click', function () {$$('.card').html('')})
 	
 	$$('#sendGC').on('click' , function(){
         
@@ -135,6 +137,16 @@ function multiplayerMenu(){
         
     });
 	
+    $$('#seeR').on('click' , function(){
+        
+		seeRoomList();
+        
+    });
+    $$('#seeRC').on('click' , function(){
+        
+		seeRoomChat();
+        
+    });
 }
 
 function configMenu(){
@@ -143,6 +155,48 @@ function configMenu(){
 	
 }
 
+function seeRoomList(){
+	
+    addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap" id="multiInput"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
+	
+	for(var c = 0;c < rooms.list.length;c++){
+		
+		printRoom(rooms.list[c])
+		
+	}
+    
+    $$('#exitCard').on('click', function () {$$('.card').html('')})
+	
+	$$('#sendGC').on('click' , function(){
+        
+		createRoom();
+        
+    });
+	
+    $$('#seeGC').on('click' , function(){
+        
+		multiplayerMenu();
+        
+    });
+    $$('#seeRC').on('click' , function(){
+        
+		seeRoomChat();
+        
+    });
+	
+}
+
+function seeRoomChat(){
+	
+    addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
+	
+	for(var c = 0;c < chats.room.length;c++){
+		
+		printGlobalChat(chats.room[c])
+		
+	}
+	
+}
 function userMenu(){
 	
 	$$('.card').html('<div class="card-header"><p class="popup-title">Bienvenido al juego</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">Para empezar a usar el multijugador y la funcion de datos en la nube da un nombre de usuario para identificarte,puedes activarlo o desactivarlo en ajustes mas adelante.</p> <hr><div class="item-inner"><div class="item-input-wrap"><div class="inputbox"><input type="text" class="inputname" placeholder="Nombre de usuario" value="'+ (UserConf[1].username || "") +'"><span class="input-clear-button resetinput"></span></div><hr></div></div></div><div id="gamescreen"><div class="block"><div class="row"><button class="button col" id="newUser">Listo</button><button class="button col" id="notUser">No me interesa</button></div></div></div>');
