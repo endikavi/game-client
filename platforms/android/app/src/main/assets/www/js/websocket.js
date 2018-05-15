@@ -4,7 +4,9 @@ var moving = false;
 var chats = {};
 var players = {};
 var rooms = {};
+rooms.list ={};
 chats.room = {};
+chats.global = {};
 function multiplayer(){
 	
 	multiplayerOn = true
@@ -57,17 +59,19 @@ function multiplayer(){
 	
 	socket.on('roomChat', function(msg){
         
+        console.log('mensaje en la sala')
 		printRoomChat(msg);
 		
 	})
     
     socket.on('newRoom', function(msg){
-        
+        console.log('nueva sala');
+        console.log(msg);
 		printRoom(msg[UserConf[1].roomid]);
 		
 	})
     
-    socket.on('newRoom', function(msg){
+    socket.on('enterRoom', function(msg){
         
 		UserConf[1].roomid = $$('#m').val();
 		
@@ -78,6 +82,12 @@ function multiplayer(){
 }
 
 function printGlobalChat(msg){
+	
+    $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">'+msg[2]+':<div class="item-header"><p class="popup-text">'+msg[0]+' </p></div><div class="item-footer">'+msg[1]+'</div></div><div class="item-after">'+msg[3]+'</div></div></div></li>');
+	
+}
+
+function printRoomChat(msg){
 	
     $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">'+msg[2]+':<div class="item-header"><p class="popup-text">'+msg[0]+' </p></div><div class="item-footer">'+msg[1]+'</div></div><div class="item-after">'+msg[3]+'</div></div></div></li>');
 	
@@ -129,7 +139,8 @@ function createRoom(){
 	
     socket.emit('newRoom', [$$('#m').val(), UserConf[1].multiplayerid]);
 	
-	$$('.relleno').html('');
+    $$('#GCmessages').html('');
+    $$('#multiInput').html('');
     
 }
 

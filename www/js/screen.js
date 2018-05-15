@@ -188,15 +188,35 @@ function seeRoomList(){
 
 function seeRoomChat(){
 	
-    addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
+    addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
 	
 	for(var c = 0;c < chats.room.length;c++){
 		
-		printGlobalChat(chats.room[c])
+		printRoomChat(chats.room[c])
 		
 	}
+    
+    $$('#exitCard').on('click', function () {$$('.card').html('')})
+	
+	$$('#sendGC').on('click' , function(){
+        
+		sendRoomChat();
+        
+    });
+	
+    $$('#seeGC').on('click' , function(){
+        
+		multiplayerMenu();
+        
+    });
+    $$('#seeR').on('click' , function(){
+        
+		seeRoomList();
+        
+    });
 	
 }
+
 function userMenu(){
 	
 	$$('.card').html('<div class="card-header"><p class="popup-title">Bienvenido al juego</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">Para empezar a usar el multijugador y la funcion de datos en la nube da un nombre de usuario para identificarte,puedes activarlo o desactivarlo en ajustes mas adelante.</p> <hr><div class="item-inner"><div class="item-input-wrap"><div class="inputbox"><input type="text" class="inputname" placeholder="Nombre de usuario" value="'+ (UserConf[1].username || "") +'"><span class="input-clear-button resetinput"></span></div><hr></div></div></div><div id="gamescreen"><div class="block"><div class="row"><button class="button col" id="newUser">Listo</button><button class="button col" id="notUser">No me interesa</button></div></div></div>');
