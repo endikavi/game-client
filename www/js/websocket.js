@@ -45,7 +45,8 @@ function multiplayer(){
     })
 	
 	socket.on('globalChat', function(msg){
-		
+        
+		chats.global.push(msg);
 		printGlobalChat(msg);
 		
 	})
@@ -66,7 +67,7 @@ function multiplayer(){
     
     socket.on('newRoom', function(msg){
         console.log('nueva sala');
-        console.log(msg);
+        console.log(msg[UserConf[1].roomid]);
 		printRoom(msg[UserConf[1].roomid]);
 		
 	})
@@ -97,7 +98,7 @@ function printRoom(msg){
 	        
     console.log(msg)
     
-    $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+msg[0]+':<div class="item-header"><p class="popup-text">'+msg[0]+' </p></div><div class="item-footer">'+msg[1]+'</div></div><div class="item-after">'+msg[1]+'</div></div></div></li>');
+    $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+UserConf[1].roomid+':<div class="item-header"><p class="popup-text">'+msg.chief+' </p></div><div class="item-footer">'+msg.people.length+'/4 </div></div><div class="item-after">'+'Localizacion'+'</div></div></div></li>');
 	
 }
 
