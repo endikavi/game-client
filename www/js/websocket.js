@@ -60,21 +60,22 @@ function multiplayer(){
 	
 	socket.on('roomChat', function(msg){
         
-        console.log('mensaje en la sala')
+        chats.room.push(msg);
 		printRoomChat(msg);
 		
 	})
     
     socket.on('newRoom', function(msg){
         console.log('nueva sala');
-        console.log(msg[UserConf[1].roomid]);
+        
+        console.log(msg);
 		printRoom(msg[UserConf[1].roomid]);
 		
 	})
     
     socket.on('enterRoom', function(msg){
         
-		UserConf[1].roomid = $$('#m').val();
+        printYourRoom(msg);
 		
 	})
     
@@ -95,6 +96,17 @@ function printRoomChat(msg){
 }
 
 function printRoom(msg){
+	        
+    console.log(msg)
+    
+    $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+ msg[0] +':<div class="item-header"><p class="popup-text">'+msg[1].chief+' </p></div><div class="item-footer">'+msg[1].people.length+'/4 </div></div><div class="item-after"><button type="button" class="button col button-round btn color-white"id="'+''+'">Send</button></div></div></div></li>');
+    
+    $$('#m').click()
+    UserConf[1].roomid = $$('#m').val();
+	
+}
+
+function printYourRoom(msg){
 	        
     console.log(msg)
     
