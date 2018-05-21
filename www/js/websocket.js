@@ -5,8 +5,8 @@ var chats = {};
 var players = {};
 var rooms = {};
 rooms.list ={};
-chats.room = {};
-chats.global = {};
+chats.room = [];
+chats.global = [];
 
 /*
 var miObjeto = { "marca":"audi", "edad":2 };
@@ -76,7 +76,14 @@ function multiplayer(){
     
     socket.on('newRoom', function(msg){
         console.log('nueva sala creada');
-        console.log(msg);
+        rooms.list[msg[0]] = msg[1]
+        if(UserConf[1].roomid == undefined){
+            printRoom(msg);
+        }
+	})
+    
+    socket.on('changeRoom', function(msg){
+        console.log('sala cambiada');
         rooms.list[msg[0]] = msg[1]
         if(UserConf[1].roomid == undefined){
             printRoom(msg);
@@ -84,10 +91,13 @@ function multiplayer(){
 	})
     
     socket.on('enterRoom', function(msg){
-        console.log('entraste a la sala'+msg);
+        
+        console.log('nuevo miembro en la sala');
+        
         if(UserConf[1].roomid != undefined){
             printYourRoom(msg);
         }
+        
 	})
     
     
@@ -120,10 +130,15 @@ function printRoom(id,msg){
 }
 
 function printYourRoom(msg){
-	        
-    console.log(msg)
     
-    $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+UserConf[1].roomid+':<div class="item-header"><p class="popup-text">'+msg.chief+' </p></div><div class="item-footer">'+msg.people.length+'/4 </div></div><div class="item-after"><button type="button" class="button col button-round btn color-white"id="startMG">Empezar</button></div></div></div></li>');
+    
+    $$('#GCmessages').html('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+UserConf[1].roomid+':<div class="item-header"><p class="popup-text">'+msg.chief+' </p></div><div class="item-footer">'+msg.people.length+'/4 </div></div><div class="item-after"><button type="button" class="button col button-round btn color-white"id="startMG">Empezar</button></div></div></div></li>');
+    
+    $$('#startMG').on('click',function (e){
+        
+        startMG();
+        
+    }
 	
 }
 
