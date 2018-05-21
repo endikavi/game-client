@@ -106,19 +106,17 @@ function printRoomChat(msg){
 	
 }
 
-function printRoom(msg){
+function printRoom(id,msg){
 	        
-    console.log(msg)
+    $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+ id +':<div class="item-header"><p class="popup-text">'+msg.chief+' </p></div><div class="item-footer">'+msg.people.length+'/4 </div></div><div class="item-after"><button type="button" class="button col button-round btn color-white"id="'+ id +'">Entrar</button></div></div></div></li>');
     
-    $$('#GCmessages').append('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+ msg[0] +':<div class="item-header"><p class="popup-text">'+msg[1].chief+' </p></div><div class="item-footer">'+msg[1].people.length+'/4 </div></div><div class="item-after"><button type="button" class="button col button-round btn color-white"id="'+ msg[0] +'">Entrar</button></div></div></div></li>');
-    
-    $$('#'+msg[0]).on('click',function(){
-        
-        console.log(this.attr('id'));
-        //UserConf[1].roomid = $$('#m').val();
-        
-    })
-    
+    $$('#' + id).on('click',function (e){
+		
+		console.log($$(this).attr('id'));
+		enterRoom($$(this).attr('id'));
+		
+	})
+	
 }
 
 function printYourRoom(msg){
@@ -153,12 +151,17 @@ function sendRoomChat(){
     
 }
 
-function enterRoom(){
+function enterRoom(msg){
+	
+	console.log(msg);
+	
+	UserConf[1].roomid = msg;
     
     socket.emit('enterRoom', [UserConf[1].roomid, UserConf[1].multiplayerid]);
     
 	$$('#GCmessages').html('');
     $$('#multiInput').html('');
+    
 }
 
 function createRoom(){
