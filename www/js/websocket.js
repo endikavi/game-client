@@ -7,6 +7,15 @@ var rooms = {};
 rooms.list ={};
 chats.room = {};
 chats.global = {};
+
+/*
+var miObjeto = { "marca":"audi", "edad":2 };
+for (var propiedad in miObjeto) {
+  if (miObjeto.hasOwnProperty(propiedad)) {
+    console.log("En la propiedad '" + propiedad + "' hay este valor: " + miObjeto[propiedad]);
+  }
+}*/
+
 function multiplayer(){
 	
 	multiplayerOn = true
@@ -110,7 +119,6 @@ function printRoom(msg){
         
     })
     
-	
 }
 
 function printYourRoom(msg){
