@@ -22,7 +22,6 @@ function multiplayer(){
         
         var o = players.list[msg[0]].character;
         
-        console.log(msg[0]+' cambiando posicion a '+msg[1]);
         if(msg[0] != UserConf[1].multiplayerid){
             
             if( o == undefined ){
