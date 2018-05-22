@@ -13,6 +13,10 @@ var cartelTile = new Tileset("img/carteltile.png");
 
 var msgbox= new Image(); msgbox.src="css/msgbox.png";
 
+var charlieTileset = new Tileset("img/charliechar.png");
+
+var playerTwoTileset = new Tileset("img/player2.png");
+
 function Tileset(src){
 	
 	this.T = new Image();

@@ -19,7 +19,7 @@ function addGameCanvas() {
 
 function mainMenu() {
     
-	$$('#screen').html('<button class="button col button-round btn color-white btn-left" id="StartGame">&#9773  Empezar</button><button class="button col button-round btn color-white btn-left" id="ContinueGame">&#9773 Continuar</button><button class="button col button-round btn color-white" id="User">Usuario</button><img class="spin" src="img/whell.png" /><button class="button col button-round btn color-white" id="Menu">Menu</button><button class="button col button-round btn color-white btn-right" id="Retos">modo Reto &#9773</button><button class="button col button-round btn color-white btn-right" id="Multi">Multijugador &#9773</button><div class="card"></div>');
+	$$('#screen').html('<img class="bgimg" src="img/wolf-1341881.jpg" /><button class="button col button-round btn color-white btn-left" id="StartGame">&#9773  Empezar</button><button class="button col button-round btn color-white btn-left" id="ContinueGame">&#9773 Continuar</button><button class="button col button-round btn color-white" id="User">Usuario</button><button class="button col button-round btn color-white" id="Menu">Menu</button><button class="button col button-round btn color-white btn-right" id="Retos">modo Reto &#9773</button><button class="button col button-round btn color-white btn-right" id="Multi">Multijugador &#9773</button><div class="card"></div>');
 	$$('.container').attr('style','none');
     
     resetCanvas();
@@ -155,23 +155,16 @@ function configMenu(){
 	
 }
 
-Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
-
 function seeRoomList(){
 	
     addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white" id="seeGC">Chat Global</button><button type="button" class="button col button-round btn color-white"id="seeR">Salas</button><button type="button" class="button col button-round btn color-white"id="seeRC">Chat de sala</button><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list relleno"><ul id="GCmessages" ></ul></div><div class="item-input-wrap" id="multiInput"><input type="text" id="m" autocomplete="off" /><button type="button" class="button col button-round btn color-white"id="sendGC">Send</button></div>');
-	console.log('pintando salas')
-    console.log(rooms.list)
-	for(var c = 0;c < Object.size(rooms.list);c++){
-		
-		printRoom(rooms.list[c])
-		console.log('sala')
+    
+	for (var nombre in rooms.list) {
+  		if (rooms.list.hasOwnProperty(nombre)) {
+			if(rooms.list[nombre] != null && rooms.list[nombre] != undefined){
+				printRoom(nombre,rooms.list[nombre]);
+			}
+  		}
 	}
     
     $$('#exitCard').on('click', function () {$$('.card').html('')})

@@ -8,14 +8,6 @@ rooms.list ={};
 chats.room = [];
 chats.global = [];
 
-/*
-var miObjeto = { "marca":"audi", "edad":2 };
-for (var propiedad in miObjeto) {
-  if (miObjeto.hasOwnProperty(propiedad)) {
-    console.log("En la propiedad '" + propiedad + "' hay este valor: " + miObjeto[propiedad]);
-  }
-}*/
-
 function multiplayer(){
 	
 	multiplayerOn = true
@@ -28,18 +20,43 @@ function multiplayer(){
     
     socket.on('walking', function(msg){
         
+        var o = players.list[msg[0]].character;
+        
         console.log(msg[0]+' cambiando posicion a '+msg[1]);
         if(msg[0] != UserConf[1].multiplayerid){
             
-            if( players.list[msg[0]].character == undefined ){
+            if( o == undefined ){
 
                 console.log('creando avatar para jugador ' + msg[0] );
-                players.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:6});
-
+                players.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:7});
+                o = players.list[msg[0]].character;
             }
             
-            players.list[msg[0]].character.placeAt(msg[1], msg[2]);
+            o.objectCanMoveTo(msg[1], msg[2]);
+            
+            if(msg[3]=="u"){o.offset[1]=+22.5}
+            if(msg[3]=="d"){o.offset[1]=-22.5}
+            if(msg[3]=="l"){o.offset[0]=+22.5}
+            if(msg[3]=="r"){o.offset[0]=-22.5}
+            
         }
+    })
+    
+    socket.on('pushing', function(msg){
+        
+        if(msg[0] != UserConf[1].multiplayerid){
+            
+            var o = mapTileData.map[msg[1],msg[2]].object;
+
+            o.objectCanMoveTo(msg[3], msg[4]);
+
+            if(msg[5]=="u"){o.offset[1]=+22.5}
+            if(msg[5]=="d"){o.offset[1]=-22.5}
+            if(msg[5]=="l"){o.offset[0]=+22.5}
+            if(msg[5]=="r"){o.offset[0]=-22.5}
+            
+        }
+        
     })
 	
 	socket.on('playersList', function(msg){
@@ -211,12 +228,3 @@ function exitRoom(){
 	socket.emit('exitRoom', [UserConf[1].roomid, UserConf[1].multiplayerid, UserConf[1].username]);
     
 }
-
-/*
-if (player.tileFrom != msg && moving){
-			
-	player.tileTo[0]=msg[0];
-	player.tileTo[1]=msg[1];
-	player.timeMoved = gameTime;
-	moving = false;
-}*/
