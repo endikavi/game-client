@@ -221,11 +221,17 @@ function drawGame() {
 
 						o.processMovement();
 
-						ot = objectTypes[o.type];
-
-						ot.sprite.draw(gameTime,
-							viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
-							viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
+						if(o.sprite == undefined){
+                            ot = objectTypes[o.type];
+							ot.sprite.draw(gameTime,
+								viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
+								viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
+						}else{
+							
+							o.sprite.draw(gameTime,
+								viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
+								viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
+						}
 					}
 
 					if(z==1 && (y*tileH) <= (player.position[1])+27) {
@@ -241,11 +247,17 @@ function drawGame() {
 
 						o.processMovement();
 
-						ot = objectTypes[o.type];
-
-						ot.sprite.draw(gameTime,
-							viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
-							viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
+						if(o.sprite == undefined){
+                            ot = objectTypes[o.type];
+							ot.sprite.draw(gameTime,
+								viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
+								viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
+						}else{
+							
+							o.sprite.draw(gameTime,
+								viewport.offset[0] + (x*tileW) + ot.offset[0] + o.offset[0],
+								viewport.offset[1] + (y*tileH) + ot.offset[1] + o.offset[1]);
+						}
 					}
 					
 					if(o!=null && objectTypes[o.type].zIndex==3 && z==3) {
