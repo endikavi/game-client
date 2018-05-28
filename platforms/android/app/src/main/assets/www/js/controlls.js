@@ -44,10 +44,16 @@ function addControllsL0() {
 function addControllsL1() {
     
     $$('#controlls-box').html('<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>')
+	
+	document.getElementById("left").addEventListener("click",function() {keysDown[37] = true;setTimeout(function(){ keysDown[37] = false},100); this.style.backgroundColor =""});
+    document.getElementById("up").addEventListener("click",function() {keysDown[38] = true;setTimeout(function(){ keysDown[38] = false},100); this.style.backgroundColor =""});
+    document.getElementById("right").addEventListener("click",function() {keysDown[39] = true;setTimeout(function(){ keysDown[39] = false},100); this.style.backgroundColor =""});
+    document.getElementById("down").addEventListener("click",function() {keysDown[40] = true;setTimeout(function(){ keysDown[40] = false},100); this.style.backgroundColor =""});
+    document.getElementById("action").addEventListener("click",function() {keysDown[80] = true;setTimeout(function(){ keysDown[80] = false},100); this.style.backgroundColor =""});
 
     document.getElementById("up").addEventListener("touchstart",function() {keysDown[38] = true; this.style.backgroundColor =""});
     document.getElementById("down").addEventListener("touchstart",function() {keysDown[40] = true; this.style.backgroundColor =""});
-    document.getElementById("left").addEventListener("touchstart",function() {keysDown[37] = true; this.style.backgroundColor =""});
+	document.getElementById("left").addEventListener("touchstart",function() {keysDown[37] = true; this.style.backgroundColor =""});
     document.getElementById("right").addEventListener("touchstart",function() {keysDown[39] = true; this.style.backgroundColor =""});
     document.getElementById("action").addEventListener("touchstart",function() {keysDown[80] = true; this.style.backgroundColor =""});
 
@@ -86,7 +92,7 @@ function addControllsForInfo(nam,inf) {
     clearInterval(interval);
 	
     $$('#controlls-box').html('<div id="msg-box"><img id="msg-img" src="img/' + nam + '.png" ></img><div id="msg-text-box"><h3 id="msg-title">' + nam + '</h3><p id="msg-text"></p></div></div>');
-	
+	keysDown[80] = false;
 	ind = 0;
     maxind = inf.length;
     text=$$('#msg-text');
@@ -115,7 +121,15 @@ function addControllsForInfo(nam,inf) {
     
 }
 
-var joystick;
+var joystick = {
+	
+	deltaY(){ return 0},
+	deltaX(){ return 0},
+	up(){ return 0},
+	down(){ return 0},
+	right(){ return 0},
+	left(){ return 0}
+};
 
 var directions = {
 	

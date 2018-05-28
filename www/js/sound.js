@@ -13,7 +13,7 @@ function sound(loop,src) {
     document.body.appendChild(this.sound);
 	
     this.play = function() {
-        if(UserConf[0].controlls==1){
+        if(UserConf[0].music==true){
             this.sound.src = src;
             this.sound.load();
             this.sound.play().catch(function(error) {});

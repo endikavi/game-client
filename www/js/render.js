@@ -52,6 +52,8 @@ var fps, fpsInterval, startTime, now, then, elapsed;
 
 var tileIndex;
 
+var movement
+var drawGameInterval
 function renderGame() {
 	
 	fpsInterval = 1000 / 60;
@@ -85,14 +87,64 @@ function renderGame() {
 	});
 
 	viewport.screen = [800,450];
-    setTimeout(function (){preLoadSprites()},0);
 	mapTileData.buildMapFromData(gameMap, mapW, mapH);
 	mapTileData.addRoofs(roofList);
-	setTimeout(function (){mapTileData.preLoad()},0);
 	populateMap();
+	preRender = setInterval(function (){
+            preLoadSprites();
+            mapTileData.preLoad();
+			clearInterval(preRender)
+    },0);
 	
+	movement = setInterval(function () {
+
+		if (!player.processMovement(gameTime) && gameSpeeds[currentSpeed].mult != 0) {
+			stop = false;
+			this.direction = directions.right;
+
+			if ((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp())) {
+				if (multiplayerOn) {
+					socket.emit('walking', [player.tileFrom[0], player.tileFrom[1] - 1, "u"]);
+				}
+				player.moveUp(gameTime);
+			} else if ((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > 35 && player.canMoveDown()) {
+				if (multiplayerOn) {
+					socket.emit('walking', [player.tileFrom[0], player.tileFrom[1] + 1, "d"]);
+				}
+				player.moveDown(gameTime);
+			} else if ((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -30 && player.canMoveLeft()) {
+				if (multiplayerOn) {
+					socket.emit('walking', [player.tileFrom[0] - 1, player.tileFrom[1], "l"]);
+				}
+				player.moveLeft(gameTime);
+			} else if ((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > 30 && player.canMoveRight()) {
+				if (multiplayerOn) {
+					socket.emit('walking', [player.tileFrom[0] + 1, player.tileFrom[1], "r"]);
+				}
+				player.moveRight(gameTime);
+			} else if (keysDown[38] || joystick.up()) {
+				player.direction = directions.up;
+			} else if (keysDown[40] || joystick.down()) {
+				player.direction = directions.down;
+			} else if (keysDown[37] || joystick.left()) {
+				player.direction = directions.left;
+			} else if (keysDown[39] || joystick.right()) {
+				player.direction = directions.right;
+			} else if (keysDown[80]) {
+				
+				player.pickUp();
+				
+			}
+		} else if (keysDown[80]){
+			
+			player.pickUp();
+			
+		}
+		
+	}, 0);
+	
+	//drawGameInterval = setInterval(drawGame,0)
 	requestAnimationFrame(drawGame);
-	
 };
 
 function drawGame() {
@@ -101,7 +153,6 @@ function drawGame() {
 	
 	if(!tilesetLoaded && !musicLoaded) {alert("Failed loading some assets. "); ctx=null; mainMenu(); return; }
 		
-	requestAnimationFrame(drawGame);
 	currentFrameTime = Date.now();
 	now = currentFrameTime;
 	timeElapsed = currentFrameTime - lastFrameTime;
@@ -110,56 +161,6 @@ function drawGame() {
     elapsed = now - then;
 	
 	if (elapsed > fpsInterval) {
-		
-		if (elapsed > fpsInterval/4){
-            
-            //setTimeout(function(){
-                
-                if(!player.processMovement(gameTime) && gameSpeeds[currentSpeed].mult!=0){
-
-                    this.direction	= directions.right;
-					
-					if((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp())){
-						if(multiplayerOn){
-							moving = true;
-							socket.emit('walking',[player.tileFrom[0],player.tileFrom[1]-1,"u"]);
-						}
-						player.moveUp(gameTime);
-					}else if((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > 35 && player.canMoveDown()){
-						if(multiplayerOn){
-							moving = true;
-							socket.emit('walking',[player.tileFrom[0],player.tileFrom[1]+1,"d"]);
-						}					
-						player.moveDown(gameTime);
-					}else if((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -30 && player.canMoveLeft()){
-						if(multiplayerOn){
-							moving = true;
-							socket.emit('walking',[player.tileFrom[0]-1,player.tileFrom[1],"l"]);
-						}					
-						player.moveLeft(gameTime);
-					}else if((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > 30 && player.canMoveRight()){
-						if(multiplayerOn){
-							moving = true;
-							socket.emit('walking',[player.tileFrom[0]+1,player.tileFrom[1],"r"]);
-						}						 
-						player.moveRight(gameTime);
-					}
-                    else if(keysDown[38] || joystick.up())			{ player.direction = directions.up; }
-                    else if(keysDown[40] || joystick.down())		{ player.direction = directions.down; }
-                    else if(keysDown[37] || joystick.left())		{ player.direction = directions.left; }
-                    else if(keysDown[39] || joystick.right())		{ player.direction = directions.right; }
-                    else if(keysDown[80]) 							{ player.pickUp(); }
-
-                }else if(keysDown[80]) { 
-
-                    player.pickUp();
-                    keysDown[80]=false; 
-
-                }
-                
-           // }, 0);
-            
-		}
 
         then = now - (elapsed % fpsInterval);
 
@@ -172,9 +173,6 @@ function drawGame() {
 		l = mapTileData.levels;
 		ye = viewport.endTile[1];
 		xe = viewport.endTile[0];
-
-		
-		
 		
 		ctx1.clearRect(0, 0, viewport.screen[0], viewport.screen[1]);
 		
@@ -277,10 +275,8 @@ function drawGame() {
 				}
 			}
 		}
-	
 	}
-	
-	
+		
 	if(sec!=currentSecond) {
 		
 		currentSecond = sec;
@@ -297,12 +293,13 @@ function drawGame() {
         ctx3.fillText(player.position[1] + 'X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
         ctx3.fillText("Steps: " + pasoscount, 10, 80);
 		
-	}
-	else { frameCount++; }
+	}else { frameCount++; }
 
 	lastFrameTime = currentFrameTime;
 		
 	}
+	
+	requestAnimationFrame(drawGame);
 	
 }
 

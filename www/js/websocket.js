@@ -1,6 +1,5 @@
 var socket;
 var multiplayerOn;
-var moving = false;
 var chats = {};
 var players = {};
 var rooms = {};
@@ -21,7 +20,7 @@ function multiplayer(){
     socket.on('walking', function(msg){
         
         var o = players.list[msg[0]].character;
-        
+       
         if(msg[0] != UserConf[1].multiplayerid){
             
             if( o == undefined ){
@@ -39,22 +38,21 @@ function multiplayer(){
             if(msg[3]=="r"){o.offset[0]-=40}
             
         }
+        
     })
     
     socket.on('pushing', function(msg){
-        
-        if(msg[0] != UserConf[1].multiplayerid){
-            
-            var o = mapTileData.map[msg[1],msg[2]].object;
 
-            o.objectCanMoveTo(msg[3], msg[4]);
+		if(msg[0] != UserConf[1].multiplayerid){
 
-            if(msg[5]=="u"){o.offset[1]=+22.5}
-            if(msg[5]=="d"){o.offset[1]=-22.5}
-            if(msg[5]=="l"){o.offset[0]=+22.5}
-            if(msg[5]=="r"){o.offset[0]=-22.5}
-            
-        }
+				var o = mapTileData.map[toIndex(msg[1],msg[2])].object;
+
+				if(msg[3] == "u")		{o.objectCanMoveTo(msg[1],msg[2]-1,true);o.offset[1]+=17.5}
+				if(msg[3] == "d")		{o.objectCanMoveTo(msg[1],msg[2]+1,true);o.offset[1]-=17.5}
+				if(msg[3] == "l")		{o.objectCanMoveTo(msg[1]-1,msg[2],true);o.offset[0]+=17.5}
+				if(msg[3] == "r")		{o.objectCanMoveTo(msg[1]+1,msg[2],true);o.offset[0]-=17.5}
+
+		}  
         
     })
 	
@@ -64,14 +62,14 @@ function multiplayer(){
         console.log(msg);
         
     })
-	
+    
     socket.on('newPlayer', function(msg){
         
         players.list = msg;
         console.log(msg);
         
     })
-    
+	
 	socket.on('roomsList', function(msg){
         
         rooms.list = msg;
@@ -170,10 +168,9 @@ function printRoom(id,msg){
 
 function printYourRoom(msg){
     
-    
     $$('#GCmessages').html('<li><div class="item-content"><div class="item-inner resizable"><div class="item-title">Sala '+UserConf[1].roomid+':<div class="item-header"><p class="popup-text">'+msg.chief+' </p></div><div class="item-footer">'+msg.people.length+'/4 </div></div><div class="item-after"><button type="button" class="button col button-round btn color-white"id="startMG">Empezar</button></div></div></div></li>');
     
-    $$('#startMG').on('click',function (e){
+    $$('#startMG').on('click',function (){
         
         socket.emit('startGame',true);
         
@@ -215,7 +212,6 @@ function enterRoom(msg){
     
 	$$('#GCmessages').html('');
     $$('#multiInput').html('');
-    
 }
 
 function createRoom(){
@@ -232,5 +228,11 @@ function createRoom(){
 function exitRoom(){
 	
 	socket.emit('exitRoom', [UserConf[1].roomid, UserConf[1].multiplayerid, UserConf[1].username]);
+    
+}
+    
+function startMG(){
+    
+    
     
 }

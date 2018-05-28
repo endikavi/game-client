@@ -199,6 +199,29 @@
 	width: 70%;
 }
 
+#iop{
+	display: block;
+	background: rgb(130, 224, 255);
+	width: 100%;
+	height: 100%;
+}
+#options{
+	display: block;
+	border-color: black;
+	border-style: solid;
+	background: rgb(130, 224, 255);
+	height: 100vh;
+	width: 70%;
+}
+.opcion{
+	display: block;
+	border-color: black;
+	border-radius: 50%;
+	border-style: solid;
+	background: rgb(130, 224, 255);
+	height: 24%;
+	width: 70%;
+}
 #sendGC { position: absolute;bottom: 3%; right: 5%; width: 20%;
 	background-image: linear-gradient(to bottom, green, darkgreen);
 	border-color: black;

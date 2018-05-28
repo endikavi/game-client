@@ -60,8 +60,9 @@ function MapObject(dat) {
 	this.y		= 0;
 	this.type	= dat.nt || 0;
 	this.offset	= [0,0];
-    this.sprite = undefined;
+	this.sprite = undefined;
 	this.direction = "d";
+	
 }
 
 MapObject.prototype.placeAt = function(nx, ny) {
@@ -191,7 +192,7 @@ MapObject.prototype.processMovement = function() {
 	
 };
 
-MapObject.prototype.objectCanMoveTo = function(x, y) {
+MapObject.prototype.objectCanMoveTo = function(x, y, t) {
     
 	if(x < 0 || x >= mapW || y < 0 || y >= mapH) { return false; }
     
@@ -218,7 +219,8 @@ MapObject.prototype.objectCanMoveTo = function(x, y) {
 		return false;
 		
 	}
-	
-	this.placeAt(x,y);
-	return false;
+	if(x != player.tileFrom[0] || y != player.tileFrom[1] || t != true){
+		this.placeAt(x,y);
+		return true;
+	}
 };

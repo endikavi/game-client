@@ -6,14 +6,21 @@ function appInit(){
     if( userdata != null){
         
         UserConf = userdata;
+		
+        if (UserConf[0].online) {
+			
+			multiplayer();
+			
+		}
+		
 		mainMenu();
-        
+		
     }else{
         
         TakeMobileInfo();
         localStorage.setItem("savedata", JSON.stringify(UserConf));
         newUserMenu();
-        
+
     }
 	
 }
@@ -37,12 +44,12 @@ function TakeMobileInfo() {
 }
 
 function vibrate() {
-    
-	console.log(navigator.vibrate(2000));
-    
+    if (UserConf[0].vibrate) {
+		console.log(navigator.vibrate(2000));
+	}
 }
 
-function startGame(){
+function startGame(savename){
 	
 	UserConf.push({
 		
@@ -54,6 +61,8 @@ function startGame(){
             actualpositiony: 3
         
 	})
+	
+	addGameCanvas();
 	
 }
 
@@ -68,12 +77,11 @@ var UserConf = [
         {
         
             controllsR: 0,
-            controllsL: 0,
-            music: 0,
-            vibrate: 0,
-            performance: 0,
-            online: 0,
-            
+            controllsL: 1,
+            music: true,
+            vibrate: true,
+            performance: true,
+            online: true,        
             
         },
                 

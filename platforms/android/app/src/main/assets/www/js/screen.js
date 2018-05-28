@@ -60,8 +60,6 @@ function addCard(title,text) {
     
 	$$('.card').html('<div class="card-header"><p class="popup-title">' + title + '</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">' + text + '</p></div><div id="gamescreen"></div>');
     
-    //$$('.card-header').on('click', function () {$$('.card').html('')})
-    
 }
 
 function mainMenuControlls() {
@@ -108,14 +106,22 @@ function mainMenuControlls() {
 }
 
 function startGameMenu(){
-	
-	
+
+	startGame("prueba");
 	
 }
 
 function loadGameMenu(){
 	
+	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list relleno"><ul id="SeeSaves" ></ul></div>');
 	
+	for(var c = 2;c < UserConf.length;c++){
+		
+		console.log(UserConf[c]);
+		
+	}
+	
+	$$('#exitCard').on('click', function () {$$('.card').html('')})
 	
 }
 
@@ -151,7 +157,34 @@ function multiplayerMenu(){
 
 function configMenu(){
 	
-	multiplayer();
+	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>',`<div class="list relleno"><ul id="options" >
+
+	<li class="item-content item-input">
+      <div class="item-inner">
+        <div class="item-title item-label">Opacidad</div>
+        <div class="item-input-wrap ">
+          <div class="range-slider range-slider-init opcion" data-label="true">
+            <input type="range" id="iop" value="50" min="0" max="100" step="1">
+          </div>
+        </div>
+      </div>
+    </li>
+
+	<li class="item-content item-input">
+      <div class="item-inner">
+        <div class="item-title item-label">Opacidad</div>
+        <div class="item-input-wrap ">
+          <div class="range-slider range-slider-init opcion" data-label="true">
+            <input type="range" id="iop" value="0" min="0" max="100" step="100">
+          </div>
+        </div>
+      </div>
+    </li>
+
+
+	</ul></div>`);
+	
+	$$('#exitCard').on('click', function () {$$('.card').html('')})
 	
 }
 
