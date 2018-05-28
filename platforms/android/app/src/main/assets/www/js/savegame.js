@@ -1,5 +1,10 @@
+
+var pc = true;
+
 function appInit(){
 	
+    pc = false;
+    
 	userdata=localStorage.getItem('savedata');
     userdata=JSON.parse(userdata);
     
@@ -25,6 +30,36 @@ function appInit(){
 	
 }
 
+function pcInit(){
+	
+	userdata=localStorage.getItem('savedata');
+    userdata=JSON.parse(userdata);
+    
+    if( userdata != null){
+        
+        UserConf = userdata;
+		
+        if (UserConf[0].online) {
+			
+			multiplayer();
+			
+		}
+		
+		mainMenu();
+		
+    }else{
+        
+        UserConf[1].mobileid = "pc"+Date.now()
+    
+        UserConf[1].mobileinfo = {}
+        
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+        
+        newUserMenu();
+
+    }
+	
+}
 function TakeMobileInfo() {
     
     UserConf[1].mobileid = device.uuid
@@ -44,6 +79,12 @@ function TakeMobileInfo() {
 }
 
 function vibrate() {
+    if (UserConf[0].vibrate) {
+		console.log(navigator.vibrate(40));
+	}
+}
+
+function vibrateLong() {
     if (UserConf[0].vibrate) {
 		console.log(navigator.vibrate(2000));
 	}
@@ -76,12 +117,13 @@ var UserConf = [
     
         {
         
-            controllsR: 0,
-            controllsL: 1,
+            controlls: 1,
             music: true,
             vibrate: true,
             performance: true,
-            online: true,        
+            online: true,
+            opac: 0,
+            sens: 0, 
             
         },
                 

@@ -51,9 +51,11 @@ var frameCount;
 var fps, fpsInterval, startTime, now, then, elapsed;
 
 var tileIndex;
+var sensi;
+var movement;
 
-var movement
-var drawGameInterval
+var drawGameInterval;
+
 function renderGame() {
 	
 	fpsInterval = 1000 / 60;
@@ -102,22 +104,22 @@ function renderGame() {
 			stop = false;
 			this.direction = directions.right;
 
-			if ((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -35 && player.canMoveUp())) {
+			if ((keysDown[38] && player.canMoveUp()) || (joystick.deltaY() < -sensi && player.canMoveUp() && joystick.up())) {
 				if (multiplayerOn) {
 					socket.emit('walking', [player.tileFrom[0], player.tileFrom[1] - 1, "u"]);
 				}
 				player.moveUp(gameTime);
-			} else if ((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > 35 && player.canMoveDown()) {
+			} else if ((keysDown[40] && player.canMoveDown()) || joystick.deltaY() > sensi && player.canMoveDown() && joystick.down()) {
 				if (multiplayerOn) {
 					socket.emit('walking', [player.tileFrom[0], player.tileFrom[1] + 1, "d"]);
 				}
 				player.moveDown(gameTime);
-			} else if ((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -30 && player.canMoveLeft()) {
+			} else if ((keysDown[37] && player.canMoveLeft()) || joystick.deltaX() < -sensi && player.canMoveLeft() && joystick.left()) {
 				if (multiplayerOn) {
 					socket.emit('walking', [player.tileFrom[0] - 1, player.tileFrom[1], "l"]);
 				}
 				player.moveLeft(gameTime);
-			} else if ((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > 30 && player.canMoveRight()) {
+			} else if ((keysDown[39] && player.canMoveRight()) || joystick.deltaX() > sensi && player.canMoveRight() && joystick.right()) {
 				if (multiplayerOn) {
 					socket.emit('walking', [player.tileFrom[0] + 1, player.tileFrom[1], "r"]);
 				}

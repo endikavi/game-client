@@ -7,7 +7,7 @@ function addGameCanvas() {
 	$$('#screen').html('<canvas id="layer0" width="800" height="450"></canvas><canvas id="layer1" width="800" height="450"></canvas><canvas id="layer2" width="800" height="450"></canvas><canvas id="layer3" width="800" height="450"></canvas><div id=controlls-box></div>');
     
 	mapId = 0002;
-	
+	sensi = UserConf[0].sens;
     addControlls();
 	renderGame();
 	
@@ -47,11 +47,18 @@ function setNewUser(){
         alert("Por favor rellene el nombre de usuario.")
         
     }else{
+        if(!pc){
+            UserConf[1].username=username;
+            UserConf[1].multiplayerid=username+device.uuid+(device.isVirtual ? 1 : 0);
+            localStorage.setItem("savedata", JSON.stringify(UserConf));
+        }else if(pc){
+            UserConf[1].username=username;
+            UserConf[1].multiplayerid=username+"pc"+Date.now();
+            localStorage.setItem("savedata", JSON.stringify(UserConf));
+        }
         
-        UserConf[1].username=username;
-        UserConf[1].multiplayerid=username+device.uuid+(device.isVirtual ? 1 : 0);
-        localStorage.setItem("savedata", JSON.stringify(UserConf));
         mainMenu();
+        
     }
     
 }
@@ -63,10 +70,10 @@ function addCard(title,text) {
 }
 
 function mainMenuControlls() {
-    
-	document.removeEventListener("backbutton", mainMenu, false);   
-	document.addEventListener("backbutton", exitFromApp, false);
-
+    if(!pc){
+	   document.removeEventListener("backbutton", mainMenu, false);   
+	   document.addEventListener("backbutton", exitFromApp, false);
+    }
 	$$("#StartGame").on("click",function () {
 
 		startGameMenu();
@@ -157,34 +164,76 @@ function multiplayerMenu(){
 
 function configMenu(){
 	
-	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>',`<div class="list relleno"><ul id="options" >
-
-	<li class="item-content item-input">
-      <div class="item-inner">
-        <div class="item-title item-label">Opacidad</div>
-        <div class="item-input-wrap ">
-          <div class="range-slider range-slider-init opcion" data-label="true">
-            <input type="range" id="iop" value="50" min="0" max="100" step="1">
-          </div>
-        </div>
-      </div>
-    </li>
-
-	<li class="item-content item-input">
-      <div class="item-inner">
-        <div class="item-title item-label">Opacidad</div>
-        <div class="item-input-wrap ">
-          <div class="range-slider range-slider-init opcion" data-label="true">
-            <input type="range" id="iop" value="0" min="0" max="100" step="100">
-          </div>
-        </div>
-      </div>
-    </li>
-
-
-	</ul></div>`);
-	
-	$$('#exitCard').on('click', function () {$$('.card').html('')})
+	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list simple-list relleno"><ul id="options" > <li><span>Tipo de Controles</span></li> <li><label class="item-radio item-content"><input type="radio" id="con1" name="typeControlls" value="1" checked/> <i class="icon icon-radio"></i><div class="item-inner">  <div class="item-title">joystick</div> </div>  </label> <label class="item-radio item-content"><input type="radio" id="con2" name="typeControlls" value="0" /><i class="icon icon-radio"></i><div class="item-inner"><div class="item-title">botones</div></div> </label></li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Sensibilidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="sens" value="50" min="0" max="100" step="1"> </div> </div></div><div class="item-inner"> <div class="item-title item-label">Opacidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="opac" value="50" min="0" max="100" step="1"> </div> </div> </div> </li><li> <span>Musica</span><label class="toggle toggle-init color-green"><input type="checkbox" id="music"><span class="toggle-icon"></span> </label> </li><li>  <span>Vibracion</span> <label class="toggle toggle-init color-green">     <input type="checkbox" id="vibrate">    <span class="toggle-icon"></span>  </label> </li><li>  <span>Multijugador</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="online">   <span class="toggle-icon"></span>  </label>  </li><li><span>Calidad</span></li>  <li>   <label class="item-radio item-content">  <input type="radio" id="per1" name="performance" value="1" checked />   <i class="icon icon-radio"></i> <div class="item-inner">   <div class="item-title">Baja</div> </div></label> <label class="item-radio item-content"><input type="radio" id="per2" name="performance" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">Alta</div></div></label></li></ul></div>');
+    
+    if(UserConf[0].sens!=undefined){$$('#sens').val(UserConf[0].sens)}
+    if(UserConf[0].opac!=undefined){$$('#opac').val(UserConf[0].opac)}
+    $$('#sens').on('change', function (e) {
+        UserConf[0].sens=$$(this).val()
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+    $$('#opac').on('change', function (e) {
+        UserConf[0].opac=$$(this).val()
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+    
+    if(UserConf[0].controlls==1){$$('#con2').attr("checked", "true")}
+    
+    $$('#con1').on('change', function () {
+        UserConf[0].controlls=0
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+    $$('#con2').on('change', function () {
+        UserConf[0].controlls=1
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+    
+    if(UserConf[0].performance==true){$$('#per2').attr("checked", "true")}
+    
+    $$('#per1').on('change', function () {
+        UserConf[0].performance=false
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+    $$('#per2').on('change', function () {
+        UserConf[0].performance=true
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+    
+    $$('input').on('change',vibrate);
+    
+    if(UserConf[0].music==true){$$('#music').attr("checked", "true")}
+    if(UserConf[0].vibrate==true){$$('#vibrate').attr("checked", "true")}
+    if(UserConf[0].online==true){$$('#online').attr("checked", "true")}
+    
+    $$('#music').on('change', function (e) {
+        if(this.checked){
+            UserConf[0].music=true
+            menuSound.play();
+        }else{
+            menuSound.stop();
+            UserConf[0].music=false
+        }
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+    $$('#vibrate').on('change', function (e) {
+        if(this.checked){UserConf[0].vibrate=true}else{UserConf[0].vibrate=false}
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+    $$('#online').on('change', function (e) {
+        if(this.checked){
+            UserConf[0].online=true;
+            multiplayer();
+        }else{
+            UserConf[0].online=false;
+            socket.disconnect();
+            multiplayerOn = false;
+        }
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+	$$('#exitCard').on('click', function () {
+        $$('.card').html('');
+        mainMenu();
+    })
 	
 }
 

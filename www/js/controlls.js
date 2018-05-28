@@ -1,23 +1,13 @@
 
 function addControlls() {
     
-    if (UserConf[0].controllsL==0){
+    if (UserConf[0].controlls==0){
         
         addControllsL0();
        
-    }else if(UserConf[0].controllsL==1){
+    }else if(UserConf[0].controlls==1){
              
         addControllsL1(); 
-             
-    }
-    
-    if (UserConf[0].controllsR==0){
-        
-        addControllsR0();
-       
-    }else if(UserConf[0].controllsR==1){
-             
-        addControllsR1(); 
              
     }
 	
@@ -26,7 +16,7 @@ function addControlls() {
 function addControllsL0() {
     
     $$('#controlls-box').html('<div class="container styck"><div class="circley" id="styck"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>')
-
+    
     document.getElementById("action").addEventListener("touchstart",function() {keysDown[80] = true; this.style.backgroundColor =""});
 
     document.getElementById("action").addEventListener("touchend",function() {keysDown[80] = false; this.style.backgroundColor =""});
@@ -35,16 +25,22 @@ function addControllsL0() {
     document.addEventListener("backbutton", mainMenu, false);
 	
 	joystick = new VirtualJoystick({mouseSupport: true})
-    
-    document.removeEventListener("backbutton", exitFromApp, false);
-    document.addEventListener("backbutton", mainMenu, false);
-	
+    if (!pc){
+        document.removeEventListener("backbutton", exitFromApp, false);
+        document.addEventListener("backbutton", mainMenu, false);
+    }
 }
 
 function addControllsL1() {
     
-    $$('#controlls-box').html('<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>')
+    $$('#controlls-box').html('<div class="container left"><div class="circle" id="left"></div></div><div class="container right"><div class="circle" id="right"></div></div><div class="container up"><div class="circle" id="up"></div></div><div class="container down"><div class="circle" id="down"></div></div><div class="container action"><div class="circle-action" id="action"></div></div>')
 	
+    $$('#left').css('opacity', UserConf[0].opac/100);
+    $$('#up').css('opacity', UserConf[0].opac/100);
+    $$('#down').css('opacity', UserConf[0].opac/100);
+    $$('#right').css('opacity', UserConf[0].opac/100);
+    $$('#action').css('opacity', UserConf[0].opac/100);
+    
 	document.getElementById("left").addEventListener("click",function() {keysDown[37] = true;setTimeout(function(){ keysDown[37] = false},100); this.style.backgroundColor =""});
     document.getElementById("up").addEventListener("click",function() {keysDown[38] = true;setTimeout(function(){ keysDown[38] = false},100); this.style.backgroundColor =""});
     document.getElementById("right").addEventListener("click",function() {keysDown[39] = true;setTimeout(function(){ keysDown[39] = false},100); this.style.backgroundColor =""});
@@ -62,10 +58,10 @@ function addControllsL1() {
     document.getElementById("left").addEventListener("touchend",function() {keysDown[37] = false; this.style.backgroundColor =""});
     document.getElementById("right").addEventListener("touchend",function() {keysDown[39] = false; this.style.backgroundColor =""});
     document.getElementById("action").addEventListener("touchend",function() {keysDown[80] = false; this.style.backgroundColor =""});
-    
-    document.removeEventListener("backbutton", exitFromApp, false);
-    document.addEventListener("backbutton", mainMenu, false);
-	
+    if(!pc){
+        document.removeEventListener("backbutton", exitFromApp, false);
+        document.addEventListener("backbutton", mainMenu, false);
+    }
 }
 
 function addControllsR0() {
@@ -156,7 +152,7 @@ var VirtualJoystick	= function(opts)
 {
 	opts			    = opts			    || {};
 	this._container		= opts.container	|| document.getElementById("styck");
-	this._strokeStyle	= opts.strokeStyle	|| 'rgba(255,0,0,0.3)';
+	this._strokeStyle	= opts.strokeStyle	|| 'rgba(255,0,0,'+UserConf[0].opac/100+')';
 	this._stickEl		= opts.stickElement	|| this._buildJoystickStick();
 	this._baseEl		= opts.baseElement	|| this._buildJoystickBase();
 	this._mouseSupport	= opts.mouseSupport !== undefined ? opts.mouseSupport : false;

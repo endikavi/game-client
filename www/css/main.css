@@ -199,9 +199,14 @@
 	width: 70%;
 }
 
-#iop{
+#sens{
 	display: block;
-	background: rgb(130, 224, 255);
+	width: 100%;
+	height: 100%;
+}
+
+#opac{
+	display: block;
 	width: 100%;
 	height: 100%;
 }
@@ -209,9 +214,10 @@
 	display: block;
 	border-color: black;
 	border-style: solid;
-	background: rgb(130, 224, 255);
-	height: 100vh;
-	width: 70%;
+    border-width: 2px;
+	height: auto;
+	width: 80%;
+    margin: auto;
 }
 .opcion{
 	display: block;
