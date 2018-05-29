@@ -58,7 +58,7 @@ var drawGameInterval;
 
 function renderGame() {
 	
-	fpsInterval = 1000 / 60;
+	fpsInterval = 1000 / UserConf[0].fps;
     then = Date.now();
     startTime = then;
     
@@ -87,8 +87,9 @@ function renderGame() {
 		}
 		if(e.keyCode==80 || e.keyCode==69) { keysDown[e.keyCode] = false; }
 	});
-
-	viewport.screen = [800,450];
+	
+	sensi = UserConf[0].sens;
+	viewport.screen = [UserConf[0].resolutionX,UserConf[0].resolutionY];
 	mapTileData.buildMapFromData(gameMap, mapW, mapH);
 	mapTileData.addRoofs(roofList);
 	populateMap();
