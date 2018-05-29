@@ -120,10 +120,13 @@ var UserConf = [
             controlls: 1,
             music: true,
             vibrate: true,
-            performance: true,
+			performance: true,
+            fps: 60,
+			resolutionX: 800,
+			resolutionY: 450,
             online: true,
-            opac: 0,
-            sens: 0, 
+            opac: 50,
+            sens: 50, 
             
         },
                 

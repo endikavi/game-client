@@ -18,6 +18,18 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "aa.g.client"
+    },
+    "cordova-plugin-buildinfo": {
+      "PACKAGE_NAME": "aa.g.client"
+    },
+    "cordova-universal-links-plugin": {
+      "PACKAGE_NAME": "aa.g.client"
+    },
+    "cordova-plugin-browsertab": {
+      "PACKAGE_NAME": "aa.g.client"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "aa.g.client"
     }
   },
   "dependent_plugins": {}

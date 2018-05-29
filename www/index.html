@@ -18,15 +18,65 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" type="text/css" href="css/game.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
+        
+        <!-- iniciar firebase -->
+        <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
         <title>Game client</title>
     </head>
     <body>
 		
 		<div id="screen">
             <div class="card">
+                
+                
+                
             </div>
 		</div>
         
+        <div class="login-screen">
+  <!-- Default view-page layout -->
+  <div class="view">
+    <div class="page">
+      <!-- page-content has additional login-screen content -->
+      <div class="page-content login-screen-content">
+          <div class="login-screen-title"></div>
+        <!-- Login form -->
+        <form>
+          <div class="list">
+            <ul>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Username</div>
+                  <div class="item-input-wrap">
+                    <input type="text" name="username" placeholder="Username">
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Password</div>
+                  <div class="item-input-wrap">
+                    <input type="password" name="password" placeholder="Password">
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="list">
+            <ul>
+              <li>
+                <button type="button" class="button col button-round btn color-white btnSigninGoogle" id="" >Entrar con google</button>
+              </li>
+            </ul>
+            <div class="block-footer">Some text with login information.</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
         <!-- Path to Framework7 -->
         <script type="text/javascript" src="js/framework7.min.js"></script>
         <!-- Path to socket.io -->
@@ -56,6 +106,10 @@
         <script type="text/javascript" src="js/maps/prueba.js"></script>
         <!-- cordova -->
         <script type="text/javascript" src="js/index.js"></script>
+        <!-- firebase -->
+        
+        <script type="text/javascript" src="js/setfirebase.js"></script>
+        <script type="text/javascript" src="js/fireauth.js"></script>
 
     </body>
 </html>
