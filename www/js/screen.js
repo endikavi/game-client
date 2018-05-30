@@ -7,9 +7,9 @@ function addGameCanvas() {
 	$$('#screen').html('<canvas id="layer0" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer1" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer2" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer3" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><div id=controlls-box></div>');
     
 	mapId = 0002;
+    mapTileData.preLoaded = false;
     addControlls();
 	renderGame();
-	
     mapSound.play();
     menuSound.stop();
 	$$('.container').attr('style','inline');

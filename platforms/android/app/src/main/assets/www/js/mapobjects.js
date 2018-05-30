@@ -199,8 +199,10 @@ MapObject.prototype.objectCanMoveTo = function(x, y, t) {
 	if(typeof player.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') {
         
         hitSound.play();
-        console.log('objeto contra Pared');
-        return false; 
+        //console.log('objeto contra Pared');
+        return false;
+        this.offset[0]=0
+        this.offset[1]=0
         
     }
     
@@ -211,11 +213,15 @@ MapObject.prototype.objectCanMoveTo = function(x, y, t) {
 		if(objectTypes[o.type].collision==objectCollision.solid || objectTypes[o.type].collision==objectCollision.push || objectTypes[o.type].collision==objectCollision.none){
             
             hitSound.play();
-            console.log('objeto contra Bloque inamovible');
+            //console.log('objeto contra Bloque inamovible');
+            this.offset[0]=0
+            this.offset[1]=0
 			return false;
             
 		}
-		
+        
+        this.offset[0]=0
+        this.offset[1]=0
 		return false;
 		
 	}

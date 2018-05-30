@@ -15,7 +15,7 @@ function addControlls() {
 
 function addControllsL0() {
     
-    $$('#controlls-box').html('<div class="container styck"><div class="circley" id="styck"></div></div><div class="container action"><div class="circle-action" id="action"></div><i class="f7-icons button-round color-white">keyboard</i></div>')
+    $$('#controlls-box').html('<div class="container styck"><div class="circley" id="styck"></div></div><div class="action-box" id="action"></div></div>')
     
     document.getElementById("action").addEventListener("touchstart",function() {keysDown[80] = true; this.style.backgroundColor =""});
 
@@ -41,11 +41,11 @@ function addControllsL1() {
     $$('#right').css('opacity', UserConf[0].opac/100);
     $$('#action').css('opacity', UserConf[0].opac/100);
     
-	document.getElementById("left").addEventListener("click",function() {keysDown[37] = true;setTimeout(function(){ keysDown[37] = false},100); this.style.backgroundColor =""});
-    document.getElementById("up").addEventListener("click",function() {keysDown[38] = true;setTimeout(function(){ keysDown[38] = false},100); this.style.backgroundColor =""});
-    document.getElementById("right").addEventListener("click",function() {keysDown[39] = true;setTimeout(function(){ keysDown[39] = false},100); this.style.backgroundColor =""});
-    document.getElementById("down").addEventListener("click",function() {keysDown[40] = true;setTimeout(function(){ keysDown[40] = false},100); this.style.backgroundColor =""});
-    document.getElementById("action").addEventListener("click",function() {keysDown[80] = true;setTimeout(function(){ keysDown[80] = false},100); this.style.backgroundColor =""});
+	document.getElementById("left").addEventListener("click",function() {keysDown[37] = true;setTimeout(function(){ keysDown[37] = false},20); this.style.backgroundColor =""});
+    document.getElementById("up").addEventListener("click",function() {keysDown[38] = true;setTimeout(function(){ keysDown[38] = false},20); this.style.backgroundColor =""});
+    document.getElementById("right").addEventListener("click",function() {keysDown[39] = true;setTimeout(function(){ keysDown[39] = false},20); this.style.backgroundColor =""});
+    document.getElementById("down").addEventListener("click",function() {keysDown[40] = true;setTimeout(function(){ keysDown[40] = false},20); this.style.backgroundColor =""});
+    document.getElementById("action").addEventListener("click",function() {keysDown[80] = true;setTimeout(function(){ keysDown[80] = false},20); this.style.backgroundColor =""});
 
     document.getElementById("up").addEventListener("touchstart",function() {keysDown[38] = true; this.style.backgroundColor =""});
     document.getElementById("down").addEventListener("touchstart",function() {keysDown[40] = true; this.style.backgroundColor =""});
