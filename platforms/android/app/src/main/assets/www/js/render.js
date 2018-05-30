@@ -58,7 +58,7 @@ var drawGameInterval;
 
 function renderGame() {
 	
-	fpsInterval = 1000 / UserConf[0].fps;
+	fpsInterval = UserConf[0].fps;
     then = Date.now();
     startTime = then;
     
@@ -89,6 +89,7 @@ function renderGame() {
 	});
 	
 	sensi = UserConf[0].sens;
+    console.log(UserConf[0].resolutionX+" "+UserConf[0].resolutionY)
 	viewport.screen = [UserConf[0].resolutionX,UserConf[0].resolutionY];
 	mapTileData.buildMapFromData(gameMap, mapW, mapH);
 	mapTileData.addRoofs(roofList);
@@ -99,7 +100,18 @@ function renderGame() {
 			clearInterval(preRender)
     },0);
 	
-	movement = setInterval(function () {
+	
+	if(UserConf[0].performance){
+        drawGameInterval = setInterval(drawGame,0)
+        movement = setInterval(gameControlls, 0);
+    }else{
+        requestAnimationFrame(drawGame);
+        requestAnimationFrame(gameControlls);
+    }
+};
+
+
+function gameControlls(){
 
 		if (!player.processMovement(gameTime) && gameSpeeds[currentSpeed].mult != 0) {
 			stop = false;
@@ -143,12 +155,10 @@ function renderGame() {
 			player.pickUp();
 			
 		}
-		
-	}, 0);
-	
-	//drawGameInterval = setInterval(drawGame,0)
-	requestAnimationFrame(drawGame);
-};
+        if(!UserConf[0].performance){
+            requestAnimationFrame(gameControlls);
+        }
+}
 
 function drawGame() {
 	
@@ -290,11 +300,11 @@ function drawGame() {
 		ctx3.clearRect(0, 0, viewport.screen[0]/2, viewport.screen[1]/2);
 	    ctx3.fillStyle = "#ff0000";
 		ctx3.textAlign = "left";
-        tileIndex = parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0]);
+        //tileIndex = parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0]);
     	ctx3.fillText("FPS: " + framesLastSecond, 10, 15);
-        ctx3.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
+        /*ctx3.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
         ctx3.fillText(player.position[1] + 'X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
-        ctx3.fillText("Steps: " + pasoscount, 10, 80);
+        ctx3.fillText("Steps: " + pasoscount, 10, 80);*/
 		
 	}else { frameCount++; }
 
@@ -302,7 +312,9 @@ function drawGame() {
 		
 	}
 	
-	requestAnimationFrame(drawGame);
+    if(!UserConf[0].performance){
+        requestAnimationFrame(drawGame);
+    }
 	
 }
 

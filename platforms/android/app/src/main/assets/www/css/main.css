@@ -210,11 +210,17 @@
 	width: 100%;
 	height: 100%;
 }
+#resu{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
 #options{
 	display: block;
 	border-color: black;
 	border-style: solid;
     border-width: 2px;
+    padding-bottom: 200px;
 	height: auto;
 	width: 80%;
     margin: auto;
