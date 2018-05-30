@@ -45,7 +45,7 @@ function pcInit(){
 			
 		}
 		
-		mainMenu();
+	mainMenu();
 		
     }else{
         

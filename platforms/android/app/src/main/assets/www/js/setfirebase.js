@@ -1,13 +1,14 @@
- // Initialize Firebase
-  const fireconfig = {
+// Initialize Firebase
+const fireconfig = {
     apiKey: "AIzaSyAUWRPpLunFjkfgWQ-VOa-rxYBd6hXNvBI",
     authDomain: "movil-app-endika.firebaseapp.com",
     databaseURL: "https://movil-app-endika.firebaseio.com",
     projectId: "movil-app-endika",
     storageBucket: "movil-app-endika.appspot.com",
     messagingSenderId: "1014982577939"
-  };
-  firebase.initializeApp(fireconfig);
+};
+
+firebase.initializeApp(fireconfig);
 
 $$(".btnSigninGoogle").click(function(){
 	console.log("Google");
@@ -19,7 +20,13 @@ $$(".btnSigninGoogle").click(function(){
             var token = result.credential.accessToken;
             // The signed-in user info.
             var user = result.user;
+			  
+			  console.log(user.uid)
             // ...
+			/*firebase.auth().currentUser.updateProfile({
+     				displayName: "pepe",
+					userid:1
+			  	})*/
           }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;

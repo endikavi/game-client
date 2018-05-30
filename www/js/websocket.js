@@ -13,7 +13,7 @@ function multiplayer(){
 	
 	console.log('multijugador comenzado')
     
-    socket = io("https://gioserver.herokuapp.com",{transports:["websocket"]});
+    socket = io("https://gioserver.herokuapp.com",{transports:["websocket"], forceNew: true });
     
     socket.emit('id', UserConf[1].multiplayerid);
     

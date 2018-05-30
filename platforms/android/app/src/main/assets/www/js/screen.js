@@ -33,12 +33,61 @@ function newUserMenu() {
     /*$$('.card').html('<div class="card-header"><p class="popup-title">Bienvenido al juego</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">Para empezar a usar el multijugador y la funcion de datos en la nube da un nombre de usuario para identificarte,puedes activarlo o desactivarlo en ajustes mas adelante.</p> <hr><div class="item-inner"><div class="item-input-wrap"><div class="inputbox"><input type="text" class="inputname" placeholder="Nombre de usuario" value="'+ (UserConf[1].username || "") +'"><span class="input-clear-button resetinput"></span></div><hr></div></div></div><div id="gamescreen"><div class="block"><div class="row"><button class="button col" id="newUser">Listo</button><button class="button col" id="notUser">No me interesa</button></div></div></div>');*/
     
     //$$('.card').html('');
-    
+    $$('.login-screen').html(`
+		<!-- Default view-page layout -->
+		  <div class="view">
+			<div class="page">
+			  <!-- page-content has additional login-screen content -->
+			  <div class="page-content login-screen-content">
+				  <div class="login-screen-title"></div>
+				<!-- Login form -->
+				<form>
+				  <div class="list">
+					<ul>
+					  <li class="item-content item-input">
+						<div class="item-inner">
+						  <div class="item-title item-label">Username</div>
+						  <div class="item-input-wrap">
+							<input type="text" name="username" placeholder="Username">
+							<span class="input-clear-button"></span>
+						  </div>
+						</div>
+					  </li>
+					  <li class="item-content item-input">
+						<div class="item-inner">
+						  <div class="item-title item-label">Password</div>
+						  <div class="item-input-wrap">
+							<input type="password" name="password" placeholder="Password">
+							<span class="input-clear-button"></span>
+						  </div>
+						</div>
+					  </li>
+					</ul>
+				  </div>
+				  <div class="list">
+					<ul>
+					  <li>
+						<button type="button" class="button col button-round btn color-white btnSigninGoogle" id="" >Entrar con google</button>
+					  </li>
+					</ul>
+					<div class="block-footer">Para empezar a usar el multijugador y la funcion de datos en la nube registrese,puede activar o desactivar estas opciones en ajustes mas adelante.
+					<div class="block">
+					<div class="row">
+					<button class="button col" id="closeLogin">No me interesa</button>
+					</div>
+					</div>
+					</div>
+				  </div>
+				</form>
+			  </div>
+			</div>
+		  </div>
+	`)
     seven.loginScreen.open('.login-screen')
     
     $$('#notUser').on('click', function () {mainMenu();});
     $$('#newUser').on('click', function () {setNewUser();});
-    
+	$$('#closeLogin').on('click', function () {$$('.login-screen').html('');seven.loginScreen.close('.login-screen')})
     
     
 }
@@ -99,8 +148,7 @@ function mainMenuControlls() {
 
 	$$('#User').on('click',  function () {
 
-		//userMenu();
-        seven.loginScreen.open('.login-screen')
+		newUserMenu();
 
 	})
 
