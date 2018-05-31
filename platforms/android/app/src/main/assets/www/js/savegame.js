@@ -24,6 +24,7 @@ function appInit(){
         
         TakeMobileInfo();
         localStorage.setItem("savedata", JSON.stringify(UserConf));
+        mainMenu();
         newUserMenu();
 
     }
@@ -55,11 +56,13 @@ function pcInit(){
         
         localStorage.setItem("savedata", JSON.stringify(UserConf));
         
+        mainMenu();
         newUserMenu();
 
     }
 	
 }
+
 function TakeMobileInfo() {
     
     UserConf[1].mobileid = device.uuid
@@ -125,6 +128,7 @@ var UserConf = [
 			resolutionX: 800,
 			resolutionY: 450,
             online: true,
+            saves: true,
             opac: 50,
             sens: 50, 
             

@@ -30,9 +30,6 @@ function mainMenu() {
 
 function newUserMenu() {
     
-    /*$$('.card').html('<div class="card-header"><p class="popup-title">Bienvenido al juego</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">Para empezar a usar el multijugador y la funcion de datos en la nube da un nombre de usuario para identificarte,puedes activarlo o desactivarlo en ajustes mas adelante.</p> <hr><div class="item-inner"><div class="item-input-wrap"><div class="inputbox"><input type="text" class="inputname" placeholder="Nombre de usuario" value="'+ (UserConf[1].username || "") +'"><span class="input-clear-button resetinput"></span></div><hr></div></div></div><div id="gamescreen"><div class="block"><div class="row"><button class="button col" id="newUser">Listo</button><button class="button col" id="notUser">No me interesa</button></div></div></div>');*/
-    
-    //$$('.card').html('');
     $$('.login-screen').html(`
 		<!-- Default view-page layout -->
 		  <div class="view">
@@ -41,36 +38,23 @@ function newUserMenu() {
 			  <div class="page-content login-screen-content">
 				  <div class="login-screen-title"></div>
 				<!-- Login form -->
-				<form>
+				<div>
 				  <div class="list">
 					<ul>
-					  <li class="item-content item-input">
-						<div class="item-inner">
-						  <div class="item-title item-label">Username</div>
-						  <div class="item-input-wrap">
-							<input type="text" name="username" placeholder="Username">
-							<span class="input-clear-button"></span>
-						  </div>
-						</div>
-					  </li>
-					  <li class="item-content item-input">
-						<div class="item-inner">
-						  <div class="item-title item-label">Password</div>
-						  <div class="item-input-wrap">
-							<input type="password" name="password" placeholder="Password">
-							<span class="input-clear-button"></span>
-						  </div>
-						</div>
-					  </li>
-					</ul>
-				  </div>
-				  <div class="list">
-					<ul>
+                        <li><p>Para empezar a usar el multijugador y la funcion de datos en la nube registrese,puede activar o desactivar estas opciones en ajustes mas adelante.</p></li>
 					  <li>
-						<button type="button" class="button col button-round btn color-white btnSigninGoogle" id="" >Entrar con google</button>
+						<button type="button" class="button col button-round btn color-white " id="btnSigninGoogle" >Entrar con google</button>
+					  </li>
+                        <br>
+                      <li>
+						<button type="button" class="button col button-round btn color-white " id="btnSigninFacebook" >Entrar con facebook</button>
+					  </li>
+                        <br>
+                        <li>
+						<button type="button" class="button col button-round btn color-white " id="btnSigninTwitter" >Entrar con twitter</button>
 					  </li>
 					</ul>
-					<div class="block-footer">Para empezar a usar el multijugador y la funcion de datos en la nube registrese,puede activar o desactivar estas opciones en ajustes mas adelante.
+					<div class="block-footer">
 					<div class="block">
 					<div class="row">
 					<button class="button col" id="closeLogin">No me interesa</button>
@@ -78,43 +62,93 @@ function newUserMenu() {
 					</div>
 					</div>
 				  </div>
-				</form>
+				</div>
 			  </div>
 			</div>
 		  </div>
 	`)
-    seven.loginScreen.open('.login-screen')
+    seven.loginScreen.open('.login-screen');
     
-    $$('#notUser').on('click', function () {mainMenu();});
-    $$('#newUser').on('click', function () {setNewUser();});
-	$$('#closeLogin').on('click', function () {mainMenu();$$('.login-screen').html('');seven.loginScreen.close('.login-screen')})
+    $$("#btnSigninGoogle").click(function(){
+        console.log('hola')
+	   var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(provider).then(function() {
+          firebase.auth().getRedirectResult().then(function(result) {
+            // This gives you a Google Access Token.
+            // You can use it to access the Google API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            // ...
+          }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+          });
+        });
+    });
     
+    $$('#btnSigninFacebook').on('click', function(e) {
+    console.log('hola')
+        var provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().signInWithRedirect(provider).then(function() {
+            firebase.auth().getRedirectResult().then(function(result) {
+                // This gives you a Google Access Token.
+                // You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // ...
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+        });
+    });
+    
+    $$('#btnSigninTwitter').on('click', function(e) {
+    console.log('hola')
+        var provider = new firebase.auth.TwitterAuthProvider();
+        firebase.auth().signInWithRedirect(provider).then(function() {
+            firebase.auth().getRedirectResult().then(function(result) {
+                // This gives you a Google Access Token.
+                // You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // ...
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+        });
+    });
+    
+	$$('#closeLogin').on('click', function () {$$('.login-screen').html('');seven.loginScreen.close('.login-screen')});
     
 }
 
-function setNewUser(){
+function UserMenu(){
     
-    username = $$('.inputname').val();
+    $$('.card').html('<div class="card-header"><p class="popup-title">Bienvenido al juego</p></div><div class="card-content card-content-padding pop-up"><p class="popup-text">Para empezar a usar el multijugador y la funcion de datos en la nube da un nombre de usuario para identificarte,puedes activarlo o desactivarlo en ajustes mas adelante.</p> <hr><div class="item-inner"><div class="item-input-wrap"><div class="inputbox"><input type="text" class="inputname" placeholder="Nombre de usuario" value="'+ (UserConf[1].username || "") +'"><span class="input-clear-button resetinput"></span></div><hr></div></div></div><div id="gamescreen"><div class="block"><div class="row"><button class="button col" id="newUser">Listo</button><button class="button col" id="notUser">No me interesa</button></div></div></div>');
     
-    if (username == undefined || username == "" || username == null){
-        
-        alert("Por favor rellene el nombre de usuario.")
-        
-    }else{
-        if(!pc){
-            UserConf[1].username=username;
-            UserConf[1].multiplayerid=username+device.uuid+(device.isVirtual ? 1 : 0);
-            localStorage.setItem("savedata", JSON.stringify(UserConf));
-        }else if(pc){
-            UserConf[1].username=username;
-            UserConf[1].multiplayerid=username+"pc"+Date.now();
-            localStorage.setItem("savedata", JSON.stringify(UserConf));
+    $$('#notUser').on('click', function () {$$('.card').html('')});
+    $$('#newUser').on('click', function () {
+    
+        username = $$('.inputname').val();
+
+        if (username == undefined || username == "" || username == null){
+
+            alert("Por favor rellene el nombre de usuario.")
+
+        }else{
+            
+            updateName(username)
+            
         }
-        
-        mainMenu();
-        
-    }
-    
+    })
 }
 
 function addCard(title,text) {
@@ -155,9 +189,12 @@ function mainMenuControlls() {
 	})
 
 	$$('#User').on('click',  function () {
-
-		newUserMenu();
-
+        
+        if(firebase.auth().currentUser){
+          UserMenu();  
+        }else{
+		  newUserMenu();
+        }
 	})
 
 	$$('#Menu').on('click', function () {
@@ -226,7 +263,7 @@ function multiplayerMenu(){
 
 function configMenu(){
 	
-	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list simple-list relleno"><ul id="options" > <li><span>Tipo de Controles</span></li> <li><label class="item-radio item-content"><input type="radio" id="con1" name="typeControlls" value="1" checked/> <i class="icon icon-radio"></i><div class="item-inner">  <div class="item-title">joystick</div> </div>  </label> <label class="item-radio item-content"><input type="radio" id="con2" name="typeControlls" value="0" /><i class="icon icon-radio"></i><div class="item-inner"><div class="item-title">botones</div></div> </label></li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Sensibilidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="sens" value="50" min="0" max="100" step="1"> </div> </div></div><div class="item-inner"> <div class="item-title item-label">Opacidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="opac" value="50" min="0" max="100" step="1"> </div> </div> </div> </li><li> <span>Musica</span><label class="toggle toggle-init color-green"><input type="checkbox" id="music"><span class="toggle-icon"></span> </label> </li><li>  <span>Vibracion</span> <label class="toggle toggle-init color-green">     <input type="checkbox" id="vibrate">    <span class="toggle-icon"></span>  </label> </li><li>  <span>Multijugador</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="online">   <span class="toggle-icon"></span>  </label>  </li><li><span>Calidad</span></li>  <li>   <label class="item-radio item-content">  <input type="radio" id="per1" name="performance" value="1" checked />   <i class="icon icon-radio"></i> <div class="item-inner">   <div class="item-title">Baja</div> </div></label> <label class="item-radio item-content"><input type="radio" id="per2" name="performance" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">Alta</div></div></label></li><li><span>Refresco</span></li>  <li>   <label class="item-radio item-content">  <input type="radio" id="fps1" name="fps" value="1" checked />   <i class="icon icon-radio"></i> <div class="item-inner">   <div class="item-title">30</div> </div></label> <label class="item-radio item-content"><input type="radio" id="fps2" name="fps" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">60</div></div></label><label class="item-radio item-content"><input type="radio" id="fps3" name="fps" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">maximo</div></div></label></li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Resolucion</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="resu" value="50" min="200" max="1200" step="100"> </div> </div></div></li></ul></div>');
+	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list simple-list relleno"><ul id="options" > <li><span>Tipo de Controles</span></li> <li><label class="item-radio item-content"><input type="radio" id="con1" name="typeControlls" value="1" checked/> <i class="icon icon-radio"></i><div class="item-inner">  <div class="item-title">joystick</div> </div>  </label> <label class="item-radio item-content"><input type="radio" id="con2" name="typeControlls" value="0" /><i class="icon icon-radio"></i><div class="item-inner"><div class="item-title">botones</div></div> </label></li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Sensibilidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="sens" value="50" min="0" max="100" step="1"> </div> </div></div><div class="item-inner"> <div class="item-title item-label">Opacidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="opac" value="50" min="0" max="100" step="1"> </div> </div> </div> </li><li> <span>Musica</span><label class="toggle toggle-init color-green"><input type="checkbox" id="music"><span class="toggle-icon"></span> </label> </li><li>  <span>Vibracion</span> <label class="toggle toggle-init color-green">     <input type="checkbox" id="vibrate">    <span class="toggle-icon"></span>  </label> </li><li>  <span>Multijugador</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="online">   <span class="toggle-icon"></span>  </label>  </li><li>  <span>Partida en la nube</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="save">   <span class="toggle-icon"></span>  </label>  </li><li><span>Calidad</span></li>  <li>   <label class="item-radio item-content">  <input type="radio" id="per1" name="performance" value="1" checked />   <i class="icon icon-radio"></i> <div class="item-inner">   <div class="item-title">Movil</div> </div></label> <label class="item-radio item-content"><input type="radio" id="per2" name="performance" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">Ordenador</div></div></label></li><li><span>Refresco</span></li>  <li>   <label class="item-radio item-content">  <input type="radio" id="fps1" name="fps" value="1" checked />   <i class="icon icon-radio"></i> <div class="item-inner">   <div class="item-title">30</div> </div></label> <label class="item-radio item-content"><input type="radio" id="fps2" name="fps" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">60</div></div></label><label class="item-radio item-content"><input type="radio" id="fps3" name="fps" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">maximo</div></div></label></li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Resolucion</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="resu" value="50" min="200" max="1200" step="100"> </div> </div></div></li></ul></div>');
     
     if(UserConf[0].sens!=undefined){$$('#sens').val(UserConf[0].sens)}
     if(UserConf[0].opac!=undefined){$$('#opac').val(UserConf[0].opac)}
