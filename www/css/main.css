@@ -223,6 +223,15 @@
 	width: 100%;
 	height: 100%;
 }
+.characterSelect{
+	display: block;
+	width: 18%;
+	height: 20vh;
+    margin: auto;
+}
+.charSelected{
+    background: red;
+}
 #resu{
 	display: block;
 	width: 100%;
