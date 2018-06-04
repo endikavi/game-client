@@ -2,142 +2,169 @@ var socket;
 var multiplayerOn;
 var chats = {};
 var players = {};
+var coop = {};
 var rooms = {};
+coop.list ={};
 rooms.list ={};
 chats.room = [];
 chats.global = [];
 
 function multiplayer(){
 	
-	multiplayerOn = true
+	if(!multiplayerOn){
 	
-	console.log('multijugador comenzado')
-    
-    socket = io("https://gioserver.herokuapp.com",{transports:["websocket"], forceNew: true });
-    
-    socket.emit('id', UserConf[1].multiplayerid);
-    
-    socket.on('walking', function(msg){
-        
-        var o = players.list[msg[0]].character;
-       
-        if(msg[0] != UserConf[1].multiplayerid){
-            
-            if( o == undefined ){
+		multiplayerOn = true
 
-                console.log('creando avatar para jugador ' + msg[0] );
-                players.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:7});
-                o = players.list[msg[0]].character;
-            }
-            
-            o.objectCanMoveTo(msg[1], msg[2]);
-            o.direction = msg[3];
-            if(msg[3]=="u"){o.offset[1]+=40}
-            if(msg[3]=="d"){o.offset[1]-=40}
-            if(msg[3]=="l"){o.offset[0]+=40}
-            if(msg[3]=="r"){o.offset[0]-=40}
-            
-        }
-        
-    })
-    
-    socket.on('pushing', function(msg){
+		console.log('multijugador comenzado')
 
-		if(msg[0] != UserConf[1].multiplayerid){
+		socket = io("https://gioserver.herokuapp.com",{transports:["websocket"], forceNew: true });
 
-				var o = mapTileData.map[toIndex(msg[1],msg[2])].object;
+		socket.emit('id', UserConf[1].multiplayerid);
+		socket.emit('set', UserConf[1].multiplayerCharacter);
+		socket.on('walking', function(msg){
 
-				if(msg[3] == "u")		{o.objectCanMoveTo(msg[1],msg[2]-1,true);o.offset[1]+=17.5}
-				if(msg[3] == "d")		{o.objectCanMoveTo(msg[1],msg[2]+1,true);o.offset[1]-=17.5}
-				if(msg[3] == "l")		{o.objectCanMoveTo(msg[1]-1,msg[2],true);o.offset[0]+=17.5}
-				if(msg[3] == "r")		{o.objectCanMoveTo(msg[1]+1,msg[2],true);o.offset[0]-=17.5}
+			if(msg[0] != UserConf[1].multiplayerid){
 
-		}  
-        
-    })
-	
-	socket.on('playersList', function(msg){
-        
-        players.list = msg;
-        console.log(msg);
-        
-    })
-    
-    socket.on('newPlayer', function(msg){
-        
-        players.list = msg;
-        console.log(msg);
-        
-    })
-	
-	socket.on('roomsList', function(msg){
-        
-        rooms.list = msg;
-        console.log(msg);
-        
-    })
-	
-	socket.on('allGlobalChats', function(msg){
-        
-        chats.global = msg;
-        console.log(msg);
-        
-    })
-	
-	socket.on('globalChat', function(msg){
-        
-		chats.global.push(msg);
-		printGlobalChat(msg);
+				var o = coop.list[msg[0]];
+
+				if(o.mapId == mapId){
+
+					if( o.character == undefined || o.character == null ){
+
+						coop.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:players.list[msg[0]].set || 10});
+						o = coop.list[msg[0]];
+						if(players.list[msg[0]].set == 7){o.character.Tileset=playerTwoTileset}
+						if(players.list[msg[0]].set == 8){o.character.Tileset=playerThreeTileset}
+						if(players.list[msg[0]].set == 9){o.character.Tileset=playerFourTileset}
+						if(players.list[msg[0]].set == 10){o.character.Tileset=charlieTileset}
+						if(o.character.Tileset == undefined){o.character.Tileset=charlieTileset}
+					}
+
+					o.character.objectCanMoveTo(msg[1], msg[2]);
+					o.character.direction = msg[3];
+					if(msg[3]=="u"){o.character.offset[1]+=40}
+					if(msg[3]=="d"){o.character.offset[1]-=40}
+					if(msg[3]=="l"){o.character.offset[0]+=40}
+					if(msg[3]=="r"){o.character.offset[0]-=40}
+
+				}else{
+
+					o.character = new MapObject({name:"coop",info:false,nt:players.list[msg[0]].set || 10});
+
+				}
+			}
+
+		})
+
+		socket.on('pushing', function(msg){
+
+			if(msg[0] != UserConf[1].multiplayerid){
+
+					var o = mapTileData.map[toIndex(msg[1],msg[2])].object;
+
+					if(msg[3] == "u")		{o.objectCanMoveTo(msg[1],msg[2]-1,true);o.offset[1]+=17.5}
+					if(msg[3] == "d")		{o.objectCanMoveTo(msg[1],msg[2]+1,true);o.offset[1]-=17.5}
+					if(msg[3] == "l")		{o.objectCanMoveTo(msg[1]-1,msg[2],true);o.offset[0]+=17.5}
+					if(msg[3] == "r")		{o.objectCanMoveTo(msg[1]+1,msg[2],true);o.offset[0]-=17.5}
+
+			}  
+
+		})
+
+		socket.on('changeMap', function(msg){
+			console.log('jugador cambiando de mapa')
+			if(coop.list[msg[0]] == undefined){
+					coop.list[msg[0]] = {};
+			}
+			coop.list[msg[0]].mapId = msg[1];
+			coop.list[msg[0]].character = new MapObject({name:"coop",info:false,nt:players.list[msg[0]].set || 10});
+
+		})
+
+		socket.on('playersList', function(msg){
+
+			players.list = msg;
+			console.log(msg);
+
+		})
+
+		socket.on('newPlayer', function(msg){
+
+			players.list = msg;
+			console.log(msg);
+
+		})
+
+		socket.on('roomsList', function(msg){
+
+			rooms.list = msg;
+			console.log(msg);
+
+		})
+
+		socket.on('allGlobalChats', function(msg){
+
+			chats.global = msg;
+			console.log(msg);
+
+		})
+
+		socket.on('globalChat', function(msg){
+
+			chats.global.push(msg);
+			printGlobalChat(msg);
+
+		})
+
+		socket.on('allRoomChats', function(msg){
+
+			chats.room = msg;
+			console.log(msg);
+
+		})
+
+		socket.on('roomChat', function(msg){
+
+			chats.room.push(msg);
+			printRoomChat(msg);
+
+		})
+
+		socket.on('newRoom', function(msg){
+			console.log('nueva sala creada');
+			rooms.list[msg[0]] = msg[1]
+			if(UserConf[1].roomid == undefined){
+				printRoom(msg[0],msg[1]);
+			}
+		})
+
+		socket.on('changeRoom', function(msg){
+			console.log('sala cambiada');
+			rooms.list[msg[0]] = msg[1]
+			if(UserConf[1].roomid == undefined){
+				printRoom(msg);
+			}
+		})
+
+		socket.on('enterRoom', function(msg){
+
+			console.log('nuevo miembro en la sala');
+
+			if(UserConf[1].roomid != undefined){
+				printYourRoom(msg);
+			}
+
+		})
+
+		socket.on('startGame', function(msg){
+
+			console.log('Comenzando coperativo');
+
+			addGameCanvas();
+
+		})
 		
-	})
-
-	socket.on('allRoomChats', function(msg){
-        
-        chats.room = msg;
-        console.log(msg);
-        
-    })
-	
-	socket.on('roomChat', function(msg){
-        
-        chats.room.push(msg);
-		printRoomChat(msg);
-		
-	})
-    
-    socket.on('newRoom', function(msg){
-        console.log('nueva sala creada');
-        rooms.list[msg[0]] = msg[1]
-        if(UserConf[1].roomid == undefined){
-            printRoom(msg[0],msg[1]);
-        }
-	})
-    
-    socket.on('changeRoom', function(msg){
-        console.log('sala cambiada');
-        rooms.list[msg[0]] = msg[1]
-        if(UserConf[1].roomid == undefined){
-            printRoom(msg);
-        }
-	})
-    
-    socket.on('enterRoom', function(msg){
-        
-        console.log('nuevo miembro en la sala');
-        
-        if(UserConf[1].roomid != undefined){
-            printYourRoom(msg);
-        }
-        
-	})
-    
-    socket.on('startGame', function(msg){
-        
-        console.log('Comenzando coperativo');
-        
-        addGameCanvas();
-        
-	})
+	}
     
 }
 

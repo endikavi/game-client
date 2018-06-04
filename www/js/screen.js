@@ -4,9 +4,12 @@ var $$ = Dom7;
 
 function addGameCanvas() {
     
-	$$('#screen').html('<canvas id="layer0" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer1" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer2" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer3" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><div id=controlls-box></div>');
+	$$('#screen').html('<canvas id="layer0" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer1" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer2" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer3" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><div id=controlls-box></div><div class="card"></div>');
     
 	mapId = 0002;
+	if (multiplayerOn) {
+		socket.emit('changeMap',0002);
+	}
     mapTileData.preLoaded = false;
     addControlls();
 	renderGame();
@@ -18,7 +21,7 @@ function addGameCanvas() {
 
 function mainMenu() {
     
-	$$('#screen').html('<img class="bgimg" src="img/wolf-1341881.png" /><button class="button col button-round btn color-white btn-left" id="StartGame">&#9773  Empezar</button><button class="button col button-round btn color-white btn-left" id="ContinueGame">&#9773 Continuar</button><button class="button col button-round btn color-white" id="User">Usuario</button><button class="button col button-round btn color-white" id="Menu">Menu</button><button class="button col button-round btn color-white btn-right" id="Retos">modo Reto &#9773</button><button class="button col button-round btn color-white btn-right" id="Multi">Multijugador &#9773</button><div class="card"></div>');
+	$$('#screen').html('<img class="bgimg" src="img/wolf-1341881.png" /><button class="button col button-round btn color-white btn-left" id="StartGame">&#9773  Empezar</button><button class="button col button-round btn color-white btn-left" id="ContinueGame">&#9773 Continuar</button><button class="button col button-round btn color-white" id="User">Usuario</button><button class="button col button-round btn color-white" id="Menu">Menu</button><button class="button col button-round btn color-white btn-right" id="Retos"> Logros &#9773</button><button class="button col button-round btn color-white btn-right" id="Multi">Multijugador &#9773</button><div class="card"></div>');
 	$$('.container').attr('style','none');
     
     resetCanvas();
