@@ -29,7 +29,10 @@ function populateMap0001() {
 
 	//posicion inicial
 
-	player.placeAt(8, 6);
+	player.placeAt(8, 7);
+	
+    var door = new MapObject({name:"mo1",info:false,nt:13});
+	door.placeAt(8, 5);
 	
 	//decoracion arboles
     
@@ -91,5 +94,12 @@ function populateMap0001() {
         player.placeAt(0, 15);
             
 	};
-      
+	
+ 	mapTileData.map[((8 + 6 * mapW))].eventEnter = function () {
+        
+        console.log("cambiando al cuartel")
+        changeMap(0007);
+        player.placeAt(9, 19);
+            
+	};
 }

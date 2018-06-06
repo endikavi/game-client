@@ -29,9 +29,16 @@ function populateMap0003() {
 
 	//decoracion cajas y arboles
     
-    var box2 = new MapObject({ name:"box2" , info:false , nt:3 });
-	box2.placeAt(0, 7);
+    var tree4 = new MapObject({ name:"box2" , info:false , nt:3 });
+	tree4.placeAt(0, 7);
     
+    var door1 = new MapObject({name:"puerta",info:["Una puerta cerrada."],nt:13});
+	door1.placeAt(6, 8);
+    var door2 = new MapObject({name:"puerta",info:["Una puerta cerrada."],nt:13});
+	door2.placeAt(12, 8);
+    var door3 = new MapObject({name:"puerta",info:["Una puerta cerrada."],nt:13});
+	door3.placeAt(17, 8);
+	
     var tree1 = new MapObject({name:"mo1",info:false,nt:3});
 	tree1.placeAt(9, 9);
     
@@ -43,13 +50,21 @@ function populateMap0003() {
 	
 	//npcs
 	
-    var charlie = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:6});
+    var pueblerino = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:6});
 	
-	var charlie2 = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:6});
+	var pueblerino2 = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:9});
 	
-	charlie.placeAt(17, 15);
+	var pueblerino3 = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:7});
+	
+	var pueblerino4 = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:8});
+	
+	pueblerino.placeAt(17, 15);
     
-    charlie2.placeAt(7, 10);
+    pueblerino2.placeAt(9, 12);
+	
+	pueblerino3.placeAt(10, 12);
+	
+	pueblerino4.placeAt(13, 13);
 	
     mapTileData.map[((0 + 13 * mapW))].eventEnter = function () {
         

@@ -26,6 +26,9 @@ function setMap0005() {
 }
 
 function populateMap0005() {
+	
+	var rock = new MapObject({name:"mo1",info:false,nt:14});
+	rock.placeAt(10, 6);
     
 	mapTileData.map[((19 + 14 * mapW))].eventEnter = function () {
         

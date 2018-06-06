@@ -19,6 +19,12 @@ var playerThreeTileset = new Tileset("img/player3.png");
 
 var playerFourTileset = new Tileset("img/player4.png");
 
+var doorTile = new Tileset("img/puerta.png");
+
+var rockTile = new Tileset("img/rock.png");
+
+var mueblesTile = new Tileset("img/muebles.png");
+
 function Tileset(src){
 	
 	this.T = new Image();
