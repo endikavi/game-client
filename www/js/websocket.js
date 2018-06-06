@@ -49,9 +49,10 @@ function multiplayer(){
 					if(msg[3]=="r"){o.character.offset[0]-=40}
 
 				}else{
-
-					o.character = null
-
+					if(o.character != undefined){
+						mapTileData.map[toIndex(o.character.x, o.character.y)].object = null;
+						o.character = undefined;
+					}
 				}
 			}
 
@@ -78,8 +79,10 @@ function multiplayer(){
 					coop.list[msg[0]] = {};
 			}
 			coop.list[msg[0]].mapId = msg[1];
-			coop.list[msg[0]].character = null
-
+			if(o.character != undefined){
+				mapTileData.map[toIndex(coop.list[msg[0]].character.x, coop.list[msg[0]].character.y)].object = null;
+				coop.list[msg[0]].character = undefined;
+			}
 		})
 
 		socket.on('playersList', function(msg){

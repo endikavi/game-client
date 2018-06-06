@@ -26,6 +26,7 @@
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
     <name>Last Ward</name>
+    <icon src="res/icon/android/icon.png" />
     <description>
         Un juego de estilo rpg con multijugador en tiempo real.
     </description>

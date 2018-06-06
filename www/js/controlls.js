@@ -111,7 +111,7 @@ function addControllsForInfo(nam,inf) {
             for (s = 0; s < 2; s++){
 
                 if (ind >= maxind){
-
+					keysDown[80] = false;
                     clearInterval(interval);
                     return;
 

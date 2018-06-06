@@ -14,6 +14,7 @@ function sound(loop,src) {
 	
     this.play = function() {
         if(UserConf[0].music==true){
+			this.sound.volume=UserConf[0].volume
             this.sound.src = src;
             this.sound.load();
             this.sound.play().catch(function(error) {});
@@ -41,8 +42,7 @@ function sound(loop,src) {
 	};
 	
 }
-
-    menuSound = new sound(true,"music/menu.mp3");
-    mapSound = new sound(true,"music/map.mp3");
-    hitSound = new sound(false,"music/hit.mp3");
-    hurraSound = new sound(false,"music/hurra.mp3");
+var menuSound = new sound(true,"music/menu.mp3");
+var relaxSound = new sound(true,"music/relax.mp3");
+var combatSound = new sound(true,"music/combat.mp3");
+var tensionSound = new sound(true,"music/tension.mp3");

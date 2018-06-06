@@ -121,7 +121,7 @@ if(this.info!=false && this.talking >= 0){
 		this.talking++ 
 
 	}else{
-
+		keysDown[80] = false;
 		document.getElementById('msg-box').removeEventListener("touchstart",function() {keysDown[80] = true;});
 		document.getElementById('msg-box').removeEventListener("touchend",function() {keysDown[80] = false;});
 		addControlls();

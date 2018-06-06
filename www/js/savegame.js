@@ -120,19 +120,20 @@ var UserConf = [
     
         {
         
-            controlls: 1,
+            controlls: 0,
+			volume:0.50,
             music: true,
             vibrate: true,
-			performance: true,
-            preRender: true,
-            fps: 60,
+			performance: false,
+            preRender: false,
+            fps: 1000/60,
 			resolutionX: 800,
 			resolutionY: 450,
             online: true,
-            saves: true,
+            saves: false,
             opac: 50,
             sens: 50, 
-            multiplayerCharacter: 10,
+            multiplayerCharacter: 11,
 			
         },
                 

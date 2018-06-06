@@ -301,11 +301,11 @@ function drawGame() {
 		ctx3.clearRect(0, 0, viewport.screen[0]/2, viewport.screen[1]/2);
 	    ctx3.fillStyle = "#ff0000";
 		ctx3.textAlign = "left";
-        //tileIndex = parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0]);
+        tileIndex = parseInt(player.tileFrom[1]) * mapW + parseInt(player.tileFrom[0]);
     	ctx3.fillText("FPS: " + framesLastSecond, 10, 15);
-        /*ctx3.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
+        ctx3.fillText("Game speed: " + gameSpeeds[currentSpeed].name, 10, 40);
         ctx3.fillText(player.position[1] + 'X: '+ player.tileFrom[0] +' Y: '+ player.tileFrom[1] +' Indice: '+ tileIndex, 10, 60);
-        ctx3.fillText("Steps: " + pasoscount, 10, 80);*/
+        ctx3.fillText("Steps: " + pasoscount, 10, 80);
 		
 	}else { frameCount++; }
 

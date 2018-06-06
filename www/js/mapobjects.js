@@ -76,8 +76,28 @@ var objectTypes = {
 		offset : [-13,-27],
 		collision : objectCollision.solid,
 		zIndex : 1
-	}
-    
+	},
+    12 : {
+		name : "estanteria movil",
+		sprite : new Sprite(mueblesTile,[{x:0,y:80,w:80,h:80}]),
+		offset : [0,-60],
+		collision : objectCollision.push,
+		zIndex : 1
+	},
+    13 : {
+		name : "puerta",
+		sprite : new Sprite(doorTile,[{x:0,y:0,w:40,h:80}]),
+		offset : [0,-20],
+		collision : objectCollision.solid,
+		zIndex : 1
+	},
+    14 : {
+		name : "rock",
+		sprite : new Sprite(rockTile,[{x:0,y:0,w:40,h:40}]),
+		offset : [0,0],
+		collision : objectCollision.push,
+		zIndex : 1
+	}    
 };
 
 function MapObject(dat) {
@@ -121,7 +141,7 @@ if(this.info!=false && this.talking >= 0){
 		this.talking++ 
 
 	}else{
-
+		keysDown[80] = false;
 		document.getElementById('msg-box').removeEventListener("touchstart",function() {keysDown[80] = true;});
 		document.getElementById('msg-box').removeEventListener("touchend",function() {keysDown[80] = false;});
 		addControlls();
@@ -228,12 +248,10 @@ MapObject.prototype.objectCanMoveTo = function(x, y, t) {
 	if(x < 0 || x >= mapW || y < 0 || y >= mapH) { return false; }
     
 	if(typeof player.delayMove[tileTypes[mapTileData.map[toIndex(x,y)].type].floor]=='undefined') {
-        
-        hitSound.play();
-        //console.log('objeto contra Pared');
-        return false;
+		
         this.offset[0]=0
         this.offset[1]=0
+        return false;
         
     }
     
@@ -243,8 +261,6 @@ MapObject.prototype.objectCanMoveTo = function(x, y, t) {
         
 		if(objectTypes[o.type].collision==objectCollision.solid || objectTypes[o.type].collision==objectCollision.push || objectTypes[o.type].collision==objectCollision.none){
             
-            hitSound.play();
-            //console.log('objeto contra Bloque inamovible');
             this.offset[0]=0
             this.offset[1]=0
 			return false;

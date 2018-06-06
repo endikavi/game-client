@@ -3,11 +3,9 @@ var tilesetLoaded = true;
 
 var tileset = new Tileset("img/tileset.png");
 
-var terrainTileset = new Tileset("img/terraintileset.png");
+var terrainTileset = new Tileset("img/spriteness.png");
 
 var playerTileset = new Tileset("img/player.png");
-
-var water = new Tileset("img/water.png");
 
 var cartelTile = new Tileset("img/carteltile.png");
 

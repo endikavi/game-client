@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="left-down" width="9" height="9" tilewidth="40" tileheight="40" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" source="spriteness.tsx"/>
+ <layer name="Capa de Patrones 1" width="9" height="9">
+  <data encoding="csv">
+148,136,135,135,135,135,135,134,148,
+148,133,132,132,132,132,132,131,148,
+148,25,24,24,24,24,24,23,148,
+148,25,24,24,24,24,24,23,148,
+148,25,24,24,24,24,24,23,148,
+148,25,24,24,24,24,24,23,148,
+148,22,31,31,24,31,31,30,148,
+148,148,148,148,24,148,148,148,148,
+148,148,148,148,24,148,148,148,148
+</data>
+ </layer>
+</map>

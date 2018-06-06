@@ -3,11 +3,9 @@ var tilesetLoaded = true;
 
 var tileset = new Tileset("img/tileset.png");
 
-var terrainTileset = new Tileset("img/terraintileset.png");
+var terrainTileset = new Tileset("img/spriteness.png");
 
 var playerTileset = new Tileset("img/player.png");
-
-var water = new Tileset("img/water.png");
 
 var cartelTile = new Tileset("img/carteltile.png");
 
@@ -20,6 +18,12 @@ var playerTwoTileset = new Tileset("img/player2.png");
 var playerThreeTileset = new Tileset("img/player3.png");
 
 var playerFourTileset = new Tileset("img/player4.png");
+
+var doorTile = new Tileset("img/puerta.png");
+
+var rockTile = new Tileset("img/rock.png");
+
+var mueblesTile = new Tileset("img/muebles.png");
 
 function Tileset(src){
 	

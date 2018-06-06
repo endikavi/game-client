@@ -6,7 +6,7 @@ function addGameCanvas() {
     
 	$$('#screen').html('<canvas id="layer0" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer1" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer2" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><canvas id="layer3" width="'+UserConf[0].resolutionX+'" height="'+UserConf[0].resolutionY+'"></canvas><div id=controlls-box></div><div class="card"></div>');
     
-	mapId = 0002;
+	mapId = 0001;
 	if (multiplayerOn) {
 		socket.emit('changeMap',0002);
 	}
@@ -18,7 +18,7 @@ function addGameCanvas() {
     mapTileData.preLoaded = false;
     addControlls();
 	renderGame();
-    mapSound.play();
+    relaxSound.play();
     menuSound.stop();
 	$$('.container').attr('style','inline');
 	
@@ -32,7 +32,7 @@ function mainMenu() {
     resetCanvas();
     mainMenuControlls();
     menuSound.play();
-    mapSound.stop();
+    relaxSound.stop();
 	
 }
 
@@ -250,10 +250,11 @@ function multiplayerMenu(){
 
 function configMenu(){
 	
-	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list simple-list relleno"><ul id="options" > <li><span>Tipo de Controles</span></li> <li><label class="item-radio item-content"><input type="radio" id="con1" name="typeControlls" value="1" checked/> <i class="icon icon-radio"></i><div class="item-inner">  <div class="item-title">joystick</div> </div>  </label> <label class="item-radio item-content"><input type="radio" id="con2" name="typeControlls" value="0" /><i class="icon icon-radio"></i><div class="item-inner"><div class="item-title">botones</div></div> </label></li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Sensibilidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="sens" value="50" min="0" max="100" step="1"> </div> </div></div><div class="item-inner"> <div class="item-title item-label">Opacidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="opac" value="50" min="0" max="100" step="1"> </div> </div> </div> </li><li> <span>Musica</span><label class="toggle toggle-init color-green"><input type="checkbox" id="music"><span class="toggle-icon"></span> </label> </li><li>  <span>Vibracion</span> <label class="toggle toggle-init color-green">     <input type="checkbox" id="vibrate">    <span class="toggle-icon"></span>  </label> </li><li>  <span>Multijugador</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="online">   <span class="toggle-icon"></span>  </label>  </li><li>  <span>Partida en la nube</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="save">   <span class="toggle-icon"></span>  </label>  </li><li><span>Calidad</span></li>  <li>  <span>Prerenderizado</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="prere">   <span class="toggle-icon"></span>  </label>  </li><li>   <label class="item-radio item-content">  <input type="radio" id="per1" name="performance" value="1" checked />   <i class="icon icon-radio"></i> <div class="item-inner">   <div class="item-title">Movil</div> </div></label> <label class="item-radio item-content"><input type="radio" id="per2" name="performance" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">Ordenador</div></div></label></li><li><span>Refresco</span></li>  <li>   <label class="item-radio item-content">  <input type="radio" id="fps1" name="fps" value="1" checked />   <i class="icon icon-radio"></i> <div class="item-inner">   <div class="item-title">30</div> </div></label> <label class="item-radio item-content"><input type="radio" id="fps2" name="fps" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">60</div></div></label><label class="item-radio item-content"><input type="radio" id="fps3" name="fps" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">maximo</div></div></label></li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Resolucion</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="resu" value="50" min="200" max="1200" step="100"> </div> </div></div></li></ul></div>');
+	addCard('<div class="row segmento"><button type="button" class="button col button-round btn color-white"id="exitCard">X</button></div>','<div class="list simple-list relleno"><ul id="options" > <li><span>Tipo de Controles</span></li> <li><label class="item-radio item-content"><input type="radio" id="con1" name="typeControlls" value="1" checked/> <i class="icon icon-radio"></i><div class="item-inner">  <div class="item-title">joystick</div> </div>  </label> <label class="item-radio item-content"><input type="radio" id="con2" name="typeControlls" value="0" /><i class="icon icon-radio"></i><div class="item-inner"><div class="item-title">botones</div></div> </label></li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Sensibilidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="sens" value="50" min="0" max="100" step="1"> </div> </div></div><div class="item-inner"> <div class="item-title item-label">Opacidad</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="opac" value="50" min="0" max="100" step="1"> </div> </div> </div> </li><li> <span>Musica</span><label class="toggle toggle-init color-green"><input type="checkbox" id="music"><span class="toggle-icon"></span> </label> </li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Volumen</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="volume" value="0.50" min="0" max="1" step="0.1"> </div> </div></div></li><li>  <span>Vibracion</span> <label class="toggle toggle-init color-green">     <input type="checkbox" id="vibrate">    <span class="toggle-icon"></span>  </label> </li><li>  <span>Multijugador</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="online">   <span class="toggle-icon"></span>  </label>  </li><li>  <span>Partida en la nube</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="save">   <span class="toggle-icon"></span>  </label>  </li><li><span>Calidad</span></li>  <li>  <span>Prerenderizado</span>  <label class="toggle toggle-init color-green">   <input type="checkbox" id="prere">   <span class="toggle-icon"></span>  </label>  </li><li>   <label class="item-radio item-content">  <input type="radio" id="per1" name="performance" value="1" checked />   <i class="icon icon-radio"></i> <div class="item-inner">   <div class="item-title">Movil</div> </div></label> <label class="item-radio item-content"><input type="radio" id="per2" name="performance" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">Ordenador</div></div></label></li><li><span>Refresco</span></li>  <li>   <label class="item-radio item-content">  <input type="radio" id="fps1" name="fps" value="1" checked />   <i class="icon icon-radio"></i> <div class="item-inner">   <div class="item-title">30</div> </div></label> <label class="item-radio item-content"><input type="radio" id="fps2" name="fps" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">60</div></div></label><label class="item-radio item-content"><input type="radio" id="fps3" name="fps" value="0" /><i class="icon icon-radio"></i><div class="item-inner"> <div class="item-title">maximo</div></div></label></li><li class="item-content item-input"> <div class="item-inner"> <div class="item-title item-label">Resolucion</div> <div class="item-input-wrap "> <div class="range-slider range-slider-init " data-label="true"> <input type="range" id="resu" value="50" min="200" max="1200" step="100"> </div> </div></div></li></ul></div>');
     
     if(UserConf[0].sens!=undefined){$$('#sens').val(UserConf[0].sens)}
     if(UserConf[0].opac!=undefined){$$('#opac').val(UserConf[0].opac)}
+	if(UserConf[0].volume!=undefined){$$('#volume').val(UserConf[0].volume)}
     if(UserConf[0].resolutionX!=undefined){$$('#resu').val(UserConf[0].resolutionX)}
     $$('#sens').on('change', function (e) {
         UserConf[0].sens=$$(this).val()
@@ -261,6 +262,10 @@ function configMenu(){
     })
     $$('#opac').on('change', function (e) {
         UserConf[0].opac=$$(this).val()
+        localStorage.setItem("savedata", JSON.stringify(UserConf));
+    })
+    $$('#volume').on('change', function (e) {
+        UserConf[0].volume=$$(this).val()
         localStorage.setItem("savedata", JSON.stringify(UserConf));
     })
     $$('#resu').on('change', function (e) {

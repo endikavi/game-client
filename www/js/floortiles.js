@@ -29,19 +29,19 @@ function autogenTiles(){
             
             tileTypes.push( {floor:floorTypes.water , sprite:new Sprite(terrainTileset,[{x:(x*41),y:(y*40),w:40,h:40}])});
             
-            if ( (x+(y*imgy)) > 0 && (x+(y*imgy)) < 76 ) {
+            if ( (x+(y*imgy)) > 0 && (x+(y*imgy)) < 17 ) {
                 
                 tileTypes[x+(y*imgy)].floor = floorTypes.grass;
                 
             }
             
-            if ((x+(y*imgy)) > 75 && (x+(y*imgy)) < 230) {
+            if ((x+(y*imgy)) > 16 && (x+(y*imgy)) < 84) {
                 
                 tileTypes[x+(y*imgy)].floor = floorTypes.path;
                 
             }
             
-            if ((x+(y*imgy)) > 229 && (x+(y*imgy)) < 431) {
+            if ((x+(y*imgy)) > 83 && (x+(y*imgy)) < 167) {
                 
                 tileTypes[x+(y*imgy)].floor = floorTypes.block;
                 
