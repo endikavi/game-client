@@ -47,7 +47,7 @@ function populateMap0007() {
 	mapTileData.map[((17 + 3 * mapW))].eventEnter = function () {
         
         console.log("cambiando a la habitacion secreta")
-        changeMap(0008);
+        changeMap(0015);
         player.placeAt(4, 8);
             
 	};

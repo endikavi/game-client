@@ -27,6 +27,12 @@ function populateMap() {
     
     if(mapId == 0008) {populateMap0008()}
     
+    if(mapId == 0009) {populateMap0009()}
+    
+    if(mapId == 0010) {populateMap0010()}
+    
+    if(mapId == 0015) {populateMap0015()}
+    
     if(mapId == 000) {populateMap000()}
     
 }
@@ -50,6 +56,10 @@ function setMap() {
     if(mapId == 0008) {setMap0008()}
     
     if(mapId == 0009) {setMap0009()}
+    
+    if(mapId == 0010) {setMap0010()}
+    
+    if(mapId == 0015) {setMap0015()}
     
     if(mapId == 000) {setMap000()}
     

@@ -1,5 +1,5 @@
-function setMap0008() {
-
+function setMap0015() {
+    
 	mapW = 9, mapH = 9;
     
     gameMap = [148,136,135,135,135,135,135,134,148,
@@ -14,7 +14,10 @@ function setMap0008() {
 	
 }
 
-function populateMap0008() {
+function populateMap0015() {
+    
+    var cofre = new MapObject({name:"mo1",info:false,nt:16});
+	cofre.placeAt(4,3);
     
 	mapTileData.map[((4 + 8 * mapW))].eventEnter = function () {
         

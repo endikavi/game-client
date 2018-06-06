@@ -97,7 +97,28 @@ var objectTypes = {
 		offset : [0,0],
 		collision : objectCollision.push,
 		zIndex : 1
-	}    
+	},
+    15 : {
+		name : "hardrock",
+		sprite : new Sprite(hardrockTile,[{x:0,y:0,w:40,h:40}]),
+		offset : [0,0],
+		collision : objectCollision.solid,
+		zIndex : 1
+	},
+    16 : {
+		name : "cofre",
+		sprite : new Sprite(cofreTile,[{x:0,y:0,w:40,h:40}]),
+		offset : [0,0],
+		collision : objectCollision.solid,
+		zIndex : 1
+	},
+    17 : {
+		name : "skeleton",
+		sprite : new Sprite(skeletonTileset,[{x:0,y:640,w:64,h:64}]),
+		offset : [0,0],
+		collision : objectCollision.solid,
+		zIndex : 1
+	} 
 };
 
 function MapObject(dat) {

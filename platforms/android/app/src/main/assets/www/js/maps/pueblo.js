@@ -50,13 +50,13 @@ function populateMap0003() {
 	
 	//npcs
 	
-    var pueblerino = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:6});
+    var pueblerino = new MapObject({name:"charlie",info:["Soy Charlie","No me gusta este pueblo","Es de lo mas aburrido","No seras tu un guardian?"],nt:6});
 	
-	var pueblerino2 = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:9});
+	var pueblerino2 = new MapObject({name:"charlie",info:["hola soy Armaus","Vengo desde el norte","Tuve que pasar por una cueva bastante peligrosa","Si vas con gente mucho mejor"],nt:9});
 	
-	var pueblerino3 = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:7});
+	var pueblerino3 = new MapObject({name:"charlie",info:["eyyy me llamo Lindiel","Me gustan las flores que hay despues de la cueva","Vienes a comprar al pueblo?"],nt:7});
 	
-	var pueblerino4 = new MapObject({name:"charlie",info:["Soy un npc","Ojala tener un sprite","Poder moverse tiene que ser genial","No seras tu el elegido?"],nt:8});
+	var pueblerino4 = new MapObject({name:"charlie",info:["Ho..la","Ojala parecer tan poderoso como tu","Poder viajar tiene que ser genial"],nt:8});
 	
 	pueblerino.placeAt(17, 15);
     

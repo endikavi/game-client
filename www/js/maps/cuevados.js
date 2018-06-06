@@ -29,18 +29,19 @@ function populateMap0005() {
 	
 	var rock = new MapObject({name:"mo1",info:false,nt:14});
 	rock.placeAt(10, 6);
-    
+	var cofre = new MapObject({name:"mo1",info:false,nt:16});
+	cofre.placeAt(4,15);
 	mapTileData.map[((19 + 14 * mapW))].eventEnter = function () {
         
-        console.log("cambiando al final")
-        changeMap(0007);
-        player.placeAt(19, 24);
+        console.log("cambiando a la siguiente sala")
+        changeMap(0009);
+        player.placeAt(0, 18);
             
 	};
 	
 	mapTileData.map[((0 + 9 * mapW))].eventEnter = function () {
         
-        console.log("cambiando ala entrada cueva")
+        console.log("cambiando a la entrada cueva")
         changeMap(0004);
         player.placeAt(19, 9);
             

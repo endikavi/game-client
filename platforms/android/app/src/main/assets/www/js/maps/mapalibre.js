@@ -58,6 +58,9 @@ function setMap0006() {
 
 function populateMap0006() {
     
+    var cofre = new MapObject({name:"mo1",info:false,nt:16});
+	cofre.placeAt(25,24);
+    
 	mapTileData.map[((5 + 49 * mapW))].eventEnter = function () {
         
         console.log("cambiando a la entrada cueva")
